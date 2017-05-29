@@ -41,10 +41,8 @@ function cleanText(input) {
       if (name && value) {
         fields[fields.length] = JSON.stringify({ name, value }, (value, key) => (key.name + ": " + key.value)).replace(/\\n/g, "").replace(/"/g, "");
       }
-      console.log(array[i]);
     }
 
-    console.log(fields);
     return fields;
   }
 
