@@ -1,0 +1,30 @@
+{
+  "name": "gwent-cards",
+  "version": "1.0.0",
+  "description": "Discord Bot designed for gwent cards",
+  "main": "bot.js",
+  "scripts": {
+    "test": "nodemon bot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PabloSzx/Gwent-Cards.git"
+  },
+  "keywords": [
+    "discordie"
+  ],
+  "author": "PabloSzx",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PabloSzx/Gwent-Cards/issues"
+  },
+  "homepage": "https://github.com/PabloSzx/Gwent-Cards#readme",
+  "dependencies": {
+    "axios": "^0.16.1",
+    "discordie": "^0.11.0",
+    "fs": "0.0.1-security",
+    "jquery": "^3.2.1",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {}
+}
