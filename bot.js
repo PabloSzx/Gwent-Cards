@@ -1,10 +1,9 @@
 var Discordie = require('discordie');
 var axios = require("axios");
 var client = new Discordie();
-const fs = require('fs');
 var request = require('request').defaults({ encoding: null });
 
-const token = process.env.token;
+const token = 'MzE4ODc4NzEyMzgyNzUwNzMx.DA4y6g.ZxV8SUmfhmRdd5KSxQ8zkBV8hWs';
 
 client.connect({
   token: token
@@ -40,7 +39,7 @@ function cleanText(input) {
       const name = array[i].substring(0, array[i].indexOf(":")).replace(/\t/g,"");
       const value = array[i].substring(array[i].indexOf(":") + 2).replace(/\t/g,"");
       if (name && value) {
-        fields[fields.length] = { name, value };
+        fields[fields.length] = JSON.stringify({ name, value }, (value, key) => (key.name + ": " + key.value)).replace(/\\n/g, "").replace(/"/g, "");
       }
       console.log(array[i]);
     }
@@ -61,22 +60,22 @@ function cleanText(input) {
         const card = msg.slice(firstBracket + 1, secondBracket);
         const url = `http://gwentify.com/cards/${card.trim().toLowerCase().replace(' ', '-')}/`;
         axios.get('https://allorigins.us/get?method=raw&url=' + encodeURIComponent(url) + '&callback=?').then(function (response) {
-          const imgStart = '<div class="card-img"><a href=\"'
-          const nameStart = '<h1 class="card-name">';
-          const textStart = '<div class="card-text"><p>';
-          const catsStart = '<ul class="card-cats">';
-          const data = response.data;
-          const img = data.substring(data.indexOf(imgStart)+imgStart.length).split('\"')[0];
-          const name = data.substring(data.indexOf(nameStart)+nameStart.length).split('<')[0];
-          const text = data.substring(data.indexOf(textStart)+textStart.length).split('</p>')[0];
-          const cats = data.substring(data.indexOf(catsStart)+catsStart.length).split('</ul>')[0];
+          const imgStart = '<div class="card-img"><a href=\"',
+          nameStart = '<h1 class="card-name">',
+          textStart = '<div class="card-text"><p>',
+          catsStart = '<ul class="card-cats">',
+          data = response.data,
+          img = data.substring(data.indexOf(imgStart)+imgStart.length).split('\"')[0],
+          name = data.substring(data.indexOf(nameStart)+nameStart.length).split('<')[0],
+          text = data.substring(data.indexOf(textStart)+textStart.length).split('</p>')[0],
+          cats = data.substring(data.indexOf(catsStart)+catsStart.length).split('</ul>')[0];
 
           e.message.reply("", false, {
             color: 0x3498db,
             title: name,
             type: "rich",
-            description: cleanText(text),
-            fields: categories(cats),
+            description: cleanText(text) + "\n" + categories(cats).join("\n"),
+            // fields: categories(cats),
             image: { url: img, width: 200, height: 300},
           });
         })
