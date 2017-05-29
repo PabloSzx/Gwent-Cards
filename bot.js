@@ -3,10 +3,14 @@ var axios = require("axios");
 var client = new Discordie();
 var request = require('request').defaults({ encoding: null });
 
-const token = 'MzE4ODc4NzEyMzgyNzUwNzMx.DA4y6g.ZxV8SUmfhmRdd5KSxQ8zkBV8hWs';
+//test server token
+// const token = 'MzE4ODc4NzEyMzgyNzUwNzMx.DA4y6g.ZxV8SUmfhmRdd5KSxQ8zkBV8hWs';
+
+//heroku token
+const token = process.env.token;
 
 client.connect({
-  token: token
+  token
 });
 
 client.Dispatcher.on("GATEWAY_READY", e => {
@@ -72,7 +76,7 @@ function cleanText(input) {
             color: 0x3498db,
             title: name,
             type: "rich",
-            description: cleanText(text) + "\n" + categories(cats).join("\n"),
+            description: cleanText(text) + "\n\n" + categories(cats).join("\n"),
             // fields: categories(cats),
             image: { url: img, width: 200, height: 300},
           });
