@@ -14,7 +14,7 @@ client.connect({
 });
 
 client.Dispatcher.on("GATEWAY_READY", e => {
-  console.log(e);
+  // console.log(e);
   console.log("Connected as: " + client.User.username);
 });
 
@@ -52,7 +52,6 @@ function cleanText(input) {
     return fields;
   }
 
-<<<<<<< test
   function colorFaction(cats) {
     let faction = "Neutral";
     faction = (cats.indexOf("Monsters") !== -1) ? "Monsters" : faction;
@@ -103,33 +102,6 @@ function cleanText(input) {
           description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
           // fields: categories(cats),
           image: { url: img, width: 140, height: 210},
-=======
-  function reply(e, msg) {
-    const firstBracket = msg.indexOf("[");
-    const secondBracket = msg.substring(firstBracket).indexOf("]") + firstBracket;
-
-    if (firstBracket !== -1 && (secondBracket - firstBracket) !== -1) {
-      const card = msg.slice(firstBracket + 1, secondBracket);
-      const url = `http://gwentify.com/cards/${card.trim().toLowerCase().replace(' ', '-')}/`;
-      axios.get('https://allorigins.us/get?method=raw&url=' + encodeURIComponent(url) + '&callback=?').then(function (response) {
-        const imgStart = '<div class="card-img"><a href=\"',
-        nameStart = '<h1 class="card-name">',
-        textStart = '<div class="card-text"><p>',
-        catsStart = '<ul class="card-cats">',
-        data = response.data,
-        img = data.substring(data.indexOf(imgStart)+imgStart.length).split('\"')[0],
-        name = data.substring(data.indexOf(nameStart)+nameStart.length).split('<')[0],
-        text = data.substring(data.indexOf(textStart)+textStart.length).split('</p>')[0],
-        cats = data.substring(data.indexOf(catsStart)+catsStart.length).split('</ul>')[0];
-
-        e.message.reply("", false, {
-          color: 0x3498db,
-          title: name,
-          type: "rich",
-          description: cleanText(text) + "\n\n" + categories(cats).join("\n"),
-          // fields: categories(cats),
-          image: { url: img, width: 200, height: 300},
->>>>>>> v1.2
         });
       })
       .catch(function (error) {
@@ -144,43 +116,6 @@ function cleanText(input) {
   client.Dispatcher.on("MESSAGE_CREATE", e => {
     if (!e.message.author.bot) {
       const msg = e.message.content;
-<<<<<<< test
-<<<<<<< test
       reply(e, msg);
-=======
-      const firstBracket = msg.indexOf("[");
-      const secondBracket = msg.substring(firstBracket).indexOf("]")+firstBracket;
-
-      if (firstBracket !== -1 && secondBracket !== -1) {
-        const card = msg.slice(firstBracket + 1, secondBracket);
-        const url = `http://gwentify.com/cards/${card.trim().toLowerCase().replace(' ', '-')}/`;
-        axios.get('https://allorigins.us/get?method=raw&url=' + encodeURIComponent(url) + '&callback=?').then(function (response) {
-          const imgStart = '<div class="card-img"><a href=\"',
-          nameStart = '<h1 class="card-name">',
-          textStart = '<div class="card-text"><p>',
-          catsStart = '<ul class="card-cats">',
-          data = response.data,
-          img = data.substring(data.indexOf(imgStart)+imgStart.length).split('\"')[0],
-          name = data.substring(data.indexOf(nameStart)+nameStart.length).split('<')[0],
-          text = data.substring(data.indexOf(textStart)+textStart.length).split('</p>')[0],
-          cats = data.substring(data.indexOf(catsStart)+catsStart.length).split('</ul>')[0];
-
-          e.message.reply("", false, {
-            color: 0x3498db,
-            title: name,
-            type: "rich",
-            description: cleanText(text) + "\n\n" + categories(cats).join("\n"),
-            // fields: categories(cats),
-            image: { url: img, width: 200, height: 300},
-          });
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      }
->>>>>>> v1.1
-=======
-      reply(e, msg);
->>>>>>> v1.2
     }
   });
