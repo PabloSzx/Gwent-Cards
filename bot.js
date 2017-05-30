@@ -39,15 +39,41 @@ function cleanText(input) {
       .replace(/<\/a>/gi, "")
       .replace(/&#8217;/gi, "\'");
 
-      array[i] = array[i].substring(0, array[i].indexOf("<a")) + array[i].substring(array[i].indexOf("\">") + 2);
+      while (array[i].indexOf("<a") !== -1) {
+        array[i] = array[i].substring(0, array[i].indexOf("<a")) + array[i].substring(array[i].indexOf("\">") + 2);
+      }
       const name = array[i].substring(0, array[i].indexOf(":")).replace(/\t/g,"");
       const value = array[i].substring(array[i].indexOf(":") + 2).replace(/\t/g,"");
       if (name && value) {
-        fields[fields.length] = JSON.stringify({ name, value }, (value, key) => (key.name + ": " + key.value)).replace(/\\n/g, "").replace(/"/g, "");
+        fields[fields.length] = JSON.stringify({ name, value }, (value, key) => (`*${key.name}*: **${key.value}**`)).replace(/\\n/g, "").replace(/"/g, "");
       }
     }
 
     return fields;
+  }
+
+  function colorFaction(cats) {
+    let faction = "Neutral";
+    faction = (cats.indexOf("Monsters") !== -1) ? "Monsters" : faction;
+    faction = (cats.indexOf("Nilfgaard") !== -1) ? "Nilfgaard" : faction;
+    faction = (cats.indexOf("Northern Realms") !== -1) ? "Northern Realms" : faction;
+    faction = (cats.indexOf("Scoia\'tael") !== -1) ? "Scoia'tael" : faction;
+    faction = (cats.indexOf("Skellige") !== -1) ? "Skellige" : faction;
+
+    switch (faction) {
+      case "Neutral":
+        return 0x7F6000;
+      case "Monsters":
+        return 0x720000;
+      case "Nilfgaard":
+        return 0x000000;
+      case "Northern Realms":
+        return 0x3D85C6;
+      case "Scoia\'tael":
+        return 0x6AA84F;
+      default: //Skellige
+        return 0x674EA7;
+    }
   }
 
   function reply(e, msg) {
@@ -69,12 +95,13 @@ function cleanText(input) {
         cats = data.substring(data.indexOf(catsStart)+catsStart.length).split('</ul>')[0];
 
         e.message.reply("", false, {
-          color: 0x3498db,
+          // color: 0x3498db,
+          color: colorFaction(cats),
           title: name,
           type: "rich",
-          description: cleanText(text) + "\n\n" + categories(cats).join("\n"),
+          description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
           // fields: categories(cats),
-          image: { url: img, width: 200, height: 300},
+          image: { url: img, width: 140, height: 210},
         });
       })
       .catch(function (error) {
