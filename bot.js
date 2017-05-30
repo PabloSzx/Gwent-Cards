@@ -324,7 +324,7 @@ function chineseSearch(e, card, long) {
       if (long) {
         e.message.reply("", false, {
           color: colorFaction(cats),
-          title: `${name}`,
+          title: name,
           type: "rich",
           description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
           image: { url: img, width: 112, height: 168},
@@ -444,3 +444,5 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
     }
   }
 });
+
+          title: `**${name}**`,
