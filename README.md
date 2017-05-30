@@ -4,4 +4,4 @@ https://discordapp.com/oauth2/authorize?&client_id=318804439354048537&scope=bot&
 Anywhere you write (case insensitive), type: ["Name of card"] and the bot will reply you with all the card basic details and the image
 
 ## Screenshot
-![Screenshot](https://i.imgur.com/sIMtJ9H.png)
+![Screenshot](https://i.imgur.com/Zfx9izM.png)

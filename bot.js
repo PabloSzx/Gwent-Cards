@@ -97,7 +97,7 @@ function cleanText(input) {
         e.message.reply("", false, {
           // color: 0x3498db,
           color: colorFaction(cats),
-          title: name,
+          title: `**${name}**`,
           type: "rich",
           description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
           // fields: categories(cats),
