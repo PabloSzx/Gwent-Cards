@@ -22,6 +22,8 @@
   "dependencies": {
     "axios": "^0.16.1",
     "discordie": "^0.11.0",
+    "fast-levenshtein": "^2.0.6",
+    "lodash": "^4.17.4",
     "request": "^2.81.0"
   },
   "devDependencies": {}
