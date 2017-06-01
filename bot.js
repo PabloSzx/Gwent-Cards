@@ -1,11 +1,10 @@
-let Discordie = require('discordie');
-let axios = require('axios');
-let client = new Discordie();
-let request = require('request').defaults({ encoding: null });
-let Cards = require('./cards.json');
-let levenshtein = require('fast-levenshtein');
-let _ = require('lodash');
+const Discordie = require('discordie');
+const axios = require('axios');
+const levenshtein = require('fast-levenshtein');
+const _ = require('lodash');
+const Cards = require('./cards.json');
 
+const client = new Discordie();
 //test server token
 // const token = 'MzE4ODc4NzEyMzgyNzUwNzMx.DA4y6g.ZxV8SUmfhmRdd5KSxQ8zkBV8hWs';
 
@@ -26,7 +25,7 @@ function cleanText(input) {
   return text
 }
 
-function categories(input) {
+function categoriesEnglish(input) {
   let fields = [];
   let obj = {name: "", value: ""};
   str = input.replace(/<li>/gi, "");
@@ -53,6 +52,32 @@ function categories(input) {
   }
 
   return fields;
+}
+
+function categoriesSpanish(input) {
+  let fields = [];
+  str = input.replace(/<tr>/gi, "");
+
+  const array = str.split("<\/tr>");
+
+  for (let i = 0; i < array.length; i++) {
+    array[i] = array[i]
+    .replace("<td class=\"label\">", "")
+    .replace("<td class=\"value\">", "")
+    .replace(new RegExp('</td>$'), '')
+    .replace(/:/g, "")
+    .replace(/&#8217;/gi, "\'")
+    .trim();
+    const name = array[i].split("</td>")[0];
+    const value = array[i].split("</td>")[1];
+    if (name && value) {
+      fields[fields.length] = JSON.stringify({ name, value }, (value, key) =>
+      (`*${key.name.trim()}*: **${key.value.trim()}**`)).replace(/\\n/g, "").replace(/"/g, "");
+    }
+  }
+
+  return fields;
+
 }
 
 function colorFaction(cats) {
@@ -91,24 +116,124 @@ function colorFaction(cats) {
   }
 }
 
+function noTildes(input) {
+  return input.replace(/á/g, "a").replace(/é/g, "e").replace(/í/g, "i").replace(/ó/g, "o").replace(/ú/g, "u");
+}
+
 function trimCard(input) {
-  let poss = _.filter(Cards, (value) => {
+  let dif, menorEnglish, menorEnglishDif, menorSpanish, menorSpanishDif;
+  let toReturn = undefined;
+  let englishPossibilities = _.filter(Cards[0], (value) => {
     if (value.toLowerCase().indexOf(input.toLowerCase()) !== -1) return value
   });
-  if (poss[0]) {
-    let menor = poss[0];
-    let menorDif = levenshtein.get(input.toLowerCase(), menor.toLowerCase());
-    let dif;
-    _.map(poss, (value) => {
+  let spanishPossibilities = _.filter(Cards[1], (value) => {
+    if (noTildes(value).toLowerCase().indexOf(noTildes(input).toLowerCase()) !== -1) return value
+  });
+  if (englishPossibilities[0]) {
+    menorEnglish = englishPossibilities[0];
+    menorEnglishDif = levenshtein.get(input.toLowerCase(), menorEnglish.toLowerCase());
+    _.map(englishPossibilities, (value) => {
       dif = levenshtein.get(input.toLowerCase(), value.toLowerCase());
-      if (dif < menorDif) {
-        menor = value;
-        menorDif = dif;
+      if (dif < menorEnglishDif) {
+        menorEnglish = value;
+        menorEnglishDif = dif;
       }
     });
-    return menor.replace(/\'/g, "").replace(/\s/g, "-").toLowerCase();
   }
-  return undefined;
+  if (spanishPossibilities[0]) {
+    menorSpanish = spanishPossibilities[0];
+    menorSpanishDif = levenshtein.get(noTildes(input.toLowerCase()), noTildes(menorSpanish.toLowerCase()));
+    _.map(spanishPossibilities, (value) => {
+      dif = levenshtein.get(noTildes(input.toLowerCase()), noTildes(value.toLowerCase()));
+      if (dif < menorSpanishDif) {
+        menorSpanish = value;
+        menorSpanishDif = dif;
+      }
+    });
+  }
+
+  if (englishPossibilities[0] && spanishPossibilities[0]) {
+    const menor = ((menorSpanishDif <= menorEnglishDif) ? menorSpanish : menorEnglish).replace(/\'/g, "").replace(/\s/g, "-").toLowerCase();
+    if (menorSpanishDif <= menorEnglishDif) { //si es <= español es prioridad, si es < ingles es prioridad
+      toReturn = [menor, "spanish"];
+    } else {
+      toReturn = [menor, "english"];
+    }
+  } else if (englishPossibilities[0]) {
+    menorEnglish = menorEnglish.replace(/\'/g, "").replace(/\s/g, "-").toLowerCase();
+    toReturn = [menorEnglish, "english"];
+  } else if (spanishPossibilities[0]){
+    menorSpanish = menorSpanish.replace(/\'/g, "").replace(/\s/g, "-").toLowerCase();
+    toReturn = [menorSpanish, "spanish"];
+  }
+  return toReturn;
+}
+
+function englishSearch(e, card) {
+  if (card) {
+    const url = `http://gwentify.com/cards/${card}/`;
+    axios.get('https://allorigins.us/get?method=raw&url=' +
+    encodeURIComponent(url) + '&callback=?').then((response) => {
+      const imgStart = '<div class="card-img"><a href=\"',
+      nameStart = '<h1 class="card-name">',
+      textStart = '<div class="card-text"><p>',
+      catsStart = '<ul class="card-cats">',
+      data = response.data,
+      img = data.substring(data.indexOf(imgStart) + imgStart.length)
+      .split('\"')[0],
+      name = data.substring(data.indexOf(nameStart) + nameStart.length)
+      .split('<')[0],
+      text = data.substring(data.indexOf(textStart) + textStart.length)
+      .split('</p>')[0],
+      cats = data.substring(data.indexOf(catsStart) + catsStart.length)
+      .split('</ul>')[0];
+
+      e.message.reply("", false, {
+        color: colorFaction(cats),
+        title: `${name.replace(/&#8217;/gi, "\'")}`,
+        type: "rich",
+        description: cleanText(text) + "\n\n" + categoriesEnglish(cats).join(" - "),
+        image: { url: img, width: 140, height: 210},
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+}
+
+function spanishSearch(e, card) {
+  if (card) {
+    card = card.replace(/á/g, "%c3%a1").replace(/é/g, "%c3%c9").replace(/í/g, "%c3%ad").replace(/ó/g, "%c3%b3").replace(/ú/g, "%c3%ba");
+    const url = `https://gwent.io/es-ES/carta/${card}/`;
+    axios.get('https://allorigins.us/get?method=raw&url=' +
+    encodeURIComponent(url) + '&callback=?').then((response) => {
+      const imgStart = 'class="z-card-image"><img src="',
+      nameStart = '<h1 class="name">',
+      textStart = '<div class="label">Capacidad</div><div class="line"></div><div class="value">',
+      catsStart = '<div class="stats-card"><table class="stats">',
+      data = response.data,
+      img = data.substring(data.indexOf(imgStart) + imgStart.length)
+      .split('\"')[0],
+      name = data.substring(data.indexOf(nameStart) + nameStart.length)
+      .split('<')[0],
+      text = data.substring(data.indexOf(textStart) + textStart.length)
+      .split('<')[0],
+      cats = data.substring(data.indexOf(catsStart) + catsStart.length)
+      .split('<tr><td class="label">Crear</td>')[0];
+
+      e.message.reply("", false, {
+        color: colorFaction(cats),
+        title: `${name.replace(/&#8217;/gi, "\'")}`,
+        type: "rich",
+        description: cleanText(text) + "\n\n" + categoriesSpanish(cats).join(" - "),
+        image: { url: img, width: 140, height: 210},
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
 }
 
 function reply(e, msg) {
@@ -118,36 +243,20 @@ function reply(e, msg) {
   if (firstBracket !== -1 && (secondBracket - firstBracket) !== -1) {
     let card = msg.slice(firstBracket + 1, secondBracket);
     card = trimCard(card.trim());
-    if (card) {
-      const url = `http://gwentify.com/cards/${card}/`;
-      axios.get('https://allorigins.us/get?method=raw&url=' +
-      encodeURIComponent(url) + '&callback=?').then((response) => {
-        const imgStart = '<div class="card-img"><a href=\"',
-        nameStart = '<h1 class="card-name">',
-        textStart = '<div class="card-text"><p>',
-        catsStart = '<ul class="card-cats">',
-        data = response.data,
-        img = data.substring(data.indexOf(imgStart) + imgStart.length)
-        .split('\"')[0],
-        name = data.substring(data.indexOf(nameStart) + nameStart.length)
-        .split('<')[0],
-        text = data.substring(data.indexOf(textStart) + textStart.length)
-        .split('</p>')[0],
-        cats = data.substring(data.indexOf(catsStart) + catsStart.length)
-        .split('</ul>')[0];
 
-        e.message.reply("", false, {
-          color: colorFaction(cats),
-          title: `${name.replace(/&#8217;/gi, "\'")}`,
-          type: "rich",
-          description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
-          image: { url: img, width: 140, height: 210},
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (card) {
+      switch (card[1]) {
+        case "spanish":
+        spanishSearch(e, card[0]);
+        break;
+        case "english":
+        englishSearch(e, card[0]);
+        break;
+        default:
+        //empty
+      }
     }
+
     reply(e, msg.substring(secondBracket))
   }
 }
@@ -156,5 +265,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
   if (!e.message.author.bot) {
     const msg = e.message.content;
     reply(e, msg);
+
+
   }
 });
