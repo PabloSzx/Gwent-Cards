@@ -21,7 +21,7 @@ client.Dispatcher.on("GATEWAY_READY", e => {
 
 function cleanText(input) {
   text = decodeURI(input.replace(/<strong>/gi, "").replace(/<\/strong>/gi, ""))
-  .replace(/&#8217;/gi, "\'")
+  .replace(/&#8217;/gi, "\'").replace(/<p>/gi, "").replace(/<\/p>/gi, "");
   return text
 }
 
@@ -184,7 +184,7 @@ function englishSearch(e, card) {
       name = data.substring(data.indexOf(nameStart) + nameStart.length)
       .split('<')[0],
       text = data.substring(data.indexOf(textStart) + textStart.length)
-      .split('</p>')[0],
+      .split('</div>')[0],
       cats = data.substring(data.indexOf(catsStart) + catsStart.length)
       .split('</ul>')[0];
 
