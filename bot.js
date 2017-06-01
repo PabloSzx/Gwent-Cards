@@ -21,7 +21,7 @@ client.Dispatcher.on("GATEWAY_READY", e => {
 
 function cleanText(input) {
   text = decodeURI(input.replace(/<strong>/gi, "").replace(/<\/strong>/gi, ""))
-  .replace(/&#8217;/gi, "\'").replace(/<p>/gi, "").replace(/<\/p>/gi, "");
+  .replace(/&#8217;/gi, "\'")
   return text
 }
 
@@ -154,7 +154,7 @@ function trimCard(input) {
 
   if (englishPossibilities[0] && spanishPossibilities[0]) {
     const menor = ((menorSpanishDif <= menorEnglishDif) ? menorSpanish : menorEnglish).replace(/\'/g, "").replace(/\s/g, "-").toLowerCase();
-    if (menorSpanishDif <= menorEnglishDif) { //si es <= español es prioridad, si es < ingles es prioridad
+    if (menorSpanishDif < menorEnglishDif) { //si es <= español es prioridad, si es < ingles es prioridad
       toReturn = [menor, "spanish"];
     } else {
       toReturn = [menor, "english"];
@@ -169,7 +169,7 @@ function trimCard(input) {
   return toReturn;
 }
 
-function englishSearch(e, card) {
+function englishSearch(e, card, long) {
   if (card) {
     const url = `http://gwentify.com/cards/${card}/`;
     axios.get('https://allorigins.us/get?method=raw&url=' +
@@ -184,17 +184,27 @@ function englishSearch(e, card) {
       name = data.substring(data.indexOf(nameStart) + nameStart.length)
       .split('<')[0],
       text = data.substring(data.indexOf(textStart) + textStart.length)
-      .split('</div>')[0],
+      .split('</p>')[0],
       cats = data.substring(data.indexOf(catsStart) + catsStart.length)
       .split('</ul>')[0];
 
-      e.message.reply("", false, {
-        color: colorFaction(cats),
-        title: `${name.replace(/&#8217;/gi, "\'")}`,
-        type: "rich",
-        description: cleanText(text) + "\n\n" + categoriesEnglish(cats).join(" - "),
-        image: { url: img, width: 140, height: 210},
-      });
+      if (long) {
+        e.message.reply("", false, {
+          color: colorFaction(cats),
+          title: `${name.replace(/&#8217;/gi, "\'")}`,
+          type: "rich",
+          description: cleanText(text) + "\n\n" + categoriesEnglish(cats).join(" - "),
+          image: { url: img, width: 140, height: 210},
+        });
+      } else {
+        e.message.reply("", false, {
+          color: colorFaction(cats),
+          title: `${name.replace(/&#8217;/gi, "\'")}`,
+          type: "rich",
+          description: cleanText(text) + "\n\n" + categoriesEnglish(cats).join(" - "),
+        });
+      }
+
     })
     .catch((error) => {
       console.log(error);
@@ -202,7 +212,7 @@ function englishSearch(e, card) {
   }
 }
 
-function spanishSearch(e, card) {
+function spanishSearch(e, card, long) {
   if (card) {
     card = card.replace(/á/g, "%c3%a1").replace(/é/g, "%c3%c9").replace(/í/g, "%c3%ad").replace(/ó/g, "%c3%b3").replace(/ú/g, "%c3%ba");
     const url = `https://gwent.io/es-ES/carta/${card}/`;
@@ -222,13 +232,24 @@ function spanishSearch(e, card) {
       cats = data.substring(data.indexOf(catsStart) + catsStart.length)
       .split('<tr><td class="label">Crear</td>')[0];
 
-      e.message.reply("", false, {
-        color: colorFaction(cats),
-        title: `${name.replace(/&#8217;/gi, "\'")}`,
-        type: "rich",
-        description: cleanText(text) + "\n\n" + categoriesSpanish(cats).join(" - "),
-        image: { url: img, width: 140, height: 210},
-      });
+      if (long) {
+        e.message.reply("", false, {
+          color: colorFaction(cats),
+          title: `${name.replace(/&#8217;/gi, "\'")}`,
+          type: "rich",
+          description: cleanText(text) + "\n\n" + categoriesSpanish(cats).join(" - "),
+          image: { url: img, width: 140, height: 210},
+        });
+      } else {
+        e.message.reply("", false, {
+          color: colorFaction(cats),
+          title: `${name.replace(/&#8217;/gi, "\'")}`,
+          type: "rich",
+          description: cleanText(text) + "\n\n" + categoriesSpanish(cats).join(" - "),
+        });
+
+      };
+
     })
     .catch((error) => {
       console.log(error);
@@ -240,6 +261,9 @@ function reply(e, msg) {
   const firstBracket = msg.indexOf("[");
   const secondBracket = msg.substring(firstBracket).indexOf("]") + firstBracket;
 
+  const firstBrace = msg.indexOf("{");
+  const secondBrace = msg.substring(firstBrace).indexOf("}") + firstBrace;
+
   if (firstBracket !== -1 && (secondBracket - firstBracket) !== -1) {
     let card = msg.slice(firstBracket + 1, secondBracket);
     card = trimCard(card.trim());
@@ -247,25 +271,45 @@ function reply(e, msg) {
     if (card) {
       switch (card[1]) {
         case "spanish":
-        spanishSearch(e, card[0]);
+        spanishSearch(e, card[0], true);
         break;
         case "english":
-        englishSearch(e, card[0]);
+        englishSearch(e, card[0], true);
         break;
         default:
         //empty
       }
     }
 
-    reply(e, msg.substring(secondBracket))
+    if (secondBracket > secondBrace) {
+      reply(e, msg.substring(secondBracket));
+    }
+  }
+  if (firstBrace !== -1 && (secondBrace - firstBrace) !== -1) {
+    let card = msg.slice(firstBrace + 1, secondBrace);
+    card = trimCard(card.trim());
+
+    if (card) {
+      switch (card[1]) {
+        case "spanish":
+        spanishSearch(e, card[0], false);
+        break;
+        case "english":
+        englishSearch(e, card[0], false);
+        break;
+        default:
+        //empty
+      }
+    }
+    if (secondBrace > secondBracket) {
+      reply(e, msg.substring(secondBrace));
+    }
   }
 }
 
 client.Dispatcher.on("MESSAGE_CREATE", e => {
   if (!e.message.author.bot) {
     const msg = e.message.content;
-    reply(e, msg);
-
-
+    reply(e, msg, true);
   }
 });
