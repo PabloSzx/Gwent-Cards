@@ -98,6 +98,10 @@ function ignoreSpelling(input) {
 }
 
 function trimCard(input) {
+
+  if (input.length <= 1) {
+    return undefined;
+  }
   let dif, menorEnglish, menorEnglishDif, menorSpanish, menorSpanishDif;
   let toReturn;
 
@@ -105,7 +109,7 @@ function trimCard(input) {
 
   _.map(Nicknames, (value, key) => {
     _.map(value, (val) => {
-      if (val === input) {
+      if (val.toLowerCase() === input.toLowerCase()) {
         nickname = key;
       }
     });
@@ -155,10 +159,12 @@ function trimCard(input) {
   } else if (englishPossibilities[0]) {
     menorEnglish = menorEnglish.replace(/\'/g, "").replace(/\s/g, "-").toLowerCase();
     toReturn = [menorEnglish, "english"];
+
   } else if (spanishPossibilities[0]){
     menorSpanish = menorSpanish.replace(/\'/g, "").replace(/\s/g, "-").toLowerCase();
     toReturn = [menorSpanish, "spanish"];
   }
+
   return toReturn;
 }
 
@@ -190,6 +196,8 @@ function spanishSearch(e, card, long) {
           type: "rich",
           description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
           image: { url: img, width: 112, height: 168},
+          url: "https://gwent.io/",
+          footer: { text: "Powered by Gwent.io, visita www.gwent.io", icon_url: "https://gwent.io/images/gwent_io_icon_256.png" }
         });
       } else {
         e.message.reply("", false, {
@@ -197,6 +205,8 @@ function spanishSearch(e, card, long) {
           title: `${name.replace(/&#8217;/g, "\'").replace(/&#39;/g, "\'")}`,
           type: "rich",
           description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
+          url: "https://gwent.io/",
+          footer: { text: "Powered by Gwent.io, visita www.gwent.io", icon_url: "https://gwent.io/images/gwent_io_icon_256.png" }
         });
 
       };
@@ -233,6 +243,8 @@ function englishSearch(e, card, long) {
           type: "rich",
           description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
           image: { url: img, width: 112, height: 168},
+          url: "https://gwent.io/",
+          footer: { text: "Powered by Gwent.io, visit www.gwent.io", icon_url: "https://gwent.io/images/gwent_io_icon_256.png" }
         });
       } else {
         e.message.reply("", false, {
@@ -240,6 +252,8 @@ function englishSearch(e, card, long) {
           title: `${name.replace(/&#8217;/g, "\'").replace(/&#39;/g, "\'")}`,
           type: "rich",
           description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
+          url: "https://gwent.io/",
+          footer: { text: "Powered by Gwent.io, visit www.gwent.io", icon_url: "https://gwent.io/images/gwent_io_icon_256.png" }
         });
       };
     })

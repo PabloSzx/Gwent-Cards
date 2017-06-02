@@ -167,17 +167,17 @@
     [ "Ciri" ]
   ,
   "Ciri: Dash" :
-    [ "Ciri: Dash" ]
+    [ "Ciri: Dash", "cdash" ]
   ,
   "Clan an Craite Raider" :
     [ "Clan an Craite Raider"
     ,"ccr"
-    ,"raider" ]
+    ,"raider", "cacr" ]
   ,
   "Clan An Craite Warcrier" :
     [ "Clan An Craite Warcrier"
     ,"warcrier"
-    ,"warcry" ]
+    ,"warcry", "cacw" ]
   ,
   "Clan An Craite Warrior" :
     [ "Clan An Craite Warrior" ]
@@ -231,7 +231,7 @@
     [ "Combat Engineer" ]
   ,
   "Commander's Horn" :
-    [ "Commander's Horn" ]
+    [ "Commander's Horn", "ch" ]
   ,
   "Commando Neophyte" :
     [ "Commando Neophyte"
@@ -636,7 +636,7 @@
     ,"mo" ]
   ,
   "Mardroeme" :
-    [ "Mardroeme" ]
+    [ "Mardroeme", "mushroom" ]
   ,
   "Margarita Laux–Antille" :
     [ "Margarita Laux–Antille"
@@ -749,7 +749,7 @@
   "Priscilla" :
     [ "Priscilla" ]
   ,
-  "Prize Winning Cow" :
+  "PrizeWinning Cow" :
     [ "Prize Winning Cow"
     ,"cow" ]
   ,
@@ -818,7 +818,7 @@
     [ "Renew" ]
   ,
   "Restore" :
-    [ "Restore" ]
+    [ "Restore", "restoration" ]
   ,
   "Roach" :
     [ "Roach" ]
@@ -954,7 +954,7 @@
     ,"triss " ]
   ,
   "Trollololo" :
-    [ "Trollololo" ]
+    [ "Trollololo", "trololo" ]
   ,
   "Udalryk" :
     [ "Udalryk" ]
@@ -1040,10 +1040,10 @@
   ,
   "Wild Hunt Rider" :
     [ "Wild Hunt Rider"
-    ,"rider" ]
+    ,"rider", "whr" ]
   ,
   "Wild Hunt Warrior" :
-    [ "Wild Hunt Warrior" ]
+    [ "Wild Hunt Warrior", "whw" ]
   ,
   "Woodland Spirit" :
     [ "Woodland Spirit"
