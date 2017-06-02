@@ -20,41 +20,12 @@ client.Dispatcher.on("GATEWAY_READY", e => {
 });
 
 function cleanText(input) {
-  text = decodeURI(input.replace(/<strong>/gi, "**").replace(/<\/strong>/gi, "**"))
+  text = input.replace(/<strong>/gi, "**").replace(/<\/strong>/gi, "**")
   .replace(/&#8217;/gi, "\'").replace(/<br>/gi, "\n").replace(/<p>/gi, "").replace(/<\/p>/gi, "");
   return text
 }
 
-function categoriesEnglish(input) {
-  let fields = [];
-  let obj = {name: "", value: ""};
-  str = input.replace(/<li>/gi, "");
-
-  const array = str.split("<\/li>");
-
-  for (let i = 0; i < array.length; i++) {
-    array[i] = array[i]
-    .replace(/<strong>/gi, "")
-    .replace(/<\/strong>/gi, "")
-    .replace(/<\/a>/gi, "")
-    .replace(/&#8217;/gi, "\'");
-
-    while (array[i].indexOf("<a") !== -1) {
-      array[i] = array[i].substring(0, array[i].indexOf("<a")) +
-      array[i].substring(array[i].indexOf("\">") + 2);
-    }
-    const name = array[i].substring(0, array[i].indexOf(":")).replace(/\t/g,"");
-    const value = array[i].substring(array[i].indexOf(":") + 2).replace(/\t/g,"");
-    if (name && value) {
-      fields[fields.length] = JSON.stringify({ name, value }, (value, key) =>
-      (`*${key.name}*: **${key.value}**`)).replace(/\\n/g, "").replace(/"/g, "");
-    }
-  }
-
-  return fields;
-}
-
-function categoriesSpanish(input) {
+function categories(input) {
   let fields = [];
   str = input.replace(/<tr>/gi, "");
 
@@ -116,18 +87,23 @@ function colorFaction(cats) {
   }
 }
 
-function noTildes(input) {
-  return input.replace(/á/g, "a").replace(/é/g, "e").replace(/í/g, "i").replace(/ó/g, "o").replace(/ú/g, "u");
+function ignoreSpelling(input) {
+  return input
+  .replace(/á/g, "a").replace(/é/g, "e")
+  .replace(/í/g, "i").replace(/ó/g, "o")
+  .replace(/ú/g, "u").replace(/'/g, "")
+  .replace(/:/g, "")
+  ;
 }
 
 function trimCard(input) {
   let dif, menorEnglish, menorEnglishDif, menorSpanish, menorSpanishDif;
   let toReturn = undefined;
   let englishPossibilities = _.filter(Cards[0], (value) => {
-    if (value.toLowerCase().indexOf(input.toLowerCase()) !== -1) return value
+    if (ignoreSpelling(value).toLowerCase().indexOf(ignoreSpelling(input).toLowerCase()) !== -1) return value
   });
   let spanishPossibilities = _.filter(Cards[1], (value) => {
-    if (noTildes(value).toLowerCase().indexOf(noTildes(input).toLowerCase()) !== -1) return value
+    if (ignoreSpelling(value).toLowerCase().indexOf(ignoreSpelling(input).toLowerCase()) !== -1) return value
   });
   if (englishPossibilities[0]) {
     menorEnglish = englishPossibilities[0];
@@ -142,9 +118,9 @@ function trimCard(input) {
   }
   if (spanishPossibilities[0]) {
     menorSpanish = spanishPossibilities[0];
-    menorSpanishDif = levenshtein.get(noTildes(input.toLowerCase()), noTildes(menorSpanish.toLowerCase()));
+    menorSpanishDif = levenshtein.get(ignoreSpelling(input.toLowerCase()), ignoreSpelling(menorSpanish.toLowerCase()));
     _.map(spanishPossibilities, (value) => {
-      dif = levenshtein.get(noTildes(input.toLowerCase()), noTildes(value.toLowerCase()));
+      dif = levenshtein.get(ignoreSpelling(input.toLowerCase()), ignoreSpelling(value.toLowerCase()));
       if (dif < menorSpanishDif) {
         menorSpanish = value;
         menorSpanishDif = dif;
@@ -154,7 +130,7 @@ function trimCard(input) {
 
   if (englishPossibilities[0] && spanishPossibilities[0]) {
     const menor = ((menorSpanishDif <= menorEnglishDif) ? menorSpanish : menorEnglish).replace(/\'/g, "").replace(/\s/g, "-").toLowerCase();
-    if (menorSpanishDif < menorEnglishDif) { //si es <= español es prioridad, si es < ingles es prioridad
+    if (menorSpanishDif <= menorEnglishDif) {
       toReturn = [menor, "spanish"];
     } else {
       toReturn = [menor, "english"];
@@ -169,52 +145,11 @@ function trimCard(input) {
   return toReturn;
 }
 
-function englishSearch(e, card, long) {
-  if (card) {
-    const url = `http://gwentify.com/cards/${card}/`;
-    axios.get('https://allorigins.us/get?method=raw&url=' +
-    encodeURIComponent(url) + '&callback=?').then((response) => {
-      const imgStart = '<div class="card-img"><a href=\"',
-      nameStart = '<h1 class="card-name">',
-      textStart = '<div class="card-text"><p>',
-      catsStart = '<ul class="card-cats">',
-      data = response.data,
-      img = data.substring(data.indexOf(imgStart) + imgStart.length)
-      .split('\"')[0],
-      name = data.substring(data.indexOf(nameStart) + nameStart.length)
-      .split('<')[0],
-      text = data.substring(data.indexOf(textStart) + textStart.length)
-      .split('</div>')[0],
-      cats = data.substring(data.indexOf(catsStart) + catsStart.length)
-      .split('</ul>')[0];
-
-      if (long) {
-        e.message.reply("", false, {
-          color: colorFaction(cats),
-          title: `${name.replace(/&#8217;/gi, "\'")}`,
-          type: "rich",
-          description: cleanText(text) + "\n\n" + categoriesEnglish(cats).join(" - "),
-          image: { url: img, width: 112, height: 168},
-        });
-      } else {
-        e.message.reply("", false, {
-          color: colorFaction(cats),
-          title: `${name.replace(/&#8217;/gi, "\'")}`,
-          type: "rich",
-          description: cleanText(text) + "\n\n" + categoriesEnglish(cats).join(" - "),
-        });
-      }
-
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
-}
-
 function spanishSearch(e, card, long) {
   if (card) {
-    card = card.replace(/á/g, "%c3%a1").replace(/é/g, "%c3%c9").replace(/í/g, "%c3%ad").replace(/ó/g, "%c3%b3").replace(/ú/g, "%c3%ba");
+    card = card.replace(/á/g, "%c3%a1").replace(/é/g, "%c3%c9")
+    .replace(/í/g, "%c3%ad").replace(/ó/g, "%c3%b3")
+    .replace(/ú/g, "%c3%ba");
     const url = `https://gwent.io/es-ES/carta/${card}/`;
     axios.get('https://allorigins.us/get?method=raw&url=' +
     encodeURIComponent(url) + '&callback=?').then((response) => {
@@ -234,21 +169,62 @@ function spanishSearch(e, card, long) {
       if (long) {
         e.message.reply("", false, {
           color: colorFaction(cats),
-          title: `${name.replace(/&#8217;/gi, "\'")}`,
+          title: `${name.replace(/&#8217;/g, "\'").replace(/&#39;/g, "\'")}`,
           type: "rich",
-          description: cleanText(text) + "\n\n" + categoriesSpanish(cats).join(" - "),
+          description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
           image: { url: img, width: 112, height: 168},
         });
       } else {
         e.message.reply("", false, {
           color: colorFaction(cats),
-          title: `${name.replace(/&#8217;/gi, "\'")}`,
+          title: `${name.replace(/&#8217;/g, "\'").replace(/&#39;/g, "\'")}`,
           type: "rich",
-          description: cleanText(text) + "\n\n" + categoriesSpanish(cats).join(" - "),
+          description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
         });
 
       };
 
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+}
+
+function englishSearch(e, card, long) {
+  if (card) {
+    const url = `https://gwent.io/en-US/card/${card}/`;
+    axios.get('https://allorigins.us/get?method=raw&url=' +
+    encodeURIComponent(url) + '&callback=?').then((response) => {
+      const imgStart = 'class="z-card-image"><img src="',
+      nameStart = '<h1 class="name">',
+      textStart = '<div class="label">Ability</div><div class="line"></div><div class="value">',
+      catsStart = '<div class="stats-card"><table class="stats">',
+      data = response.data,
+      img = data.substring(data.indexOf(imgStart) + imgStart.length)
+      .split('\"')[0],
+      name = data.substring(data.indexOf(nameStart) + nameStart.length)
+      .split('<')[0],
+      text = data.substring(data.indexOf(textStart) + textStart.length)
+      .split('</div>')[0],
+      cats = data.substring(data.indexOf(catsStart) + catsStart.length)
+      .split('<tr><td class="label">Craft</td>')[0];
+      if (long) {
+        e.message.reply("", false, {
+          color: colorFaction(cats),
+          title: `${name.replace(/&#8217;/g, "\'").replace(/&#39;/g, "\'")}`,
+          type: "rich",
+          description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
+          image: { url: img, width: 112, height: 168},
+        });
+      } else {
+        e.message.reply("", false, {
+          color: colorFaction(cats),
+          title: `${name.replace(/&#8217;/g, "\'").replace(/&#39;/g, "\'")}`,
+          type: "rich",
+          description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
+        });
+      };
     })
     .catch((error) => {
       console.log(error);
@@ -266,7 +242,6 @@ function reply(e, msg) {
   if (firstBracket !== -1 && (secondBracket - firstBracket) !== -1) {
     let card = msg.slice(firstBracket + 1, secondBracket);
     card = trimCard(card.trim());
-
     if (card) {
       switch (card[1]) {
         case "spanish":
@@ -279,7 +254,6 @@ function reply(e, msg) {
         //empty
       }
     }
-
     if (secondBracket > secondBrace) {
       reply(e, msg.substring(secondBracket));
     }
@@ -309,6 +283,10 @@ function reply(e, msg) {
 client.Dispatcher.on("MESSAGE_CREATE", e => {
   if (!e.message.author.bot) {
     const msg = e.message.content;
-    reply(e, msg.replace(/\"/g, ""), true);
+    try {
+      reply(e, msg.replace(/\"/g, ""), true);
+    } catch (e) {
+      console.log(e);
+    }
   }
 });
