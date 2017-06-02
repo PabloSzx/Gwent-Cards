@@ -20,8 +20,8 @@ client.Dispatcher.on("GATEWAY_READY", e => {
 });
 
 function cleanText(input) {
-  text = decodeURI(input.replace(/<strong>/gi, "").replace(/<\/strong>/gi, ""))
-  .replace(/&#8217;/gi, "\'")
+  text = decodeURI(input.replace(/<strong>/gi, "**").replace(/<\/strong>/gi, "**"))
+  .replace(/&#8217;/gi, "\'").replace(/<br>/gi, "\n").replace(/<p>/gi, "").replace(/<\/p>/gi, "");
   return text
 }
 
@@ -184,7 +184,7 @@ function englishSearch(e, card, long) {
       name = data.substring(data.indexOf(nameStart) + nameStart.length)
       .split('<')[0],
       text = data.substring(data.indexOf(textStart) + textStart.length)
-      .split('</p>')[0],
+      .split('</div>')[0],
       cats = data.substring(data.indexOf(catsStart) + catsStart.length)
       .split('</ul>')[0];
 
@@ -194,7 +194,7 @@ function englishSearch(e, card, long) {
           title: `${name.replace(/&#8217;/gi, "\'")}`,
           type: "rich",
           description: cleanText(text) + "\n\n" + categoriesEnglish(cats).join(" - "),
-          image: { url: img, width: 140, height: 210},
+          image: { url: img, width: 112, height: 168},
         });
       } else {
         e.message.reply("", false, {
@@ -228,17 +228,16 @@ function spanishSearch(e, card, long) {
       name = data.substring(data.indexOf(nameStart) + nameStart.length)
       .split('<')[0],
       text = data.substring(data.indexOf(textStart) + textStart.length)
-      .split('<')[0],
+      .split('</div>')[0],
       cats = data.substring(data.indexOf(catsStart) + catsStart.length)
       .split('<tr><td class="label">Crear</td>')[0];
-
       if (long) {
         e.message.reply("", false, {
           color: colorFaction(cats),
           title: `${name.replace(/&#8217;/gi, "\'")}`,
           type: "rich",
           description: cleanText(text) + "\n\n" + categoriesSpanish(cats).join(" - "),
-          image: { url: img, width: 140, height: 210},
+          image: { url: img, width: 112, height: 168},
         });
       } else {
         e.message.reply("", false, {
@@ -310,6 +309,6 @@ function reply(e, msg) {
 client.Dispatcher.on("MESSAGE_CREATE", e => {
   if (!e.message.author.bot) {
     const msg = e.message.content;
-    reply(e, msg, true);
+    reply(e, msg.replace(/\"/g, ""), true);
   }
 });
