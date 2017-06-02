@@ -3,6 +3,7 @@ const axios = require('axios');
 const levenshtein = require('fast-levenshtein');
 const _ = require('lodash');
 const Cards = require('./cards.json');
+const Nicknames = require('./nicknames.json');
 
 const client = new Discordie();
 //test server token
@@ -98,7 +99,23 @@ function ignoreSpelling(input) {
 
 function trimCard(input) {
   let dif, menorEnglish, menorEnglishDif, menorSpanish, menorSpanishDif;
-  let toReturn = undefined;
+  let toReturn;
+
+  let nickname;
+
+  _.map(Nicknames, (value, key) => {
+    _.map(value, (val) => {
+      if (val === input) {
+        nickname = key;
+      }
+    });
+  });
+
+  if (nickname) {
+    nickname = nickname.replace(/\'/g, "").replace(/\s/g, "-").toLowerCase();
+    return [nickname, "english"];
+  }
+
   let englishPossibilities = _.filter(Cards[0], (value) => {
     if (ignoreSpelling(value).toLowerCase().indexOf(ignoreSpelling(input).toLowerCase()) !== -1) return value
   });
