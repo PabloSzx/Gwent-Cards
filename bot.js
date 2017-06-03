@@ -16,9 +16,28 @@ client.connect({
   token
 });
 
+let channels;
+
 client.Dispatcher.on("GATEWAY_READY", e => {
   console.log("Connected as: " + client.User.username);
+  channels = (_.map(client.Guilds.toArray(), (value) => value.textChannels));
+
+  // console.log(channels);
+  // channels = _.map(channels, (val) => _.map(val , (value, key) =>
+  //     [ value.id, value.guild_id, value.name ]
+  //   )
+  // );
+
+  // console.log(channels);
 });
+
+function checkChineseOrJapaneseCharacter(input) {
+  if (input.match(/[\u3400-\u9FBF]/)) {
+    return true;
+  }
+
+  return false;
+}
 
 function cleanText(input) {
   text = input.replace(/<strong>/gi, "**").replace(/<\/strong>/gi, "**")
@@ -102,10 +121,32 @@ function trimCard(input) {
   if (input.length <= 1) {
     return undefined;
   }
-  let dif, menorEnglish, menorEnglishDif, menorSpanish, menorSpanishDif;
-  let toReturn;
 
-  let nickname;
+  let menorEnglish, menorEnglishDif, menorSpanish,
+  menorSpanishDif, dif, nickname, toReturn;
+
+  if (checkChineseOrJapaneseCharacter(input)) {
+    let chinesePossibilities = _.filter(Cards[2], (value) => {
+      if (value.indexOf(input.trim()) !== -1) return value
+    });
+
+    if (chinesePossibilities[0]) {
+      menorChinese = chinesePossibilities[0];
+      menorChineseDif = levenshtein.get(input.toLowerCase(), menorChinese.toLowerCase());
+      _.map(chinesePossibilities, (value) => {
+        dif = levenshtein.get(input.toLowerCase(), value.toLowerCase());
+        if (dif < menorEnglishDif) {
+          menorChinese = value;
+          menorChineseDif = dif;
+        }
+      });
+
+      toReturn = [menorChinese, "chinese"];
+
+    }
+
+    return toReturn;
+  }
 
   _.map(Nicknames, (value, key) => {
     _.map(value, (val) => {
@@ -170,10 +211,10 @@ function trimCard(input) {
 
 function spanishSearch(e, card, long) {
   if (card) {
-    card = card.replace(/á/g, "%c3%a1").replace(/é/g, "%c3%c9")
+    let carta = card.replace(/á/g, "%c3%a1").replace(/é/g, "%c3%c9")
     .replace(/í/g, "%c3%ad").replace(/ó/g, "%c3%b3")
     .replace(/ú/g, "%c3%ba");
-    const url = `https://gwent.io/es-ES/carta/${card}/`;
+    const url = `https://gwent.io/es-ES/carta/${carta}/`;
     axios.get('https://allorigins.us/get?method=raw&url=' +
     encodeURIComponent(url) + '&callback=?').then((response) => {
       const imgStart = 'class="z-card-image"><img src="',
@@ -196,8 +237,8 @@ function spanishSearch(e, card, long) {
           type: "rich",
           description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
           image: { url: img, width: 112, height: 168},
-          url: "https://gwent.io/",
-          footer: { text: "Powered by Gwent.io, visita www.gwent.io", icon_url: "https://gwent.io/images/gwent_io_icon_256.png" }
+          url: url,
+          footer: { text: "Información gracias a Gwent.io, visita www.gwent.io", icon_url: "https://gwent.io/images/gwent_io_icon_256.png" }
         });
       } else {
         e.message.reply("", false, {
@@ -205,8 +246,8 @@ function spanishSearch(e, card, long) {
           title: `${name.replace(/&#8217;/g, "\'").replace(/&#39;/g, "\'")}`,
           type: "rich",
           description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
-          url: "https://gwent.io/",
-          footer: { text: "Powered by Gwent.io, visita www.gwent.io", icon_url: "https://gwent.io/images/gwent_io_icon_256.png" }
+          url: url,
+          footer: { text: "Información gracias a Gwent.io, visita www.gwent.io", icon_url: "https://gwent.io/images/gwent_io_icon_256.png" }
         });
 
       };
@@ -220,7 +261,7 @@ function spanishSearch(e, card, long) {
 
 function englishSearch(e, card, long) {
   if (card) {
-    const url = `https://gwent.io/en-US/card/${card}/`;
+    const url = `https://gwent.io/en-US/card/${encodeURIComponent(card)}/`;
     axios.get('https://allorigins.us/get?method=raw&url=' +
     encodeURIComponent(url) + '&callback=?').then((response) => {
       const imgStart = 'class="z-card-image"><img src="',
@@ -243,7 +284,7 @@ function englishSearch(e, card, long) {
           type: "rich",
           description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
           image: { url: img, width: 112, height: 168},
-          url: "https://gwent.io/",
+          url: url,
           footer: { text: "Powered by Gwent.io, visit www.gwent.io", icon_url: "https://gwent.io/images/gwent_io_icon_256.png" }
         });
       } else {
@@ -252,8 +293,55 @@ function englishSearch(e, card, long) {
           title: `${name.replace(/&#8217;/g, "\'").replace(/&#39;/g, "\'")}`,
           type: "rich",
           description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
-          url: "https://gwent.io/",
+          url: url,
           footer: { text: "Powered by Gwent.io, visit www.gwent.io", icon_url: "https://gwent.io/images/gwent_io_icon_256.png" }
+        });
+      };
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+}
+
+
+function chineseSearch(e, card, long) {
+  if (card) {
+    const url = `https://gwent.io/zh-TW/%E5%8D%A1%E7%89%8C/${encodeURIComponent(card)}/`;
+    axios.get('https://allorigins.us/get?method=raw&url=' +
+    encodeURIComponent(url) + '&callback=?').then((response) => {
+      const imgStart = 'class="z-card-image"><img src="',
+      nameStart = '<h1 class="name">',
+      textStart = '<div class="label">' + '能力' + '</div><div class="line"></div><div class="value">',
+      catsStart = '<div class="stats-card"><table class="stats">',
+      data = response.data,
+      img = data.substring(data.indexOf(imgStart) + imgStart.length)
+      .split('\"')[0],
+      name = data.substring(data.indexOf(nameStart) + nameStart.length)
+      .split('<')[0],
+      text = data.substring(data.indexOf(textStart) + textStart.length)
+      .split('</div>')[0],
+      cats = data.substring(data.indexOf(catsStart) + catsStart.length)
+      .split('<tr><td class="label">' + '合成' + '</td>')[0];
+
+      if (long) {
+        e.message.reply("", false, {
+          color: colorFaction(cats),
+          title: `${name}`,
+          type: "rich",
+          description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
+          image: { url: img, width: 112, height: 168},
+          url: url,
+          footer: { text: "來源由Gwent.io提供，詳細資料請到www.gwent.io", icon_url: "https://gwent.io/images/gwent_io_icon_256.png" }
+        });
+      } else {
+        e.message.reply("", false, {
+          color: colorFaction(cats),
+          title: `${name.replace(/&#8217;/g, "\'").replace(/&#39;/g, "\'")}`,
+          type: "rich",
+          description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
+          url: url,
+          footer: { text: "來源由Gwent.io提供，詳細資料請到www.gwent.io", icon_url: "https://gwent.io/images/gwent_io_icon_256.png" }
         });
       };
     })
@@ -276,11 +364,20 @@ function reply(e, msg) {
     if (card) {
       switch (card[1]) {
         case "spanish":
-        spanishSearch(e, card[0], true);
-        break;
+        {
+          spanishSearch(e, card[0], true);
+          break;
+        }
         case "english":
-        englishSearch(e, card[0], true);
-        break;
+        {
+          englishSearch(e, card[0], true);
+          break;
+        }
+        case "chinese":
+        {
+          chineseSearch(e, card[0], true);
+          break;
+        }
         default:
         //empty
       }
@@ -296,11 +393,20 @@ function reply(e, msg) {
     if (card) {
       switch (card[1]) {
         case "spanish":
-        spanishSearch(e, card[0], false);
-        break;
+        {
+          spanishSearch(e, card[0], false);
+          break;
+        }
         case "english":
-        englishSearch(e, card[0], false);
-        break;
+        {
+          englishSearch(e, card[0], false);
+          break;
+        }
+        case "chinese":
+        {
+          chineseSearch(e, card[0], false);
+          break;
+        }
         default:
         //empty
       }

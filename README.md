@@ -11,21 +11,32 @@ The bot is currently working with an algorithm that compares your input with the
 There are implemented shortcuts that you can use to write less, for example [dbomb] to get "Dimeritium Bomb" info.
 The list of nicknames is available here https://docs.google.com/spreadsheets/d/1rxDfsX2BoAo6MKZFJewgZwZhxJQ22m9luaC8CqDWzk0/edit?usp=sharing.
 
-Currently the bot supports English and Spanish versions of cards for Gwent.
+Currently the bot supports English, Spanish and Chinese (Taiwan) versions of cards for Gwent.
 (If you want to help me to add another language to the bot, feel free to talk to me via discord, my nickname is @PabloSz#0327)
 
 
 The database i'm using is https://gwent.io/.
 
-A couple servers that are using this bot is "Gwent Esp", https://discord.gg/8ceWwck, and Official Gwent discord server, https://discord.gg/DTPYChN.
+A couple servers that are using this bot are:
+
+"Gwent Esp", https://discord.gg/8ceWwck.
+
+Official Gwent discord server, https://discord.gg/DTPYChN.
+
+"Gwent Taiwan", https://discord.gg/CRJbjsq.
 
 
 
 ### Special thanks to:
-\@nickgaunaetc for helping on spanish version
-\@switchblade420 for helping on nicknames database
-## Screenshot
-![Screenshot](https://i.imgur.com/AnO7Sov.png)
+\@nickgaunaetc for helping on spanish version.
+
+\@switchblade420 for helping on nicknames database.
+
+\@阿高 for helping on Chinese version.
+## Screenshots
+![Screenshot](https://i.imgur.com/qCsruZC.png)
+![Screenshot](https://i.imgur.com/FL3CBW3.png)
+![Screenshot](https://i.imgur.com/tmfIMYM.png)
 
 
 ## How it's made?
