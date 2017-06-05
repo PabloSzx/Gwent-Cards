@@ -351,31 +351,50 @@ function chineseSearch(e, card, long) {
   }
 }
 
+function checkChannelPermission(channel) {
+  restrictedChannels = [ "202165327650357249" ];
+
+  // "202165327650357249" = #gwent-discussion
+
+  let bool = true;
+
+  _.map(restrictedChannels, (value) => {
+    if (channel === value) {
+      bool = false;
+    }
+  });
+
+
+
+  return bool;
+}
+
 function reply(e, msg) {
   const firstBracket = msg.indexOf("[");
   const secondBracket = msg.substring(firstBracket).indexOf("]") + firstBracket;
 
   const firstBrace = msg.indexOf("{");
   const secondBrace = msg.substring(firstBrace).indexOf("}") + firstBrace;
-
   if (firstBracket !== -1 && (secondBracket - firstBracket) !== -1) {
     let card = msg.slice(firstBracket + 1, secondBracket);
     card = trimCard(card.trim());
+
+    const long = checkChannelPermission(e.message.channel_id);
     if (card) {
       switch (card[1]) {
         case "spanish":
         {
-          spanishSearch(e, card[0], true);
+          spanishSearch(e, card[0], long);
           break;
         }
         case "english":
         {
-          englishSearch(e, card[0], true);
+          englishSearch(e, card[0], long);
           break;
         }
         case "chinese":
         {
-          chineseSearch(e, card[0], true);
+          chineseSearch(e, card[0], long);
           break;
         }
         default:
