@@ -18,6 +18,9 @@ client.connect({
 
 let channels;
 
+// console.log("cantidad de cartas a analizar: " + Cards[0].length);
+// let c = 0;
+
 client.Dispatcher.on("GATEWAY_READY", e => {
   console.log("Connected as: " + client.User.username);
   channels = (_.map(client.Guilds.toArray(), (value) => value.textChannels));
@@ -164,6 +167,7 @@ function trimCard(input) {
   let englishPossibilities = _.filter(Cards[0], (value) => {
     if (ignoreSpelling(value).toLowerCase().indexOf(ignoreSpelling(input).toLowerCase()) !== -1) return value
   });
+
   let spanishPossibilities = _.filter(Cards[1], (value) => {
     if (ignoreSpelling(value).toLowerCase().indexOf(ignoreSpelling(input).toLowerCase()) !== -1) return value
   });
@@ -211,10 +215,11 @@ function trimCard(input) {
 
 function spanishSearch(e, card, long) {
   if (card) {
-    let carta = card.replace(/á/g, "%c3%a1").replace(/é/g, "%c3%c9")
-    .replace(/í/g, "%c3%ad").replace(/ó/g, "%c3%b3")
-    .replace(/ú/g, "%c3%ba");
-    const url = `https://gwent.io/es-ES/carta/${carta}/`;
+    let carta = card.replace(/á/g, "%C3%A1").replace(/é/g, "%C3%A9")
+    .replace(/í/g, "%C3%AD").replace(/ó/g, "%C3%B3")
+    .replace(/ú/g, "%C3%BA").replace(/%3A/g, "").replace(/-/g, "%2D")
+    .replace(/ñ/g, "%C3%B1").toLowerCase();
+    const url = `https://gwent.io/es-ES/carta/${carta}`;
     axios.get('https://allorigins.us/get?method=raw&url=' +
     encodeURIComponent(url) + '&callback=?').then((response) => {
       const imgStart = 'class="z-card-image"><img src="',
@@ -241,6 +246,17 @@ function spanishSearch(e, card, long) {
           footer: { text: "Información gracias a Gwent.io, visita www.gwent.io", icon_url: "https://gwent.io/images/gwent_io_icon_256.png" }
         });
       } else {
+        // c+=1;
+        // console.log(c);
+        // console.log({
+        //   color: colorFaction(cats),
+        //   title: `${name.replace(/&#8217;/g, "\'").replace(/&#39;/g, "\'")}`,
+        //   type: "rich",
+        //   description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
+        //   url: url,
+        //   footer: { text: "Información gracias a Gwent.io, visita www.gwent.io", icon_url: "https://gwent.io/images/gwent_io_icon_256.png" }
+        // });
+
         e.message.reply("", false, {
           color: colorFaction(cats),
           title: `${name.replace(/&#8217;/g, "\'").replace(/&#39;/g, "\'")}`,
@@ -261,7 +277,7 @@ function spanishSearch(e, card, long) {
 
 function englishSearch(e, card, long) {
   if (card) {
-    const url = `https://gwent.io/en-US/card/${encodeURIComponent(card)}/`;
+    const url = `https://gwent.io/en-US/card/${encodeURIComponent(card).replace(/%3A/g, "")}`;
     axios.get('https://allorigins.us/get?method=raw&url=' +
     encodeURIComponent(url) + '&callback=?').then((response) => {
       const imgStart = 'class="z-card-image"><img src="',
@@ -288,6 +304,17 @@ function englishSearch(e, card, long) {
           footer: { text: "Powered by Gwent.io, visit www.gwent.io", icon_url: "https://gwent.io/images/gwent_io_icon_256.png" }
         });
       } else {
+        // c+=1;
+        // console.log(c);
+        // console.log({
+        //   color: colorFaction(cats),
+        //   title: `${name.replace(/&#8217;/g, "\'").replace(/&#39;/g, "\'")}`,
+        //   type: "rich",
+        //   description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
+        //   url: url,
+        //   footer: { text: "Información gracias a Gwent.io, visita www.gwent.io", icon_url: "https://gwent.io/images/gwent_io_icon_256.png" }
+        // });
+
         e.message.reply("", false, {
           color: colorFaction(cats),
           title: `${name.replace(/&#8217;/g, "\'").replace(/&#39;/g, "\'")}`,
@@ -335,6 +362,17 @@ function chineseSearch(e, card, long) {
           footer: { text: "來源由Gwent.io提供，詳細資料請到www.gwent.io", icon_url: "https://gwent.io/images/gwent_io_icon_256.png" }
         });
       } else {
+        // c+=1;
+        // console.log(c);
+        // console.log({
+        //   color: colorFaction(cats),
+        //   title: `${name.replace(/&#8217;/g, "\'").replace(/&#39;/g, "\'")}`,
+        //   type: "rich",
+        //   description: cleanText(text) + "\n\n" + categories(cats).join(" - "),
+        //   url: url,
+        //   footer: { text: "Información gracias a Gwent.io, visita www.gwent.io", icon_url: "https://gwent.io/images/gwent_io_icon_256.png" }
+        // });
+
         e.message.reply("", false, {
           color: colorFaction(cats),
           title: `${name.replace(/&#8217;/g, "\'").replace(/&#39;/g, "\'")}`,
@@ -440,6 +478,10 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
   if (!e.message.author.bot) {
     const msg = e.message.content;
     try {
+      // _.map(Cards[0], (val, key) => {
+      //   console.log("val " + val + " key " + key);
+      //   reply(e, "{" + val + "}")
+      // })
       reply(e, msg.replace(/\"/g, ""), true);
     } catch (e) {
       console.log(e);
