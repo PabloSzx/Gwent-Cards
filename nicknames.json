@@ -1,0 +1,1079 @@
+{
+  "Adrenaline Rush" :
+    [ "Adrenaline Rush"
+    , "arush" ] ,
+  "Aelirenn" :
+    [ "Aelirenn" ]  ,
+  "Aeromancy" :
+    [ "Aeromancy" ]  ,
+  "Aglais" :
+    [ "Aglais" ]
+  ,
+  "Alba Pikeman" :
+    [ "Alba Pikeman"
+    ,"pikeman" ]
+  ,
+  "Alba Spearmen" :
+    [ "Alba Spearmen"
+    ,"spearmen" ]
+  ,
+  "Albrich" :
+    [ "Albrich" ]
+  ,
+  "Alchemist" :
+    [ "Alchemist" ]
+  ,
+  "Alzur's Double Cross" :
+    [ "Alzur's Double Cross"
+    ,"adc" ]
+  ,
+  "Alzur's Thunder" :
+    [ "Alzur's Thunder"
+    ,"thunder"
+    ,"zap" ]
+  ,
+  "Ambassador" :
+    [ "Ambassador" ]
+  ,
+  "Ancient Foglet" :
+    [ "Ancient Foglet"
+    ,"af" ]
+  ,
+  "Arachas" :
+    [ "Arachas" ]
+  ,
+  "Arachas Behemoth" :
+    [ "Arachas Behemoth"
+    ,"behemoth" ]
+  ,
+  "Arachas Venom" :
+    [ "Arachas Venom"
+    ,"av" ]
+  ,
+  "Archgriffin" :
+    [ "Archgriffin" ]
+  ,
+  "Aretuza Adept" :
+    [ "Aretuza Adept"
+    ,"aa" ]
+  ,
+  "Assassination" :
+    [ "Assassination" ]
+  ,
+  "Assire Var Anahid" :
+    [ "Assire Var Anahid"
+    ,"assire" ]
+  ,
+  "Auckes" :
+    [ "Auckes" ]
+  ,
+  "Avallac'h" :
+    [ "Avallac'h"
+    ,"avallach" ]
+  ,
+  "Ballista" :
+    [ "Ballista" ]
+  ,
+  "Barclay Els" :
+    [ "Barclay Els"
+    ,"barclay" ]
+  ,
+  "Bekker's Twisted Mirror" :
+    [ "Bekker's Twisted Mirror"
+    ,"btm" ]
+  ,
+  "Berserker Marauder" :
+    [ "Berserker Marauder"
+    ,"bm" ]
+  ,
+  "Birna Bran" :
+    [ "Birna Bran"
+    ,"birna" ]
+  ,
+  "Biting Frost" :
+    [ "Biting Frost"
+    ,"frost" ]
+  ,
+  "Black Infantry Arbalest" :
+    [ "Black Infantry Arbalest"
+    ,"arbalest" ]
+  ,
+  "Bloodcurdling Roar" :
+    [ "Bloodcurdling Roar"
+    ,"br" ]
+  ,
+  "Bloody Baron" :
+    [ "Bloody Baron"
+    ,"baron" ]
+  ,
+  "Blue Mountain Commando" :
+    [ "Blue Mountain Commando"
+    ,"bmc" ]
+  ,
+  "Blue Stripes Commando" :
+    [ "Blue Stripes Commando"
+    ,"bsc" ]
+  ,
+  "Blue Stripes Scout" :
+    [ "Blue Stripes Scout"
+    ,"bss" ]
+  ,
+  "Blueboy Lugos" :
+    [ "Blueboy Lugos" ]
+  ,
+  "Botchling" :
+    [ "Botchling" ]
+  ,
+  "Braenn" :
+    [ "Braenn" ]
+  ,
+  "Brouver Hoog" :
+    [ "Brouver Hoog"
+    ,"brouver" ]
+  ,
+  "Cahir" :
+    [ "Cahir" ]
+  ,
+  "Cantarella" :
+    [ "Cantarella" ]
+  ,
+  "Caranthir" :
+    [ "Caranthir" ]
+  ,
+  "Caretaker" :
+    [ "Caretaker" ]
+  ,
+  "Ceallach" :
+    [ "Ceallach" ]
+  ,
+  "Celaeno Harpy" :
+    [ "Celaeno Harpy"
+    ,"harpy" ]
+  ,
+  "Cerys" :
+    [ "Cerys" ]
+  ,
+  "Champion of Champions" :
+    [ "Champion of Champions"
+    ,"coc" ]
+  ,
+  "Chort" :
+    [ "Chort" ]
+  ,
+  "Ciaran" :
+    [ "Ciaran" ]
+  ,
+  "Ciri" :
+    [ "Ciri" ]
+  ,
+  "Ciri: Dash" :
+    [ "Ciri: Dash", "cdash" ]
+  ,
+  "Clan an Craite Raider" :
+    [ "Clan an Craite Raider"
+    ,"ccr"
+    ,"raider", "cacr" ]
+  ,
+  "Clan An Craite Warcrier" :
+    [ "Clan An Craite Warcrier"
+    ,"warcrier"
+    ,"warcry", "cacw" ]
+  ,
+  "Clan An Craite Warrior" :
+    [ "Clan An Craite Warrior" ]
+  ,
+  "Clan Brokvar Archer" :
+    [ "Clan Brokvar Archer"
+    ,"cba" ]
+  ,
+  "Clan Brokvar Hunter" :
+    [ "Clan Brokvar Hunter"
+    ,"cbh" ]
+  ,
+  "Clan Dimun Pirate" :
+    [ "Clan Dimun Pirate"
+    ,"cdp" ]
+  ,
+  "Clan Dimun Pirate Captain" :
+    [ "Clan Dimun Pirate Captain"
+    ,"cdpc" ]
+  ,
+  "Clan Drummond Shieldmaiden" :
+    [ "Clan Drummond Shieldmaiden"
+    ,"cds" ]
+  ,
+  "Clan Heymaey Skald" :
+    [ "Clan Heymaey Skald"
+    ,"skald" ]
+  ,
+  "Clan Tordarroch Armorsmith" :
+    [ "Clan Tordarroch Armorsmith"
+    ,"armorsmith" ]
+  ,
+  "Clan Tordarroch Shieldsmith" :
+    [ "Clan Tordarroch Shieldsmith"
+    ,"shieldsmith" ]
+  ,
+  "Clan Tuirseach Axeman" :
+    [ "Clan Tuirseach Axeman"
+    ,"axeman"
+    ,"xman"
+    ,"xmen" ]
+  ,
+  "Clan Tuirseach Skirmishers" :
+    [ "Clan Tuirseach Skirmishers"
+    ,"skirmisher" ]
+  ,
+  "Cleaver" :
+    [ "Cleaver" ]
+  ,
+  "Combat Engineer" :
+    [ "Combat Engineer" ]
+  ,
+  "Commander's Horn" :
+    [ "Commander's Horn", "ch" ]
+  ,
+  "Commando Neophyte" :
+    [ "Commando Neophyte"
+    ,"neophyte" ]
+  ,
+  "Coral" :
+    [ "Coral" ]
+  ,
+  "Crach An Craite" :
+    [ "Crach An Craite"
+    ,"crach" ]
+  ,
+  "Crone: Brewess" :
+    [ "Crone: Brewess"
+    ,"brewess" ]
+  ,
+  "Crone: Weavess" :
+    [ "Crone: Weavess"
+    ,"weavess" ]
+  ,
+  "Crone: Whispess" :
+    [ "Crone: Whispess"
+    ,"whispess" ]
+  ,
+  "Cynthia" :
+    [ "Cynthia" ]
+  ,
+  "Cyprian Wiley" :
+    [ "Cyprian Wiley"
+    ,"wiley"
+    ,"cyprian"
+    ,"whoreson" ]
+  ,
+  "Daerlan Foot Soldiers" :
+    [ "Daerlan Foot Soldiers"
+    ,"dfs" ]
+  ,
+  "Dagon" :
+    [ "Dagon" ]
+  ,
+  "Dandelion" :
+    [ "Dandelion" ]
+  ,
+  "Decoy" :
+    [ "Decoy" ]
+  ,
+  "Dennis Cranmer" :
+    [ "Dennis Cranmer" ]
+  ,
+  "Dethmold" :
+    [ "Dethmold" ]
+  ,
+  "Dijkstra" :
+    [ "Dijkstra" ]
+  ,
+  "Dimeritium Bomb" :
+    [ "Dimeritium Bomb"
+    ,"dbomb" ]
+  ,
+  "Dimeritium Shackles" :
+    [ "Dimeritium Shackles"
+    ,"shackles"
+    ,"lock" ]
+  ,
+  "Djenge Frett" :
+    [ "Djenge Frett"
+    ,"djenge" ]
+  ,
+  "Dol Blathanna Archer" :
+    [ "Dol Blathanna Archer"
+    ,"dba" ]
+  ,
+  "Dol Blathanna Marksman" :
+    [ "Dol Blathanna Marksman"
+    ,"dbm" ]
+  ,
+  "Dol Blathanna Protector" :
+    [ "Dol Blathanna Protector"
+    ,"dbp" ]
+  ,
+  "Dol Blathanna Trapper" :
+    [ "Dol Blathanna Trapper"
+    ,"trapper" ]
+  ,
+  "Donar an Hindar" :
+    [ "Donar an Hindar"
+    ,"donar" ]
+  ,
+  "Draig Bon–Dhu" :
+    [ "Draig Bon–Dhu"
+    ,"draig" ]
+  ,
+  "Draug" :
+    [ "Draug" ]
+  ,
+  "Drought" :
+    [ "Drought" ]
+  ,
+  "Drowner" :
+    [ "Drowner" ]
+  ,
+  "Dudu" :
+    [ "Dudu" ]
+  ,
+  "Dun Banner Heavy Cavalry" :
+    [ "Dun Banner Heavy Cavalry"
+    ,"dbhc" ]
+  ,
+  "Dun Banner Light Cavalry" :
+    [ "Dun Banner Light Cavalry"
+    ,"dblc" ]
+  ,
+  "Dwarven Mercenary" :
+    [ "Dwarven Mercenary" ]
+  ,
+  "Dwarven Skirmisher" :
+    [ "Dwarven Skirmisher" ]
+  ,
+  "Earth Elemental" :
+    [ "Earth Elemental" ]
+  ,
+  "Eithné" :
+    [ "Eithné"
+    ,"eithne" ]
+  ,
+  "Ekimmara" :
+    [ "Ekimmara"
+    ,"eki" ]
+  ,
+  "Ele'yas" :
+    [ "Ele'yas"
+    ,"eleyas" ]
+  ,
+  "Elven Mercenary" :
+    [ "Elven Mercenary"
+    ,"merc" ]
+  ,
+  "Elven Wardancer" :
+    [ "Elven Wardancer"
+    ,"wardancer" ]
+  ,
+  "Emhyr Var Emreis" :
+    [ "Emhyr Var Emreis"
+    ,"emhyr" ]
+  ,
+  "Emissary" :
+    [ "Emissary" ]
+  ,
+  "Epidemic" :
+    [ "Epidemic" ]
+  ,
+  "Eredin" :
+    [ "Eredin" ]
+  ,
+  "Ermion" :
+    [ "Ermion" ]
+  ,
+  "Eskel" :
+    [ "Eskel" ]
+  ,
+  "Fake Ciri" :
+    [ "Fake Ciri" ]
+  ,
+  "Field Medic" :
+    [ "Field Medic"
+    ,"fm" ]
+  ,
+  "Fiend" :
+    [ "Fiend" ]
+  ,
+  "Fire Elemental" :
+    [ "Fire Elemental" ]
+  ,
+  "Fire Scorpion" :
+    [ "Fire Scorpion"
+    ,"fs" ]
+  ,
+  "First Light" :
+    [ "First Light"
+    ,"fl" ]
+  ,
+  "Foglet" :
+    [ "Foglet" ]
+  ,
+  "Foltest" :
+    [ "Foltest" ]
+  ,
+  "Francesca" :
+    [ "Francesca" ]
+  ,
+  "Frightener" :
+    [ "Frightener" ]
+  ,
+  "Fringilla Vigo" :
+    [ "Fringilla Vigo" ]
+  ,
+  "Gaunter O'Dimm" :
+    [ "Gaunter O'Dimm"
+    ,"god" ]
+  ,
+  "Ge'els" :
+    [ "Ge'els"
+    ,"geels" ]
+  ,
+  "Geralt" :
+    [ "Geralt" ]
+  ,
+  "Geralt: Aard" :
+    [ "Geralt: Aard"
+    ,"aard"
+    ,"gaard" ]
+  ,
+  "Geralt: Igni" :
+    [ "Geralt: Igni"
+    ,"igni"
+    ,"gigni" ]
+  ,
+  "Ghoul" :
+    [ "Ghoul" ]
+  ,
+  "Giant Toad" :
+    [ "Giant Toad"
+    ,"toad"
+    ,"frog" ]
+  ,
+  "Grave Hag" :
+    [ "Grave Hag"
+    ,"gh" ]
+  ,
+  "Gremist" :
+    [ "Gremist" ]
+  ,
+  "Griffin" :
+    [ "Griffin" ]
+  ,
+  "Harald the Cripple" :
+    [ "Harald the Cripple"
+    ,"htc"
+    ,"harald" ]
+  ,
+  "Harpy" :
+    [ "Harpy" ]
+  ,
+  "Hawker Healer" :
+    [ "Hawker Healer" ]
+  ,
+  "Hawker Smuggler" :
+    [ "Hawker Smuggler" ]
+  ,
+  "Hawker Support" :
+    [ "Hawker Support" ]
+  ,
+  "Henselt" :
+    [ "Henselt" ]
+  ,
+  "Hjalmar" :
+    [ "Hjalmar" ]
+  ,
+  "Holger Blackhand" :
+    [ "Holger Blackhand"
+    ,"holger" ]
+  ,
+  "Ice Giant" :
+    [ "Ice Giant" ]
+  ,
+  "Ida Emean" :
+    [ "Ida Emean"
+    ,"ida" ]
+  ,
+  "Imlerith" :
+    [ "Imlerith" ]
+  ,
+  "Immune Boost" :
+    [ "Immune Boost"
+    ,"blizzard" ]
+  ,
+  "Impenetrable Fog" :
+    [ "Impenetrable Fog"
+    ,"fog" ]
+  ,
+  "Impera Brigade" :
+    [ "Impera Brigade" ]
+  ,
+  "Impera Enforcers" :
+    [ "Impera Enforcers" ]
+  ,
+  "Imperial Golem" :
+    [ "Imperial Golem"
+    ,"golem" ]
+  ,
+  "Iorveth" :
+    [ "Iorveth" ]
+  ,
+  "Iris" :
+    [ "Iris" ]
+  ,
+  "Isengrim" :
+    [ "Isengrim" ]
+  ,
+  "Ithlinne" :
+    [ "Ithlinne" ]
+  ,
+  "Joachim De Wett" :
+    [ "Joachim De Wett"
+    ,"joachim" ]
+  ,
+  "John Calveit" :
+    [ "John Calveit"
+    ,"calveit" ]
+  ,
+  "John Natalis" :
+    [ "John Natalis"
+    ,"natalis" ]
+  ,
+  "Johnny" :
+    [ "Johnny" ]
+  ,
+  "Jotunn" :
+    [ "Jotunn" ]
+  ,
+  "Jutta an Dimun" :
+    [ "Jutta an Dimun"
+    ,"jutta" ]
+  ,
+  "Kaedweni Sergeant" :
+    [ "Kaedweni Sergeant"
+    ,"ks" ]
+  ,
+  "Kaedweni Siege Platform" :
+    [ "Kaedweni Siege Platform"
+    ,"ksp" ]
+  ,
+  "Kaedweni Siege Support" :
+    [ "Kaedweni Siege Support"
+    ,"kss" ]
+  ,
+  "Kambi" :
+    [ "Kambi" ]
+  ,
+  "Katakan" :
+    [ "Katakan" ]
+  ,
+  "Kayran" :
+    [ "Kayran" ]
+  ,
+  "Keira Metz" :
+    [ "Keira Metz"
+    ,"keira" ]
+  ,
+  "King Bran" :
+    [ "King Bran"
+    ,"bran" ]
+  ,
+  "King of Beggars" :
+    [ "King of Beggars"
+    ,"kob" ]
+  ,
+  "Lacerate" :
+    [ "Lacerate" ]
+  ,
+  "Lambert" :
+    [ "Lambert" ]
+  ,
+  "Leo Bonhart" :
+    [ "Leo Bonhart"
+    ,"leo" ]
+  ,
+  "Letho of Gulet" :
+    [ "Letho of Gulet"
+    ,"letho" ]
+  ,
+  "Light Longship" :
+    [ "Light Longship" ]
+  ,
+  "Lubberkin" :
+    [ "Lubberkin" ]
+  ,
+  "Madman Lugos" :
+    [ "Madman Lugos" ]
+  ,
+  "Mahakam Defender" :
+    [ "Mahakam Defender"
+    ,"dorf" ]
+  ,
+  "Mahakam Guard" :
+    [ "Mahakam Guard" ]
+  ,
+  "Malena" :
+    [ "Malena" ]
+  ,
+  "Mangonel" :
+    [ "Mangonel" ]
+  ,
+  "Manticore" :
+    [ "Manticore" ]
+  ,
+  "Manticore Venom" :
+    [ "Manticore Venom" ]
+  ,
+  "Marching Orders" :
+    [ "Marching Orders"
+    ,"mo" ]
+  ,
+  "Mardroeme" :
+    [ "Mardroeme", "mushroom" ]
+  ,
+  "Margarita Laux–Antille" :
+    [ "Margarita Laux–Antille"
+    ,"margarita"
+    ,"rita" ]
+  ,
+  "Menno Coehoorn" :
+    [ "Menno Coehoorn"
+    ,"menno" ]
+  ,
+  "Merigold's Hailstorm" :
+    [ "Merigold's Hailstorm"
+    ,"hailstorm"
+    ,"hail" ]
+  ,
+  "Milva" :
+    [ "Milva" ]
+  ,
+  "Monster Nest" :
+    [ "Monster Nest"
+    ,"nest" ]
+  ,
+  "Morenn" :
+    [ "Morenn" ]
+  ,
+  "Morkvarg" :
+    [ "Morkvarg"
+    ,"wolf" ]
+  ,
+  "Morvran Voorhis" :
+    [ "Morvran Voorhis"
+    ,"morvran" ]
+  ,
+  "Myrgtabrakke" :
+    [ "Myrgtabrakke"
+    ,"myrgta"
+    ,"brakke" ]
+  ,
+  "Nature's Gift" :
+    [ "Nature's Gift"
+    ,"ng" ]
+  ,
+  "Nauzicaa Brigade" :
+    [ "Nauzicaa Brigade" ]
+  ,
+  "Nauzicaa Standard Bearer" :
+    [ "Nauzicaa Standard Bearer"
+    ,"nsb" ]
+  ,
+  "Necromancy" :
+    [ "Necromancy" ]
+  ,
+  "Nekker" :
+    [ "Nekker" ]
+  ,
+  "Nekker Warrior" :
+    [ "Nekker Warrior"
+    ,"nw" ]
+  ,
+  "Nenneke" :
+    [ "Nenneke" ]
+  ,
+  "Nilfgaardian Knight" :
+    [ "Nilfgaardian Knight"
+    ,"nk" ]
+  ,
+  "Nithral" :
+    [ "Nithral" ]
+  ,
+  "Ocvist" :
+    [ "Ocvist" ]
+  ,
+  "Odrin" :
+    [ "Odrin" ]
+  ,
+  "Old Speartip: Asleep" :
+    [ "Old Speartip: Asleep"
+    ,"speartip" ]
+  ,
+  "Olgierd" :
+    [ "Olgierd" ]
+  ,
+  "Operator" :
+    [ "Operator" ]
+  ,
+  "Overdose" :
+    [ "Overdose" ]
+  ,
+  "Pavetta" :
+    [ "Pavetta" ]
+  ,
+  "Peter Saar Gwynleve" :
+    [ "Peter Saar Gwynleve"
+    ,"psg"
+    ,"peter" ]
+  ,
+  "Philippa Eilhart" :
+    [ "Philippa Eilhart"
+    ,"philippa" ]
+  ,
+  "Priestess of Freya" :
+    [ "Priestess of Freya"
+    ,"priestess"
+    ,"freya" ]
+  ,
+  "Prince Stennis" :
+    [ "Prince Stennis"
+    ,"stennis" ]
+  ,
+  "Priscilla" :
+    [ "Priscilla" ]
+  ,
+  "PrizeWinning Cow" :
+    [ "Prize Winning Cow"
+    ,"cow" ]
+  ,
+  "Queensguard" :
+    [ "Queensguard"
+    ,"qg" ]
+  ,
+  "Quen Sign" :
+    [ "Quen Sign"
+    ,"quen" ]
+  ,
+  "Radovid" :
+    [ "Radovid" ]
+  ,
+  "Ragh Nar Roog" :
+    [ "Ragh Nar Roog"
+    ,"rnr" ]
+  ,
+  "Raging Berserker" :
+    [ "Raging Berserker" ]
+  ,
+  "Rainfarn" :
+    [ "Rainfarn" ]
+  ,
+  "Reaver Hunter" :
+    [ "Reaver Hunter" ]
+  ,
+  "Reaver Scout" :
+    [ "Reaver Scout" ]
+  ,
+  "Redanian Elite" :
+    [ "Redanian Elite" ]
+  ,
+  "Redanian Knight" :
+    [ "Redanian Knight" ]
+  ,
+  "Redanian Knight-Elect" :
+    [ "Redanian Knight-Elect"
+    ,"rke" ]
+  ,
+  "Regis" :
+    [ "Regis" ]
+  ,
+  "Regis: Higher Vampire" :
+    [ "Regis: Higher Vampire"
+    ,"rhv" ]
+  ,
+  "Reinforced Ballista" :
+    [ "Reinforced Ballista"
+    ,"ballista" ]
+  ,
+  "Reinforced Siege Tower" :
+    [ "Reinforced Siege Tower"
+    ,"rst" ]
+  ,
+  "Reinforced Trebuchet" :
+    [ "Reinforced Trebuchet"
+    ,"rt"
+    ,"treb"
+    ,"trebuchet" ]
+  ,
+  "Reinforcement" :
+    [ "Reinforcement" ]
+  ,
+  "Renew" :
+    [ "Renew" ]
+  ,
+  "Restore" :
+    [ "Restore", "restoration" ]
+  ,
+  "Roach" :
+    [ "Roach" ]
+  ,
+  "Rot Tosser" :
+    [ "Rot Tosser" ]
+  ,
+  "Royal Decree" :
+    [ "Royal Decree"
+    ,"decree" ]
+  ,
+  "Sabrina Glevissig" :
+    [ "Sabrina Glevissig"
+    ,"sabrina" ]
+  ,
+  "Saesenthessis" :
+    [ "Saesenthessis" ]
+  ,
+  "Sarah" :
+    [ "Sarah" ]
+  ,
+  "Saskia" :
+    [ "Saskia" ]
+  ,
+  "Savage Bear" :
+    [ "Savage Bear" ]
+  ,
+  "Schirru" :
+    [ "Schirru" ]
+  ,
+  "Scorch" :
+    [ "Scorch" ]
+  ,
+  "Serrit" :
+    [ "Serrit" ]
+  ,
+  "Shadow" :
+    [ "Shadow" ]
+  ,
+  "Shani" :
+    [ "Shani" ]
+  ,
+  "Sheldon Skaggs" :
+    [ "Sheldon Skaggs"
+    ,"sheldon" ]
+  ,
+  "Sigrdrifa" :
+    [ "Sigrdrifa" ]
+  ,
+  "Sile de Tansarville" :
+    [ "Sile de Tansarville"
+    ,"sile" ]
+  ,
+  "Skellige Storm" :
+    [ "Skellige Storm"
+    ,"ss" ]
+  ,
+  "Skjall" :
+    [ "Skjall" ]
+  ,
+  "Spotter" :
+    [ "Spotter" ]
+  ,
+  "Stammelford's Tremors" :
+    [ "Stammelford's Tremors"
+    ,"tremors" ]
+  ,
+  "Stefan Skellen" :
+    [ "Stefan Skellen"
+    ,"stefan" ]
+  ,
+  "Succubus" :
+    [ "Succubus" ]
+  ,
+  "Summoning Circle" :
+    [ "Summoning Circle" ]
+  ,
+  "Svanrige" :
+    [ "Svanrige" ]
+  ,
+  "Swallow Potion" :
+    [ "Swallow Potion"
+    ,"swallow" ]
+  ,
+  "Sweers" :
+    [ "Sweers" ]
+  ,
+  "Temerian Infantryman" :
+    [ "Temerian Infantryman" ]
+  ,
+  "Thaler" :
+    [ "Thaler" ]
+  ,
+  "The Guardian" :
+    [ "The Guardian"
+    ,"guardian" ]
+  ,
+  "The Last Wish" :
+    [ "The Last Wish"
+    ,"lw" ]
+  ,
+  "Thunderbolt Potion" :
+    [ "Thunderbolt Potion"
+    ,"thunderbolt" ]
+  ,
+  "Tibor Eggebracht" :
+    [ "Tibor Eggebracht"
+    ,"tibor" ]
+  ,
+  "Torrential Rain" :
+    [ "Torrential Rain"
+    ,"rain" ]
+  ,
+  "Toruviel" :
+    [ "Toruviel" ]
+  ,
+  "Treason" :
+    [ "Treason" ]
+  ,
+  "Trebuchet" :
+    [ "Trebuchet" ]
+  ,
+  "Tridam Infantryman" :
+    [ "Tridam Infantryman"
+    ,"tridam" ]
+  ,
+  "Triss: Butterfly Spell" :
+    [ "Triss: Butterfly Spell"
+    ,"triss butt" ]
+  ,
+  "Triss Merigold" :
+    [ "Triss Merigold"
+    ,"triss " ]
+  ,
+  "Trollololo" :
+    [ "Trollololo", "trololo" ]
+  ,
+  "Udalryk" :
+    [ "Udalryk" ]
+  ,
+  "Unseen Elder" :
+    [ "Unseen Elder"
+    ,"elder" ]
+  ,
+  "Vabjorn" :
+    [ "Vabjorn" ]
+  ,
+  "Vanhemar" :
+    [ "Vanhemar" ]
+  ,
+  "Vattier De Rideaux" :
+    [ "Vattier De Rideaux"
+    ,"vdr" ]
+  ,
+  "Vernon Roche" :
+    [ "Vernon Roche"
+    ,"roche" ]
+  ,
+  "Ves" :
+    [ "Ves" ]
+  ,
+  "Vesemir" :
+    [ "Vesemir" ]
+  ,
+  "Vicovaro Medic" :
+    [ "Vicovaro Medic" ]
+  ,
+  "Vicovaro Novice" :
+    [ "Vicovaro Novice"
+    ,"novice" ]
+  ,
+  "Vilgefortz" :
+    [ "Vilgefortz" ]
+  ,
+  "Villentretenmerth" :
+    [ "Villentretenmerth"
+    ,"borkh" ]
+  ,
+  "Vran Warrior" :
+    [ "Vran Warrior"
+    ,"vran" ]
+  ,
+  "Vrihedd Brigade" :
+    [ "Vrihedd Brigade" ]
+  ,
+  "Vrihedd Dragoon" :
+    [ "Vrihedd Dragoon"
+    ,"dragoon" ]
+  ,
+  "Vrihedd Officer" :
+    [ "Vrihedd Officer" ]
+  ,
+  "Vrihedd Sappers" :
+    [ "Vrihedd Sappers"
+    ,"sapper" ]
+  ,
+  "Vrihedd Vanguard" :
+    [ "Vrihedd Vanguard" ]
+  ,
+  "War Longship" :
+    [ "War Longship" ]
+  ,
+  "Water Hag" :
+    [ "Water Hag" ]
+  ,
+  "White Frost" :
+    [ "White Frost" ]
+  ,
+  "Wild Boar of the Sea" :
+    [ "Wild Boar of the Sea" ]
+  ,
+  "Wild Hunt Hound" :
+    [ "Wild Hunt Hound"
+    ,"hound" ]
+  ,
+  "Wild Hunt Navigator" :
+    [ "Wild Hunt Navigator"
+    ,"navigator" ]
+  ,
+  "Wild Hunt Rider" :
+    [ "Wild Hunt Rider"
+    ,"rider", "whr" ]
+  ,
+  "Wild Hunt Warrior" :
+    [ "Wild Hunt Warrior", "whw" ]
+  ,
+  "Woodland Spirit" :
+    [ "Woodland Spirit"
+    ,"leshen" ]
+  ,
+  "Wyvern" :
+    [ "Wyvern" ]
+  ,
+  "Xarthisius" :
+    [ "Xarthisius"
+    ,"xarth" ]
+  ,
+  "Yaevinn" :
+    [ "Yaevinn" ]
+  ,
+  "Yarpen Zigrin" :
+    [ "Yarpen Zigrin"
+    ,"yarpen" ]
+  ,
+  "Yennefer" :
+    [ "Yennefer" ]
+  ,
+  "Yennefer: The Conjurer" :
+    [ "Yennefer: The Conjurer"
+    ,"yencon" ]
+  ,
+  "Zoltan: Animal Tamer" :
+    [ "Zoltan: Animal Tamer"
+    ,"zat" ]
+  ,
+  "Zoltan Chivay" :
+    [ "Zoltan Chivay" ]
+}
