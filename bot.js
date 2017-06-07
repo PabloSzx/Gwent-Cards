@@ -6,8 +6,6 @@ const Cards = require('./cards.json');
 const Nicknames = require('./nicknames.json');
 
 const client = new Discordie();
-//test server token
-// const token = 'MzE4ODc4NzEyMzgyNzUwNzMx.DA4y6g.ZxV8SUmfhmRdd5KSxQ8zkBV8hWs';
 
 //heroku token
 const token = process.env.token;
@@ -16,19 +14,8 @@ client.connect({
   token
 });
 
-let channels;
-
 client.Dispatcher.on("GATEWAY_READY", e => {
   console.log("Connected as: " + client.User.username);
-  channels = (_.map(client.Guilds.toArray(), (value) => value.textChannels));
-
-  // console.log(channels);
-  // channels = _.map(channels, (val) => _.map(val , (value, key) =>
-  //     [ value.id, value.guild_id, value.name ]
-  //   )
-  // );
-
-  // console.log(channels);
 });
 
 function checkChineseOrJapaneseCharacter(input) {
@@ -164,6 +151,7 @@ function trimCard(input) {
   let englishPossibilities = _.filter(Cards[0], (value) => {
     if (ignoreSpelling(value).toLowerCase().indexOf(ignoreSpelling(input).toLowerCase()) !== -1) return value
   });
+
   let spanishPossibilities = _.filter(Cards[1], (value) => {
     if (ignoreSpelling(value).toLowerCase().indexOf(ignoreSpelling(input).toLowerCase()) !== -1) return value
   });
@@ -211,10 +199,11 @@ function trimCard(input) {
 
 function spanishSearch(e, card, long) {
   if (card) {
-    let carta = card.replace(/á/g, "%c3%a1").replace(/é/g, "%c3%c9")
-    .replace(/í/g, "%c3%ad").replace(/ó/g, "%c3%b3")
-    .replace(/ú/g, "%c3%ba");
-    const url = `https://gwent.io/es-ES/carta/${carta}/`;
+    let carta = card.replace(/á/g, "%C3%A1").replace(/é/g, "%C3%A9")
+    .replace(/í/g, "%C3%AD").replace(/ó/g, "%C3%B3")
+    .replace(/ú/g, "%C3%BA").replace(/%3A/g, "").replace(/-/g, "%2D")
+    .replace(/ñ/g, "%C3%B1").toLowerCase();
+    const url = `https://gwent.io/es-ES/carta/${carta}`;
     axios.get('https://allorigins.us/get?method=raw&url=' +
     encodeURIComponent(url) + '&callback=?').then((response) => {
       const imgStart = 'class="z-card-image"><img src="',
@@ -261,7 +250,7 @@ function spanishSearch(e, card, long) {
 
 function englishSearch(e, card, long) {
   if (card) {
-    const url = `https://gwent.io/en-US/card/${encodeURIComponent(card)}/`;
+    const url = `https://gwent.io/en-US/card/${encodeURIComponent(card).replace(/%3A/g, "")}`;
     axios.get('https://allorigins.us/get?method=raw&url=' +
     encodeURIComponent(url) + '&callback=?').then((response) => {
       const imgStart = 'class="z-card-image"><img src="',
