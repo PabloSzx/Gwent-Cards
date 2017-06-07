@@ -16,6 +16,13 @@ client.connect({
   token
 });
 
+stringToPathKey = function(string) {
+  string = string.replace(/[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/@#\\]/g, '');
+  string = string.replace(/\s/g, '-');
+  string = string.toLocaleLowerCase();
+  return encodeURIComponent(string);
+};
+
 let channels;
 
 // console.log("cantidad de cartas a analizar: " + Cards[0].length);
@@ -275,6 +282,13 @@ function spanishSearch(e, card, long) {
   }
 }
 
+function apiSearch() {
+  console.log("api search");
+  axios.post('https://gwent.io/api/obelix/v1/exoid', { "requests": [{"path":"cards.getByPathKey", "body":{"pathKey":"%E3%83%AC%E3%82%B8%E3%82%B9"}}] }).then((response) => {
+    console.log(response.data.results);
+  })
+}
+
 function englishSearch(e, card, long) {
   if (card) {
     const url = `https://gwent.io/en-US/card/${encodeURIComponent(card).replace(/%3A/g, "")}`;
@@ -482,7 +496,8 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
       //   console.log("val " + val + " key " + key);
       //   reply(e, "{" + val + "}")
       // })
-      reply(e, msg.replace(/\"/g, ""), true);
+      apiSearch();
+      // reply(e, msg.replace(/\"/g, ""), true);
     } catch (e) {
       console.log(e);
     }
