@@ -7,10 +7,10 @@ const Nicknames = require('./nicknames.json');
 
 const client = new Discordie();
 //test server token
-// const token = 'MzE4ODc4NzEyMzgyNzUwNzMx.DA4y6g.ZxV8SUmfhmRdd5KSxQ8zkBV8hWs';
+const token = 'MzE4ODc4NzEyMzgyNzUwNzMx.DA4y6g.ZxV8SUmfhmRdd5KSxQ8zkBV8hWs';
 
 //heroku token
-const token = process.env.token;
+// const token = process.env.token;
 
 client.connect({
   token
@@ -19,7 +19,7 @@ client.connect({
 let channels;
 
 // console.log("cantidad de cartas a analizar: " + Cards[0].length);
-// let c = 0;
+let c = 0;
 
 client.Dispatcher.on("GATEWAY_READY", e => {
   console.log("Connected as: " + client.User.username);
