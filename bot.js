@@ -198,12 +198,14 @@ function trimCard(input) {
 }
 
 function spanishSearch(e, card, long) {
+  let url;
   if (card) {
     let carta = card.replace(/á/g, "%C3%A1").replace(/é/g, "%C3%A9")
     .replace(/í/g, "%C3%AD").replace(/ó/g, "%C3%B3")
     .replace(/ú/g, "%C3%BA").replace(/%3A/g, "").replace(/-/g, "%2D")
     .replace(/ñ/g, "%C3%B1").toLowerCase();
-    const url = `https://gwent.io/es-ES/carta/${carta}`;
+    url = `https://gwent.io/es-ES/carta/${carta}`;
+    console.log("---\nRequest: " + url + "\n---");
     axios.get('https://allorigins.us/get?method=raw&url=' +
     encodeURIComponent(url) + '&callback=?').then((response) => {
       const imgStart = 'class="z-card-image"><img src="',
@@ -244,13 +246,16 @@ function spanishSearch(e, card, long) {
     })
     .catch((error) => {
       console.log(error);
+      console.log("Error en: " + url + " carta: " + card);
     });
   }
 }
 
 function englishSearch(e, card, long) {
+  let url;
   if (card) {
-    const url = `https://gwent.io/en-US/card/${encodeURIComponent(card).replace(/%3A/g, "")}`;
+    url = `https://gwent.io/en-US/card/${encodeURIComponent(card).replace(/%3A/g, "")}`;
+    console.log("---\nRequest: " + url + "\n---");
     axios.get('https://allorigins.us/get?method=raw&url=' +
     encodeURIComponent(url) + '&callback=?').then((response) => {
       const imgStart = 'class="z-card-image"><img src="',
@@ -289,14 +294,17 @@ function englishSearch(e, card, long) {
     })
     .catch((error) => {
       console.log(error);
+      console.log("Error en: " + url + " carta: " + card);
     });
   }
 }
 
 
 function chineseSearch(e, card, long) {
+  let url;
   if (card) {
-    const url = `https://gwent.io/zh-TW/%E5%8D%A1%E7%89%8C/${encodeURIComponent(card)}/`;
+    url = `https://gwent.io/zh-TW/%E5%8D%A1%E7%89%8C/${encodeURIComponent(card)}/`;
+    console.log("---\nRequest: " + url + "\n---");
     axios.get('https://allorigins.us/get?method=raw&url=' +
     encodeURIComponent(url) + '&callback=?').then((response) => {
       const imgStart = 'class="z-card-image"><img src="',
@@ -336,6 +344,7 @@ function chineseSearch(e, card, long) {
     })
     .catch((error) => {
       console.log(error);
+      console.log("Error en: " + url + " carta: " + card);
     });
   }
 }
