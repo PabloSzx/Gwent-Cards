@@ -1,21 +1,15 @@
 h1 {
-  /*justify-content: center;
-  */
   text-align: center;
   padding-top: 15px;
-  /*margin-top: 100px;*/
 }
 
 body {
-  /*background-image: url("background1.jpg");*/
   background-size: cover;
   color: #565656;
 }
 
 
 p {
-  /*text-align: center;*/
-  /*width: 100%;*/
   line-height: 1.7em;
   padding-left: 18em;
   padding-right: 18em;
@@ -23,26 +17,11 @@ p {
   font-size: 0.2em;
 }
 
-li a {
-  transition: all 0.5s !important;
-  color: #9D9D9D !important;
-}
-
-/*a img {
-  padding-top: 0.1em;
-  transition: all 0.5s !important;
-}*/
-
-/*li a img:hover {
-  filter: brightness(400%);
-}*/
-
 .black-background {
   background-color: #F2F2F2;
 }
 
 .github {
-  /*height: 100%;*/
   transition: all 0.5s;
   position: absolute;
   top: calc(50% - 7em);
@@ -56,9 +35,6 @@ li a {
 }
 
 .logo {
-  /*left: calc(50% - 5em);*/
-  /*margin: auto;*/
-  /*top: 1em;*/
   top: calc(50% - 10em);
   left: 1em;
   position: absolute;
@@ -68,17 +44,11 @@ li a {
 }
 
 .card {
-  /*justify-content: center;*/
-  /*position: relative;
-  top: 50%;
-  transform: translateY(-50%);*/
   margin: auto;
-  /*width: 100vw;*/
 }
 
 .addButton {
   background-color: #697EC4;
-  /*color: black;*/
 }
 
 .addButton:hover {
@@ -90,8 +60,6 @@ li a {
 }
 
 .showButton {
-  /*border-radius: 25px;*/
-  border-color: #697EC4;
   color: #141414;
   background-color: white;
 }
