@@ -28,5 +28,8 @@
     "npm": "^5.0.3",
     "object.values": "^1.0.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-preset-env": "^1.5.2"
+  }
 }

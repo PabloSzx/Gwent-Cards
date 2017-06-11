@@ -363,14 +363,17 @@ function checkLanguageOnServer(poss, message) {
   let defaultServer = "en-US";
   let server;
 
-  let actualChannel = message.channel.id;
+  if (message.channel) {
+    let actualChannel = message.channel.id;
 
-  _.map(channels, (value, key) => {
-    if (key === actualChannel) {
-      server = value;
-    } else {
-    }
-  });
+    _.map(channels, (value, key) => {
+      if (key === actualChannel) {
+        server = value;
+      } else {
+      }
+    });
+  }
+
 
   let n;
 
