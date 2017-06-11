@@ -76,8 +76,8 @@ module.exports = {
     _faction: {
       'Neutral': 'Neutral',
       'Monster': 'Monster',
-      'Scoiatael': 'Scoiatael',
-      'NorthernKingdom': 'Northern Kingdom',
+      'Scoiatael': 'Scoia\'tael',
+      'NorthernKingdom': 'Northern Realms',
       'Skellige': 'Skellige',
       'Nilfgaard': 'Nilfgaard'
     },

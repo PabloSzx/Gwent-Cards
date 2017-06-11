@@ -3,7 +3,7 @@ const axios = require('axios');
 const levenshtein = require('fast-levenshtein');
 const _ = require('lodash');
 const fs = require('fs');
-let firebase = require('firebase');
+const firebase = require('firebase');
 const getValues = require('object.values');
 const Cards = require('./cards.json');
 const Nicknames = require('./nicknames.json');
@@ -51,7 +51,7 @@ function addServer(id, language, message) {
 
   if (pass) {
     firebase.database().ref().update({ [id]: languageToAdd }).then(() => {
-      console.log("--Idioma actualizado--");
+      console.log("--Language Updated--");
       if (message.author.dmChannel) {
         message.author.dmChannel.send("Your server default language has updated to: " + languageToAdd);
       } else {
@@ -73,14 +73,9 @@ function addServer(id, language, message) {
   }
 }
 
-//test server token
-// const token = 'MzE4ODc4NzEyMzgyNzUwNzMx.DA4y6g.ZxV8SUmfhmRdd5KSxQ8zkBV8hWs';
-
-//heroku token
+// const token = 'MzE4ODc4NzEyMzgyNzUwNzMx.DB554A.E1Gz2qk7eUzPMu72MYxd5ju6dkw';
 const token = process.env.token;
 client.login(token);
-
-let cardsArray = [ [],[],[],[],[],[],[],[],[],[],[],[] ];
 
 function stringToPathKey(string) {
   string = string.replace(/[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/@#\\]/g, '');
@@ -113,7 +108,12 @@ function categories(data, language) {
 
   fields[fields.length] = `*${translation[language].group}*: **${(translation[language]._group)[data.type]}**`
 
-  fields[fields.length] = `*${translation[language].faction}*: **${(translation[language]._faction)[data.faction]}**`
+  let faction = data.faction;
+  if (data.faction === 'Northern Realms') {
+    faction = 'NorthernKingdom';
+  }
+
+  fields[fields.length] = `*${translation[language].faction}*: **${translation[language]._faction[faction]}**`
 
   let rarity = (getValues(data.variations)[0]).rarity;
   fields[fields.length] = `*${translation[language].rarity}*: **${(translation[language]._rarity)[rarity]}**`
@@ -424,7 +424,7 @@ function embedData(data, card, long) {
     type: "rich",
     description: text + "\n\n" + cats.join(" - "),
     url: `https://gwent.io/card/${stringToPathKey(card[0])}`,
-    footer: { text: "Powered by Gwent.io, visit www.gwent.io", icon_url: "https://gwent.io/images/gwent_io_icon_256.png" }
+    footer: { text: "Gwent.io", icon_url: "https://gwent.io/images/gwent_io_icon_256.png" }
   })
   if (long) {
     embed.setImage(getImage(data));
