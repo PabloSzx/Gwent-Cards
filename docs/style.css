@@ -67,3 +67,30 @@ p {
 .showButton:hover {
   background-color: #F2F2F2 !important;
 }
+
+@media only screen and (max-width: 1000px) {
+    p {
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+    .logo, .github {
+      top: 0;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .logo, .github {
+      width: auto;
+      height: 20vh;
+    }
+    .github {
+      right: 0.5em;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .logo, .github {
+      width: 20vw;
+      height: auto;
+    }
+}
