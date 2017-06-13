@@ -68,6 +68,7 @@ function ignoreSpelling(input) {
   .replace(/'/g, '')
   .replace(/:/g, '')
   .replace(/ï/g, 'i')
+  .replace(/–/g, '-')
   .toLowerCase();
 }
 

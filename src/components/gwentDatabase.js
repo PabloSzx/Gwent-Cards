@@ -73,9 +73,9 @@ export default class GwentDatabase {
     if (nickname) {
       return [nickname, 'en-US'];
     } else if (checkChineseOrJapaneseCharacter(input)) {
-      const jpPossibilities = filter(cards[6], input);
-      const cnPossibilities = filter(cards[10], input);
-      const twPossibilities = filter(cards[11], input);
+      const jpPossibilities = filter((cards.cards)['ja-JP'], input);
+      const cnPossibilities = filter((cards.cards)['zh-CN'], input);
+      const twPossibilities = filter((cards.cards)['zh-TW'], input);
 
       if (jpPossibilities[0]) {
         length = Object.keys(poss).length;
@@ -112,21 +112,21 @@ export default class GwentDatabase {
         return [values[0], keys[0]];
       }
     } else if (checkRussianCharacter(input)) {
-      const ruPossibilities = filter(cards[9], input);
+      const ruPossibilities = filter((cards.cards)['ru-RU'], input);
 
       if (ruPossibilities[0]) {
         return [bestPossibility(ruPossibilities, input), 'ru-RU'];
       }
       return undefined;
     } else {
-      const dePossibilities = filter(cards[0], input);
-      const usPossibilities = filter(cards[1], input);
-      const esPossibilities = filter(cards[2], input);
-      const mxPossibilities = filter(cards[3], input);
-      const frPossibilities = filter(cards[4], input);
-      const itPossibilities = filter(cards[5], input);
-      const plPossibilities = filter(cards[7], input);
-      const brPossibilities = filter(cards[8], input);
+      const dePossibilities = filter((cards.cards)['de-DE'], input);
+      const usPossibilities = filter((cards.cards)['en-US'], input);
+      const esPossibilities = filter((cards.cards)['es-ES'], input);
+      const mxPossibilities = filter((cards.cards)['es-MX'], input);
+      const frPossibilities = filter((cards.cards)['fr-FR'], input);
+      const itPossibilities = filter((cards.cards)['it-IT'], input);
+      const plPossibilities = filter((cards.cards)['pl-PL'], input);
+      const brPossibilities = filter((cards.cards)['pt-BR'], input);
 
       if (dePossibilities[0]) {
         length = Object.keys(poss).length;

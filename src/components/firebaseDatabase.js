@@ -12,7 +12,6 @@ export default class FirebaseDatabase {
 
     this.database.database().ref().on('value', (snapshot) => {
       this.channels = snapshot.val();
-      console.log(this.channels);
     });
   }
 
