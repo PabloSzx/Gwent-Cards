@@ -15,7 +15,7 @@ export default class GwentDatabase {
 
     const embed = new DiscordJS.RichEmbed({
       color: colorFaction(data.faction),
-      title: `**${card[0]}**`,
+      title: card[0],
       type: 'rich',
       description: `${text}\n\n${cats.join(' - ')}`,
       url: `https://gwent.io/card/${stringToPathKey(card[0])}`,
