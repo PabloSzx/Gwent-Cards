@@ -24,6 +24,7 @@ export default class Discord {
     this.client.on('guildCreate', guild => this.newServerEvent(guild));
 
     this.fDatabase = new FirebaseDatabase(this.apiKey, this.databaseURL);
+    this.cardsDatabase = new GwentDatabase(this.fDatabase);
   }
 
   messageEvent(message) {
@@ -65,7 +66,7 @@ export default class Discord {
       const long = checkChannelPermission(message.channel.id,
         restrictedChannels);
 
-      GwentDatabase.apiSearch(card, message, long, this.fDatabase);
+      this.cardsDatabase.apiSearch(card, message, long);
       if (secondBracket > secondBrace) {
         this.checkMessage(message, content.substring(secondBracket));
       }
@@ -73,8 +74,7 @@ export default class Discord {
     if (firstBrace !== -1 && (secondBrace - firstBrace) !== -1) {
       const card = content.slice(firstBrace + 1, secondBrace);
 
-
-      GwentDatabase.apiSearch(card, message, false, this.fDatabase);
+      this.cardsDatabase.apiSearch(card, message, false);
 
       if (secondBrace > secondBracket) {
         this.checkMessage(message, content.substring(secondBrace));

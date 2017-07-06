@@ -9,9 +9,14 @@ import { stringToPathKey, checkChineseOrJapaneseCharacter,
 } from '../utils';
 
 export default class GwentDatabase {
-  static embedData(data, card, long) {
+  constructor(fDatabase) {
+    this.fDatabase = fDatabase;
+    this.database = {};
+  }
+
+  embedData(data, card, long) {
     const text = data.info[card[1]];
-    const cats = this.categories(data, card[1]);
+    const cats = this.constructor.categories(data, card[1]);
 
     const embed = new DiscordJS.RichEmbed({
       color: colorFaction(data.faction),
@@ -29,39 +34,7 @@ export default class GwentDatabase {
     return embed;
   }
 
-  static apiSearch(input, message, long, fDatabase) {
-    const card = this.trimCard(input, message.channel, fDatabase);
-
-    if (card) {
-      axios.post('https://gwent.io/api/obelix/v1/exoid', {
-        requests: [{ path: 'cards.getByPathKey',
-          body: { pathKey: stringToPathKey(card[0]) } }] })
-      .then((response) => {
-        const data = response.data.results[0];
-        message.reply({ embed: this.embedData(data, card, long) })
-        .then(msg => console.log(`Sent card info ${msg.channel.name ? `in ${msg.channel.name} on ${msg.channel.guild.name} server` : `to ${msg.channel.recipient.username} direct message channel`}`))
-       .catch(() => {
-         message.author.createDM().then((channel) => {
-           channel.send({ embed: this.embedData(data, card, long) }).then((msg) => {
-             console.log(`Sent card info to ${msg.channel.recipient.username} direct message channel`);
-           });
-         }).catch((err) => {
-           console.error(err);
-         });
-       });
-      }).catch((err) => {
-        console.error(err);
-      });
-    } else {
-      message.author.createDM().then((channel) => {
-        channel.send('Card not recognized');
-      }).catch((err) => {
-        console.error(err);
-      });
-    }
-  }
-
-  static trimCard(param, channel, fDatabase) {
+  trimCard(param, channel) {
     let input = '';
 
     if (param) {
@@ -104,9 +77,9 @@ export default class GwentDatabase {
       length = Object.keys(poss).length;
 
       if (channel.guild) {
-        priorityIndex = fDatabase.checkLanguageOnServer(poss, channel.guild.id);
+        priorityIndex = this.fDatabase.checkLanguageOnServer(poss, channel.guild.id);
       } else {
-        priorityIndex = fDatabase.checkLanguageOnServer(poss, undefined);
+        priorityIndex = this.fDatabase.checkLanguageOnServer(poss, undefined);
       }
 
       if (length === 0) {
@@ -175,9 +148,9 @@ export default class GwentDatabase {
       length = Object.keys(poss).length;
 
       if (channel.guild) {
-        priorityIndex = fDatabase.checkLanguageOnServer(poss, channel.guild.id);
+        priorityIndex = this.fDatabase.checkLanguageOnServer(poss, channel.guild.id);
       } else {
-        priorityIndex = fDatabase.checkLanguageOnServer(poss, undefined);
+        priorityIndex = this.fDatabase.checkLanguageOnServer(poss, undefined);
       }
 
       if (length === 0) {
@@ -250,4 +223,51 @@ export default class GwentDatabase {
     return fields;
   }
 
+  apiSearch(input, message, long) {
+    const card = this.trimCard(input, message.channel);
+
+    if (card) {
+      const info = this.database[stringToPathKey(card[0])];
+      if (info) {
+        message.reply({ embed: this.embedData(info, card, long) })
+        .then(msg => console.log(`Sent card info ${msg.channel.name ? `in ${msg.channel.name} on ${msg.channel.guild.name} server` : `to ${msg.channel.recipient.username} direct message channel`}`))
+       .catch(() => {
+         message.author.createDM().then((channel) => {
+           channel.send({ embed: this.embedData(info, card, long) }).then((msg) => {
+             console.log(`Sent card info to ${msg.channel.recipient.username} direct message channel`);
+           });
+         }).catch((err) => {
+           console.error(err);
+         });
+       });
+      } else {
+        axios.post('https://gwent.io/api/obelix/v1/exoid', {
+          requests: [{ path: 'cards.getByPathKey',
+            body: { pathKey: stringToPathKey(card[0]) } }] })
+          .then((response) => {
+            const data = response.data.results[0];
+            this.database[stringToPathKey(card[0])] = data;
+            message.reply({ embed: this.embedData(data, card, long) })
+         .then(msg => console.log(`Sent card info ${msg.channel.name ? `in ${msg.channel.name} on ${msg.channel.guild.name} server` : `to ${msg.channel.recipient.username} direct message channel`}`))
+        .catch(() => {
+          message.author.createDM().then((channel) => {
+            channel.send({ embed: this.embedData(data, card, long) }).then((msg) => {
+              console.log(`Sent card info to ${msg.channel.recipient.username} direct message channel`);
+            });
+          }).catch((err) => {
+            console.error(err);
+          });
+        });
+          }).catch((err) => {
+            console.error(err);
+          });
+      }
+    } else {
+      message.author.createDM().then((channel) => {
+        channel.send('Card not recognized');
+      }).catch((err) => {
+        console.error(err);
+      });
+    }
+  }
 }
