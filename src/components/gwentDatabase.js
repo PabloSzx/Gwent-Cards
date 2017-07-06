@@ -38,8 +38,17 @@ export default class GwentDatabase {
           body: { pathKey: stringToPathKey(card[0]) } }] })
       .then((response) => {
         const data = response.data.results[0];
-
-        message.reply({ embed: this.embedData(data, card, long) });
+        message.reply({ embed: this.embedData(data, card, long) })
+        .then(msg => console.log(`Sent card info ${msg.channel.name ? `in ${msg.channel.name} on ${msg.channel.guild.name} server` : `to ${msg.channel.recipient.username} direct message channel`}`))
+       .catch(() => {
+         message.author.createDM().then((channel) => {
+           channel.send({ embed: this.embedData(data, card, long) }).then((msg) => {
+             console.log(`Sent card info to ${msg.channel.recipient.username} direct message channel`);
+           });
+         }).catch((err) => {
+           console.error(err);
+         });
+       });
       }).catch((err) => {
         console.error(err);
       });
