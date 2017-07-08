@@ -43,9 +43,12 @@ export default class Discord {
               }
             }
           }
+        } else if (message.author.id === '215658764097945601' && message.content.trim() === '!gwent-check-memory') {
+          console.log(this.cardsDatabase.getMemory());
         } else {
           this.checkMessage(message, content.replace(/"/g, ''));
         }
+        // }
       } catch (e) {
         console.log(e);
       }

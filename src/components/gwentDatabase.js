@@ -14,24 +14,33 @@ export default class GwentDatabase {
     this.database = {};
   }
 
+  getMemory() {
+    return this.database;
+  }
+
   embedData(data, card, long) {
-    const text = data.info[card[1]];
-    const cats = this.constructor.categories(data, card[1]);
+    try {
+      const text = data.info[card[1]];
+      const cats = this.constructor.categories(data, card[1]);
 
-    const embed = new DiscordJS.RichEmbed({
-      color: colorFaction(data.faction),
-      title: card[0],
-      type: 'rich',
-      description: `${text}\n\n${cats.join(' - ')}`,
-      url: `https://gwent.io/card/${stringToPathKey(card[0])}`,
-      footer: { text: 'Gwent.io',
-        icon_url: 'https://gwent.io/images/gwent_io_icon_256.png' },
-    });
-    if (long) {
-      embed.setImage(getImage(data));
+      const embed = new DiscordJS.RichEmbed({
+        color: colorFaction(data.faction),
+        title: card[0],
+        type: 'rich',
+        description: `${text}\n\n${cats.join(' - ')}`,
+        url: `https://gwent.io/card/${stringToPathKey(card[0])}`,
+        footer: { text: 'Gwent.io',
+          icon_url: 'https://gwent.io/images/gwent_io_icon_256.png' },
+      });
+      if (long) {
+        embed.setImage(getImage(data));
+      }
+
+      return embed;
+    } catch (e) {
+      console.error('Error encontrado en embedData');
+      console.error(e);
     }
-
-    return embed;
   }
 
   trimCard(param, channel) {
@@ -246,18 +255,20 @@ export default class GwentDatabase {
             body: { pathKey: stringToPathKey(card[0]) } }] })
           .then((response) => {
             const data = response.data.results[0];
-            this.database[stringToPathKey(card[0])] = data;
-            message.reply({ embed: this.embedData(data, card, long) })
-         .then(msg => console.log(`Sent card info ${msg.channel.name ? `in ${msg.channel.name} on ${msg.channel.guild.name} server` : `to ${msg.channel.recipient.username} direct message channel`}`))
-        .catch(() => {
-          message.author.createDM().then((channel) => {
-            channel.send({ embed: this.embedData(data, card, long) }).then((msg) => {
-              console.log(`Sent card info to ${msg.channel.recipient.username} direct message channel`);
+            if (data) {
+              this.database[stringToPathKey(card[0])] = data;
+              message.reply({ embed: this.embedData(data, card, long) })
+           .then(msg => console.log(`Sent card info ${msg.channel.name ? `in ${msg.channel.name} on ${msg.channel.guild.name} server` : `to ${msg.channel.recipient.username} direct message channel`}`))
+          .catch(() => {
+            message.author.createDM().then((channel) => {
+              channel.send({ embed: this.embedData(data, card, long) }).then((msg) => {
+                console.log(`Sent card info to ${msg.channel.recipient.username} direct message channel`);
+              });
+            }).catch((err) => {
+              console.error(err);
             });
-          }).catch((err) => {
-            console.error(err);
           });
-        });
+            }
           }).catch((err) => {
             console.error(err);
           });
