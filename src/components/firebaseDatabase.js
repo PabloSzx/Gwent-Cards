@@ -5,19 +5,19 @@ export default class FirebaseDatabase {
   constructor(apiKey, databaseURL) {
     this.database = firebase.initializeApp({
       apiKey,
-      databaseURL,
+      databaseURL
     });
 
     this.channels = {};
 
-    this.database.database().ref().on('value', (snapshot) => {
+    this.database.database().ref().on('value', snapshot => {
       this.channels = snapshot.val();
     });
   }
 
   addServer(id, language, message) {
-    const languageToAdd = language.substring(0,
-      language.indexOf('-')).toLowerCase() +
+    const languageToAdd =
+      language.substring(0, language.indexOf('-')).toLowerCase() +
       language.substring(language.indexOf('-')).toUpperCase();
     let pass;
     switch (languageToAdd) {
@@ -32,36 +32,37 @@ export default class FirebaseDatabase {
       case 'pt-BR':
       case 'ru-RU':
       case 'zh-CN':
-      case 'zh-TW':
-        {
-          pass = true;
-          break;
-        }
+      case 'zh-TW': {
+        pass = true;
+        break;
+      }
       default:
         pass = false;
     }
 
     if (pass) {
-      this.database.database().ref().update({ [id]: languageToAdd }).then(() => {
-        console.log('--Language Updated--');
-        const msg = `Your server default language has updated to: ${
-        languageToAdd}`;
-        if (message.author.dmChannel) {
-          message.author.dmChannel.send(msg);
-        } else {
-          message.author.createDM((channel) => {
-            channel.send(msg);
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      this.database
+        .database()
+        .ref()
+        .update({ [id]: languageToAdd })
+        .then(() => {
+          console.log('--Language Updated--');
+          const msg = `Your server default language has updated to: ${languageToAdd}`;
+          if (message.author.dmChannel) {
+            message.author.dmChannel.send(msg);
+          } else {
+            message.author.createDM(channel => {
+              channel.send(msg);
+            });
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     } else if (message.author.dmChannel) {
-      message.author.dmChannel.send(`Error, ${
-        language} not recognized`);
+      message.author.dmChannel.send(`Error, ${language} not recognized`);
     } else {
-      message.author.createDM((channel) => {
+      message.author.createDM(channel => {
         channel.send(`Error, ${language} not recognized`);
       });
     }
@@ -90,7 +91,6 @@ export default class FirebaseDatabase {
       }
     });
 
-    return (priority !== -1) ? priority : defaultPriority;
+    return priority !== -1 ? priority : defaultPriority;
   }
-
 }
