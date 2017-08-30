@@ -1,6 +1,6 @@
 import restrictedChannels from './restrictedChannels';
 import translation from './translation';
-import cards from './cards.json';
+import cards_language from './cards_language.json';
 import nicknames from './nicknames.json';
 import equivalents from './equivalents.json';
 import database from './database.json';
@@ -8,7 +8,7 @@ import database from './database.json';
 export {
   restrictedChannels,
   translation,
-  cards,
+  cards_language,
   nicknames,
   equivalents,
   database,

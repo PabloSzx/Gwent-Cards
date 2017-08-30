@@ -8,7 +8,6 @@ body {
   color: #565656;
 }
 
-
 p {
   line-height: 1.7em;
   padding-left: 18em;
@@ -18,7 +17,7 @@ p {
 }
 
 .black-background {
-  background-color: #F2F2F2;
+  background-color: #f2f2f2;
 }
 
 .github {
@@ -28,10 +27,6 @@ p {
   right: 2em;
   z-index: 1;
   width: 6em;
-}
-
-.github:hover {
-  filter: brightness(170%);
 }
 
 .logo {
@@ -48,7 +43,7 @@ p {
 }
 
 .addButton {
-  background-color: #697EC4;
+  background-color: #697ec4;
 }
 
 .addButton:hover {
@@ -65,32 +60,35 @@ p {
 }
 
 .showButton:hover {
-  background-color: #F2F2F2 !important;
+  background-color: #f2f2f2 !important;
 }
 
 @media only screen and (max-width: 1000px) {
-    p {
-      padding-left: 5%;
-      padding-right: 5%;
-    }
-    .logo, .github {
-      top: 0;
-    }
+  p {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+  .logo,
+  .github {
+    top: 0;
+  }
 }
 
 @media only screen and (max-width: 800px) {
-    .logo, .github {
-      width: auto;
-      height: 20vh;
-    }
-    .github {
-      right: 0.5em;
-    }
+  .logo,
+  .github {
+    width: auto;
+    height: 20vh;
+  }
+  .github {
+    right: 0.5em;
+  }
 }
 
 @media only screen and (max-width: 450px) {
-    .logo, .github {
-      width: 20vw;
-      height: auto;
-    }
+  .logo,
+  .github {
+    width: 20vw;
+    height: auto;
+  }
 }

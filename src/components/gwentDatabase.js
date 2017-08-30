@@ -2,7 +2,7 @@ import axios from 'axios';
 import _ from 'lodash';
 import DiscordJS from 'discord.js';
 import getValues from 'object.values';
-import { translation, nicknames, cards, database } from '../data';
+import { translation, nicknames, cards_language, database } from '../data';
 import {
   stringToPathKey,
   checkChineseOrJapaneseCharacter,
@@ -43,6 +43,10 @@ export default class GwentDatabase {
       return embed;
     } catch (e) {
       console.error('Error encontrado en embedData');
+      console.log('data:');
+      console.log(data);
+      console.log('card:');
+      console.log(card);
       console.error(e);
     }
   }
@@ -68,9 +72,9 @@ export default class GwentDatabase {
     if (nickname) {
       return [getEquivalent(nickname), 'en-US'];
     } else if (checkChineseOrJapaneseCharacter(input)) {
-      const jpPossibilities = filter(cards['ja-JP'], input);
-      const cnPossibilities = filter(cards['zh-CN'], input);
-      const twPossibilities = filter(cards['zh-TW'], input);
+      const jpPossibilities = filter(cards_language['ja-JP'], input);
+      const cnPossibilities = filter(cards_language['zh-CN'], input);
+      const twPossibilities = filter(cards_language['zh-TW'], input);
 
       if (jpPossibilities[0]) {
         length = Object.keys(poss).length;
@@ -110,7 +114,7 @@ export default class GwentDatabase {
         return [getEquivalent(values[0]), keys[0]];
       }
     } else if (checkRussianCharacter(input)) {
-      const ruPossibilities = filter(cards.cards['ru-RU'], input);
+      const ruPossibilities = filter(cards_language['ru-RU'], input);
 
       if (ruPossibilities[0]) {
         return [
@@ -120,14 +124,14 @@ export default class GwentDatabase {
       }
       return undefined;
     } else {
-      const dePossibilities = filter(cards['de-DE'], input);
-      const usPossibilities = filter(cards['en-US'], input);
-      const esPossibilities = filter(cards['es-ES'], input);
-      const mxPossibilities = filter(cards['es-MX'], input);
-      const frPossibilities = filter(cards['fr-FR'], input);
-      const itPossibilities = filter(cards['it-IT'], input);
-      const plPossibilities = filter(cards['pl-PL'], input);
-      const brPossibilities = filter(cards['pt-BR'], input);
+      const dePossibilities = filter(cards_language['de-DE'], input);
+      const usPossibilities = filter(cards_language['en-US'], input);
+      const esPossibilities = filter(cards_language['es-ES'], input);
+      const mxPossibilities = filter(cards_language['es-MX'], input);
+      const frPossibilities = filter(cards_language['fr-FR'], input);
+      const itPossibilities = filter(cards_language['it-IT'], input);
+      const plPossibilities = filter(cards_language['pl-PL'], input);
+      const brPossibilities = filter(cards_language['pt-BR'], input);
 
       if (dePossibilities[0]) {
         length = Object.keys(poss).length;
