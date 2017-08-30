@@ -1,12 +1,33 @@
 import _ from 'lodash';
 import levenshtein from 'fast-levenshtein';
+import { equivalents } from '../data';
 
 function stringToPathKey(input) {
-  let string = input;
-  string = string.replace(/[-!$%^&*()_+|~=`{}[\]:";'<>?,./@#\\]/g, '');
-  string = string.replace(/\s/g, '-');
-  string = string.toLocaleLowerCase();
-  return encodeURIComponent(string);
+  if (input) {
+    let str = input;
+    str = str.replace(/[-!$%^&*()_+|~=`{}[\]:";'<>?,./@#\\]/g, '');
+    str = str.replace(/\s/g, '-');
+    str = str.toLocaleLowerCase();
+    return encodeURIComponent(str);
+  }
+  return '';
+}
+
+function getEquivalent(input) {
+  let equivalent;
+
+  _.find(equivalents, (value, key) =>
+    _.find(value, val => {
+      if (val) {
+        if (stringToPathKey(input) === val) {
+          equivalent = key;
+          return key;
+        }
+      }
+    })
+  );
+
+  return equivalent;
 }
 
 function checkChineseOrJapaneseCharacter(input) {
@@ -132,5 +153,6 @@ export {
   nicknameCheck,
   getImage,
   checkChannelPermission,
-  bestPossibility
+  bestPossibility,
+  getEquivalent,
 };

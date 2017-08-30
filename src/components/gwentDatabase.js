@@ -2,7 +2,7 @@ import axios from 'axios';
 import _ from 'lodash';
 import DiscordJS from 'discord.js';
 import getValues from 'object.values';
-import { translation, nicknames, cards } from '../data';
+import { translation, nicknames, cards, database } from '../data';
 import {
   stringToPathKey,
   checkChineseOrJapaneseCharacter,
@@ -11,17 +11,13 @@ import {
   filter,
   nicknameCheck,
   bestPossibility,
-  getImage
+  getImage,
+  getEquivalent,
 } from '../utils';
 
 export default class GwentDatabase {
   constructor(fDatabase) {
     this.fDatabase = fDatabase;
-    this.database = {};
-  }
-
-  getMemory() {
-    return this.database;
   }
 
   embedData(data, card, long) {
@@ -31,14 +27,14 @@ export default class GwentDatabase {
 
       const embed = new DiscordJS.RichEmbed({
         color: colorFaction(data.faction),
-        title: card[0],
+        title: database[card[0]].name[card[1]],
         type: 'rich',
         description: `${text}\n\n${cats.join(' - ')}`,
         url: `https://gwent.io/card/${stringToPathKey(card[0])}`,
         footer: {
           text: 'Gwent.io',
-          icon_url: 'https://gwent.io/images/gwent_io_icon_256.png'
-        }
+          icon_url: 'https://gwent.io/images/gwent_io_icon_256.png',
+        },
       });
       if (long) {
         embed.setImage(getImage(data));
@@ -70,11 +66,11 @@ export default class GwentDatabase {
     const nickname = nicknameCheck(input, nicknames);
 
     if (nickname) {
-      return [nickname, 'en-US'];
+      return [getEquivalent(nickname), 'en-US'];
     } else if (checkChineseOrJapaneseCharacter(input)) {
-      const jpPossibilities = filter(cards.cards['ja-JP'], input);
-      const cnPossibilities = filter(cards.cards['zh-CN'], input);
-      const twPossibilities = filter(cards.cards['zh-TW'], input);
+      const jpPossibilities = filter(cards['ja-JP'], input);
+      const cnPossibilities = filter(cards['zh-CN'], input);
+      const twPossibilities = filter(cards['zh-TW'], input);
 
       if (jpPossibilities[0]) {
         length = Object.keys(poss).length;
@@ -107,28 +103,31 @@ export default class GwentDatabase {
       } else if (length === 1) {
         values = getValues(poss[0]);
         keys = Object.keys(poss[0]);
-        return [values[0], keys[0]];
+        return [getEquivalent(values[0]), keys[0]];
       } else if (priorityIndex >= 0) {
         values = getValues(poss[priorityIndex]);
         keys = Object.keys(poss[priorityIndex]);
-        return [values[0], keys[0]];
+        return [getEquivalent(values[0]), keys[0]];
       }
     } else if (checkRussianCharacter(input)) {
       const ruPossibilities = filter(cards.cards['ru-RU'], input);
 
       if (ruPossibilities[0]) {
-        return [bestPossibility(ruPossibilities, input), 'ru-RU'];
+        return [
+          getEquivalent(bestPossibility(ruPossibilities, input)),
+          'ru-RU',
+        ];
       }
       return undefined;
     } else {
-      const dePossibilities = filter(cards.cards['de-DE'], input);
-      const usPossibilities = filter(cards.cards['en-US'], input);
-      const esPossibilities = filter(cards.cards['es-ES'], input);
-      const mxPossibilities = filter(cards.cards['es-MX'], input);
-      const frPossibilities = filter(cards.cards['fr-FR'], input);
-      const itPossibilities = filter(cards.cards['it-IT'], input);
-      const plPossibilities = filter(cards.cards['pl-PL'], input);
-      const brPossibilities = filter(cards.cards['pt-BR'], input);
+      const dePossibilities = filter(cards['de-DE'], input);
+      const usPossibilities = filter(cards['en-US'], input);
+      const esPossibilities = filter(cards['es-ES'], input);
+      const mxPossibilities = filter(cards['es-MX'], input);
+      const frPossibilities = filter(cards['fr-FR'], input);
+      const itPossibilities = filter(cards['it-IT'], input);
+      const plPossibilities = filter(cards['pl-PL'], input);
+      const brPossibilities = filter(cards['pt-BR'], input);
 
       if (dePossibilities[0]) {
         length = Object.keys(poss).length;
@@ -181,11 +180,13 @@ export default class GwentDatabase {
       } else if (length === 1) {
         values = getValues(poss[0]);
         keys = Object.keys(poss[0]);
-        return [values[0], keys[0]];
+        return [getEquivalent(values[0]), keys[0]];
       } else if (priorityIndex >= 0) {
         values = getValues(poss[priorityIndex]);
         keys = Object.keys(poss[priorityIndex]);
-        return [values[0], keys[0]];
+        return [getEquivalent(values[0]), keys[0]];
+      } else {
+        return [getEquivalent(getValues(poss[0])[0]), 'en-US'];
       }
     }
 
@@ -207,7 +208,7 @@ export default class GwentDatabase {
     fields[fields.length] = `*${translation[language]
       .faction}*: **${translation[language]._faction[faction]}**`;
 
-    const rarity = getValues(data.variations)[0].rarity;
+    const rarity = data.rarity;
     fields[fields.length] = `*${translation[language].rarity}*: **${translation[
       language
     ]._rarity[rarity]}**`;
@@ -260,7 +261,7 @@ export default class GwentDatabase {
     const card = this.trimCard(input, message.channel);
 
     if (card) {
-      const info = this.database[stringToPathKey(card[0])];
+      const info = database[card[0]];
       if (info) {
         message
           .reply({ embed: this.embedData(info, card, long) })
@@ -288,53 +289,6 @@ export default class GwentDatabase {
               .catch(err => {
                 console.error(err);
               });
-          });
-      } else {
-        axios
-          .post('https://gwent.io/api/obelix/v1/exoid', {
-            requests: [
-              {
-                path: 'cards.getByPathKey',
-                body: { pathKey: stringToPathKey(card[0]) }
-              }
-            ]
-          })
-          .then(response => {
-            const data = response.data.results[0];
-            if (data) {
-              this.database[stringToPathKey(card[0])] = data;
-              message
-                .reply({ embed: this.embedData(data, card, long) })
-                .then(msg =>
-                  console.log(
-                    `Sent card info ${msg.channel.name
-                      ? `in ${msg.channel.name} on ${msg.channel.guild
-                          .name} server`
-                      : `to ${msg.channel.recipient
-                          .username} direct message channel`}`
-                  )
-                )
-                .catch(() => {
-                  message.author
-                    .createDM()
-                    .then(channel => {
-                      channel
-                        .send({ embed: this.embedData(data, card, long) })
-                        .then(msg => {
-                          console.log(
-                            `Sent card info to ${msg.channel.recipient
-                              .username} direct message channel`
-                          );
-                        });
-                    })
-                    .catch(err => {
-                      console.error(err);
-                    });
-                });
-            }
-          })
-          .catch(err => {
-            console.error(err);
           });
       }
     } else {
