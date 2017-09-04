@@ -38,6 +38,8 @@ export default class GwentDatabase {
       });
       if (long) {
         embed.setImage(getImage(data));
+      } else {
+        embed.setThumbnail(getImage(data));
       }
 
       return embed;
