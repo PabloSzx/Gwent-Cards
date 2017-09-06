@@ -1,18 +1,21 @@
-export default {
+import _ from 'lodash';
+import emotes from './emotes.json';
+
+const translation = {
   'de-DE': {
     group: 'Gruppe',
     _group: {
       Leader: 'Anführer',
       Gold: 'Gold',
       Silver: 'Silber',
-      Bronze: 'Bronze'
+      Bronze: 'Bronze',
     },
     rarity: 'Seltenheit',
     _rarity: {
       Legendary: 'Legendär',
       Epic: 'Episch',
       Rare: 'Selten',
-      Common: 'Gewöhnlich'
+      Common: 'Gewöhnlich',
     },
     faction: 'Fraktion',
     _faction: {
@@ -21,7 +24,7 @@ export default {
       Scoiatael: "Scoia'Tael",
       NorthernKingdom: 'Nördliche Königreiche',
       Skellige: 'Skellige',
-      Nilfgaard: 'Nilfgaard'
+      Nilfgaard: 'Nilfgaard',
     },
     power: 'Kraft',
     type: 'Art',
@@ -39,7 +42,7 @@ export default {
       Vampire: 'Vampir',
       Dragon: 'Drache',
       Shapeshifter: 'Doppler',
-      'Blue Stripes': 'Blaue Streifen'
+      'Blue Stripes': 'Blaue Streifen',
     },
     lane: 'Position',
     _lane: {
@@ -47,15 +50,15 @@ export default {
       Melee: 'Nahkampf',
       Ranged: 'Fernkampf',
       Siege: 'Belagerung',
-      Any: 'Gewandtheit'
+      Any: 'Gewandtheit',
     },
     loyalty: 'Loyalität: ',
     _loyalty: {
       Loyal: 'Loyal',
-      Disloyal: 'Illoyal'
+      Disloyal: 'Illoyal',
     },
     mill: 'Mahlen',
-    craft: 'Herstellen'
+    craft: 'Herstellen',
   },
   'en-US': {
     group: 'Group',
@@ -63,14 +66,14 @@ export default {
       Leader: 'Leader',
       Gold: 'Gold',
       Silver: 'Silver',
-      Bronze: 'Bronze'
+      Bronze: 'Bronze',
     },
     rarity: 'Rarity',
     _rarity: {
       Legendary: 'Legendary',
       Epic: 'Epic',
       Rare: 'Rare',
-      Common: 'Common'
+      Common: 'Common',
     },
     faction: 'Faction',
     _faction: {
@@ -79,7 +82,7 @@ export default {
       Scoiatael: "Scoia'tael",
       NorthernKingdom: 'Northern Realms',
       Skellige: 'Skellige',
-      Nilfgaard: 'Nilfgaard'
+      Nilfgaard: 'Nilfgaard',
     },
     power: 'Power',
     type: 'Type',
@@ -97,7 +100,7 @@ export default {
       Vampire: 'Vampire',
       Dragon: 'Dragon',
       Shapeshifter: 'Shapeshifter',
-      'Blue Stripes': 'Blue Stripes'
+      'Blue Stripes': 'Blue Stripes',
     },
     lane: 'Lane',
     _lane: {
@@ -105,15 +108,15 @@ export default {
       Melee: 'Melee',
       Ranged: 'Ranged',
       Siege: 'Siege',
-      Any: 'Any'
+      Any: 'Any',
     },
     loyalty: 'Loyalty',
     _loyalty: {
       Loyal: 'Loyal',
-      Disloyal: 'Disloyal'
+      Disloyal: 'Disloyal',
     },
     mill: 'Mill',
-    craft: 'Craft'
+    craft: 'Craft',
   },
   'es-ES': {
     group: 'Grupo',
@@ -121,14 +124,14 @@ export default {
       Leader: 'Líder',
       Gold: 'Oro',
       Silver: 'Plata',
-      Bronze: 'Bronce'
+      Bronze: 'Bronce',
     },
     rarity: 'Rareza',
     _rarity: {
       Legendary: 'Legendaria',
       Epic: 'Épica',
       Rare: 'Rara',
-      Common: 'Común'
+      Common: 'Común',
     },
     faction: 'Facción',
     _faction: {
@@ -137,7 +140,7 @@ export default {
       Scoiatael: "Scoia'Tael",
       NorthernKingdom: 'Reinos Del Norte',
       Skellige: 'Skellige',
-      Nilfgaard: 'Nilfgaard'
+      Nilfgaard: 'Nilfgaard',
     },
     power: 'Fuerza',
     type: 'Tipo',
@@ -155,7 +158,7 @@ export default {
       Vampire: 'Vampiro',
       Dragon: 'Dragón',
       Shapeshifter: 'Cambiaformas',
-      'Blue Stripes': 'Franjas Azules'
+      'Blue Stripes': 'Franjas Azules',
     },
     lane: 'Posición',
     _lane: {
@@ -163,15 +166,15 @@ export default {
       Melee: 'Cuerpo A Cuerpo',
       Ranged: 'A Distancia',
       Siege: 'Asedio',
-      Any: 'Ágil'
+      Any: 'Ágil',
     },
     loyalty: 'Lealtad',
     _loyalty: {
       Loyal: 'Leal',
-      Disloyal: 'Desleal'
+      Disloyal: 'Desleal',
     },
     mill: 'Moler',
-    craft: 'Crear'
+    craft: 'Crear',
   },
   'es-MX': {
     group: 'Grupo',
@@ -179,14 +182,14 @@ export default {
       Leader: 'Líder',
       Gold: 'Oro',
       Silver: 'Plata',
-      Bronze: 'Bronce'
+      Bronze: 'Bronce',
     },
     rarity: 'Rareza',
     _rarity: {
       Legendary: 'Legendaria',
       Epic: 'Épica',
       Rare: 'Rara',
-      Common: 'Común'
+      Common: 'Común',
     },
     faction: 'Facción',
     _faction: {
@@ -195,7 +198,7 @@ export default {
       Scoiatael: "Scoia'Tael",
       NorthernKingdom: 'Reinos Del Norte',
       Skellige: 'Skellige',
-      Nilfgaard: 'Nilfgaard'
+      Nilfgaard: 'Nilfgaard',
     },
     power: 'Poder',
     type: 'Tipo',
@@ -213,7 +216,7 @@ export default {
       Vampire: 'Vampiro',
       Dragon: 'Dragón',
       Shapeshifter: 'Cambiaformas',
-      'Blue Stripes': 'Franjas Azules'
+      'Blue Stripes': 'Franjas Azules',
     },
     lane: 'Posición',
     _lane: {
@@ -221,15 +224,15 @@ export default {
       Melee: 'Melé',
       Ranged: 'Distancia',
       Siege: 'Asedio',
-      Any: 'Ágil'
+      Any: 'Ágil',
     },
     loyalty: 'Lealtad',
     _loyalty: {
       Loyal: 'Leal',
-      Disloyal: 'Desleal'
+      Disloyal: 'Desleal',
     },
     mill: 'Moler',
-    craft: 'Crear'
+    craft: 'Crear',
   },
   'fr-FR': {
     group: 'Groupe ',
@@ -237,14 +240,14 @@ export default {
       Leader: 'Chef',
       Gold: 'Or',
       Silver: 'Argent',
-      Bronze: 'Bronze'
+      Bronze: 'Bronze',
     },
     rarity: 'Rareté',
     _rarity: {
       Legendary: 'Légendaire',
       Epic: 'Épique',
       Rare: 'Rare',
-      Common: 'Ordinaire'
+      Common: 'Ordinaire',
     },
     faction: 'Faction',
     _faction: {
@@ -253,7 +256,7 @@ export default {
       Scoiatael: "Scoia'Tael",
       NorthernKingdom: 'Royaumes Du Nord',
       Skellige: 'Skellige',
-      Nilfgaard: 'Nilfgaard'
+      Nilfgaard: 'Nilfgaard',
     },
     power: 'Force',
     type: 'Type',
@@ -271,7 +274,7 @@ export default {
       Vampire: 'Vampire',
       Dragon: 'Dragon',
       Shapeshifter: 'Doppler',
-      'Blue Stripes': 'Stries Bleues'
+      'Blue Stripes': 'Stries Bleues',
     },
     lane: 'Position',
     _lane: {
@@ -279,15 +282,15 @@ export default {
       Melee: 'Combat Rapproché',
       Ranged: 'Combat À Distance',
       Siege: 'Combat De Siège',
-      Any: 'Agile'
+      Any: 'Agile',
     },
     loyalty: 'Loyauté : ',
     _loyalty: {
       Loyal: 'Loyale',
-      Disloyal: 'Déloyale'
+      Disloyal: 'Déloyale',
     },
     mill: 'Fragmenter',
-    craft: 'Fabriquer'
+    craft: 'Fabriquer',
   },
   'it-IT': {
     group: 'Gruppo',
@@ -295,14 +298,14 @@ export default {
       Leader: 'Comandante',
       Gold: 'Oro',
       Silver: 'Argento',
-      Bronze: 'Bronzo'
+      Bronze: 'Bronzo',
     },
     rarity: 'Rarità',
     _rarity: {
       Legendary: 'Leggendarie',
       Epic: 'Epiche',
       Rare: 'Rare',
-      Common: 'Comuni'
+      Common: 'Comuni',
     },
     faction: 'Fazione',
     _faction: {
@@ -311,7 +314,7 @@ export default {
       Scoiatael: "Scoia'Tael",
       NorthernKingdom: 'Regni Settentrionali',
       Skellige: 'Skellige',
-      Nilfgaard: 'Nilfgaard'
+      Nilfgaard: 'Nilfgaard',
     },
     power: 'Potenza',
     type: 'Tipo',
@@ -329,7 +332,7 @@ export default {
       Vampire: 'Vampiro',
       Dragon: 'Drago',
       Shapeshifter: 'Mutaforma',
-      'Blue Stripes': 'Bande Blu'
+      'Blue Stripes': 'Bande Blu',
     },
     lane: 'Posizione',
     _lane: {
@@ -337,15 +340,15 @@ export default {
       Melee: 'Corpo A Corpo',
       Ranged: 'A Distanza',
       Siege: 'Assedio',
-      Any: 'Agili'
+      Any: 'Agili',
     },
     loyalty: 'Lealtà: ',
     _loyalty: {
       Loyal: 'Leali',
-      Disloyal: 'Sleali'
+      Disloyal: 'Sleali',
     },
     mill: 'Ricicla',
-    craft: 'Crea'
+    craft: 'Crea',
   },
   'ja-JP': {
     group: 'グループ',
@@ -353,14 +356,14 @@ export default {
       Leader: 'リーダー',
       Gold: 'ゴールド',
       Silver: 'シルバー',
-      Bronze: 'ブロンズ'
+      Bronze: 'ブロンズ',
     },
     rarity: 'レア度',
     _rarity: {
       Legendary: 'レジェンダリー',
       Epic: 'エピック',
       Rare: 'レア',
-      Common: 'コモン'
+      Common: 'コモン',
     },
     faction: '勢力',
     _faction: {
@@ -369,7 +372,7 @@ export default {
       Scoiatael: 'スコイア＝テル',
       NorthernKingdom: '北方諸国',
       Skellige: 'スケリッジ',
-      Nilfgaard: 'ニルフガード'
+      Nilfgaard: 'ニルフガード',
     },
     power: '戦力',
     type: 'タイプ',
@@ -387,7 +390,7 @@ export default {
       Vampire: '吸血鬼',
       Dragon: 'ドラゴン',
       Shapeshifter: '変身使い',
-      'Blue Stripes': '刺青隊'
+      'Blue Stripes': '刺青隊',
     },
     lane: '戦列',
     _lane: {
@@ -395,15 +398,15 @@ export default {
       Melee: '近接',
       Ranged: '間接',
       Siege: '攻城',
-      Any: '自由'
+      Any: '自由',
     },
     loyalty: '忠誠心：',
     _loyalty: {
       Loyal: '忠実',
-      Disloyal: '不忠'
+      Disloyal: '不忠',
     },
     mill: '粉砕',
-    craft: '生成'
+    craft: '生成',
   },
   'pl-PL': {
     group: 'Grupa',
@@ -411,14 +414,14 @@ export default {
       Leader: 'Karty Dowódców',
       Gold: 'Złote Karty',
       Silver: 'Srebrne Karty',
-      Bronze: 'Brązowe Karty'
+      Bronze: 'Brązowe Karty',
     },
     rarity: 'Rzadkość',
     _rarity: {
       Legendary: 'Legendarne',
       Epic: 'Epickie',
       Rare: 'Rzadkie',
-      Common: 'Zwykłe'
+      Common: 'Zwykłe',
     },
     faction: 'Frakcja',
     _faction: {
@@ -427,7 +430,7 @@ export default {
       Scoiatael: "Scoia'Tael",
       NorthernKingdom: 'Królestwa Północy',
       Skellige: 'Skellige',
-      Nilfgaard: 'Nilfgaard'
+      Nilfgaard: 'Nilfgaard',
     },
     power: 'Siła',
     type: 'Rodzaj',
@@ -445,7 +448,7 @@ export default {
       Vampire: 'Wampir',
       Dragon: 'Smok',
       Shapeshifter: 'Zmiennokształtny',
-      'Blue Stripes': 'Niebieskie Pasy'
+      'Blue Stripes': 'Niebieskie Pasy',
     },
     lane: 'Pozycja',
     _lane: {
@@ -453,15 +456,15 @@ export default {
       Melee: 'Bliskie Starcie',
       Ranged: 'Daleki Zasięg',
       Siege: 'Oblężenie',
-      Any: 'Zwinne'
+      Any: 'Zwinne',
     },
     loyalty: 'Lojalność: ',
     _loyalty: {
       Loyal: 'Lojalne',
-      Disloyal: 'Nielojalne'
+      Disloyal: 'Nielojalne',
     },
     mill: 'Zniszcz',
-    craft: 'Stwórz'
+    craft: 'Stwórz',
   },
   'pt-BR': {
     group: 'Grupo',
@@ -469,14 +472,14 @@ export default {
       Leader: 'Líder',
       Gold: 'Ouro',
       Silver: 'Prata',
-      Bronze: 'Bronze'
+      Bronze: 'Bronze',
     },
     rarity: 'Raridade',
     _rarity: {
       Legendary: 'Lendária',
       Epic: 'Épica',
       Rare: 'Rara',
-      Common: 'Comum'
+      Common: 'Comum',
     },
     faction: 'Facção',
     _faction: {
@@ -485,7 +488,7 @@ export default {
       Scoiatael: "Scoia'Tael",
       NorthernKingdom: 'Reinos Do Norte',
       Skellige: 'Skellige',
-      Nilfgaard: 'Nilfgaard'
+      Nilfgaard: 'Nilfgaard',
     },
     power: 'Poder',
     type: 'Tipo',
@@ -503,7 +506,7 @@ export default {
       Vampire: 'Vampiro',
       Dragon: 'Dragão',
       Shapeshifter: 'Metamorfo',
-      'Blue Stripes': 'Listras Azuis'
+      'Blue Stripes': 'Listras Azuis',
     },
     lane: 'Posição',
     _lane: {
@@ -511,15 +514,15 @@ export default {
       Melee: 'Corpo A Corpo',
       Ranged: 'Longa Distância',
       Siege: 'Cerco',
-      Any: 'Ágil'
+      Any: 'Ágil',
     },
     loyalty: 'Lealdade: ',
     _loyalty: {
       Loyal: 'Leal',
-      Disloyal: 'Desleal'
+      Disloyal: 'Desleal',
     },
     mill: 'Moer',
-    craft: 'Criar'
+    craft: 'Criar',
   },
   'ru-RU': {
     group: 'Группа',
@@ -527,14 +530,14 @@ export default {
       Leader: 'Лидеры',
       Gold: 'Золотые',
       Silver: 'Серебряные',
-      Bronze: 'Бронзовые'
+      Bronze: 'Бронзовые',
     },
     rarity: 'Редкость',
     _rarity: {
       Legendary: 'Легендарные',
       Epic: 'Эпические',
       Rare: 'Редкие',
-      Common: 'Обычные'
+      Common: 'Обычные',
     },
     faction: 'Фракция',
     _faction: {
@@ -543,7 +546,7 @@ export default {
       Scoiatael: "Скоя'Таэли",
       NorthernKingdom: 'Королевства Севера',
       Skellige: 'Скеллиге',
-      Nilfgaard: 'Нильфгаард'
+      Nilfgaard: 'Нильфгаард',
     },
     power: 'По Силе',
     type: 'Тип',
@@ -561,7 +564,7 @@ export default {
       Vampire: 'Вампир',
       Dragon: 'Дракон',
       Shapeshifter: 'Оборотень',
-      'Blue Stripes': 'Синие Полоски'
+      'Blue Stripes': 'Синие Полоски',
     },
     lane: 'Позиция',
     _lane: {
@@ -569,15 +572,15 @@ export default {
       Melee: 'Рукопашный Ряд',
       Ranged: 'Дальнобойный Ряд',
       Siege: 'Осадный Ряд',
-      Any: 'Подвижные'
+      Any: 'Подвижные',
     },
     loyalty: 'Верность: ',
     _loyalty: {
       Loyal: 'Верные',
-      Disloyal: 'Вероломные'
+      Disloyal: 'Вероломные',
     },
     mill: 'Перемолоть',
-    craft: 'Создать'
+    craft: 'Создать',
   },
   'zh-CN': {
     group: '分组',
@@ -585,14 +588,14 @@ export default {
       Leader: '领袖牌',
       Gold: '金色牌',
       Silver: '银色牌',
-      Bronze: '铜色牌'
+      Bronze: '铜色牌',
     },
     rarity: '稀有度',
     _rarity: {
       Legendary: '传奇',
       Epic: '史诗',
       Rare: '稀有',
-      Common: '普通'
+      Common: '普通',
     },
     faction: '阵营',
     _faction: {
@@ -601,7 +604,7 @@ export default {
       Scoiatael: '松鼠党',
       NorthernKingdom: '北方领域',
       Skellige: '史凯利杰',
-      Nilfgaard: '尼弗迦德'
+      Nilfgaard: '尼弗迦德',
     },
     power: '战力',
     type: '类型',
@@ -619,7 +622,7 @@ export default {
       Vampire: '吸血鬼',
       Dragon: '巨龙',
       Shapeshifter: '变身',
-      'Blue Stripes': '蓝衣铁卫'
+      'Blue Stripes': '蓝衣铁卫',
     },
     lane: '位置',
     _lane: {
@@ -627,15 +630,15 @@ export default {
       Melee: '近战',
       Ranged: '远程',
       Siege: '攻城',
-      Any: '敏捷'
+      Any: '敏捷',
     },
     loyalty: '立场：',
     _loyalty: {
       Loyal: '忠诚',
-      Disloyal: '不忠'
+      Disloyal: '不忠',
     },
     mill: '分解',
-    craft: '合成'
+    craft: '合成',
   },
   'zh-TW': {
     group: '組別',
@@ -643,14 +646,14 @@ export default {
       Leader: '領導牌',
       Gold: '金色牌',
       Silver: '銀色牌',
-      Bronze: '銅色牌'
+      Bronze: '銅色牌',
     },
     rarity: '稀有度',
     _rarity: {
       Legendary: '傳奇',
       Epic: '史詩',
       Rare: '稀有',
-      Common: '一般'
+      Common: '一般',
     },
     faction: '陣營：',
     _faction: {
@@ -659,7 +662,7 @@ export default {
       Scoiatael: '松鼠黨',
       NorthernKingdom: '北方領域',
       Skellige: '史凱利傑',
-      Nilfgaard: '尼弗迦德'
+      Nilfgaard: '尼弗迦德',
     },
     power: '力量',
     type: '類型',
@@ -677,7 +680,7 @@ export default {
       Vampire: '吸血鬼',
       Dragon: '巨龍',
       Shapeshifter: '變身',
-      'Blue Stripes': '藍衣鐵衛'
+      'Blue Stripes': '藍衣鐵衛',
     },
     lane: '位置',
     _lane: {
@@ -685,14 +688,61 @@ export default {
       Melee: '近戰',
       Ranged: '遠程',
       Siege: '攻城',
-      Any: '敏捷'
+      Any: '敏捷',
     },
     loyalty: '立場：',
     _loyalty: {
       Loyal: '效忠',
-      Disloyal: '不忠'
+      Disloyal: '不忠',
     },
     mill: '分解',
-    craft: '合成'
-  }
+    craft: '合成',
+  },
 };
+
+_.forIn(translation, (value, key) => {
+  _.each(value._rarity, (v, k) => {
+    switch (k) {
+      case 'Legendary':
+        _.set(translation, key + '._rarity.' + k, v + emotes.legendary);
+        break;
+      case 'Epic':
+        _.set(translation, key + '._rarity.' + k, v + emotes.epic);
+        break;
+      case 'Rare':
+        _.set(translation, key + '._rarity.' + k, v + emotes.rare);
+        break;
+      case 'Common':
+        _.set(translation, key + '._rarity.' + k, v + emotes.common);
+        break;
+      default:
+      //EMPTY
+    }
+  });
+  _.forIn(value._faction, (v, k) => {
+    switch (k) {
+      case 'Neutral':
+        _.set(translation, key + '._faction.' + k, v + emotes.neutral);
+        break;
+      case 'Monster':
+        _.set(translation, key + '._faction.' + k, v + emotes.monster);
+        break;
+      case 'Scoiatael':
+        _.set(translation, key + '._faction.' + k, v + emotes.scoiatael);
+        break;
+      case 'NorthernKingdom':
+        _.set(translation, key + '._faction.' + k, v + emotes.northern);
+        break;
+      case 'Skellige':
+        _.set(translation, key + '._faction.' + k, v + emotes.skellige);
+        break;
+      case 'Nilfgaard':
+        _.set(translation, key + '._faction.' + k, v + emotes.nilfgaard);
+        break;
+      default:
+      //EMPTY
+    }
+  });
+});
+
+export default translation;
