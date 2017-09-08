@@ -7,7 +7,7 @@ https://discordapp.com/oauth2/authorize?&client_id=318804439354048537&scope=bot&
 
 ## How to use
 Anywhere you write (case insensitive), type: ["Name of card"] and the bot will reply you with all the card basic details and the image,
-or type: {"Name of card"} and the bot will reply you only with the card basic details, without the image.
+or type: {"Name of card"} and the bot will reply you only with the card basic details too, but with a thumbnail image.
 
 The bot is currently working with an algorithm that compares your input with the most similar card and the bot will give you the better option. For example, if you type [adrenaline] you will receive "Adrenaline rush" info, and you can request multiple cards in a single message, for example: [adrenaline] [troll] [geralt] etc...
 
@@ -26,9 +26,9 @@ For example, in any channel of your server , write: "\@Gwent-Cards es-es" to set
 
 (If you want to report a bug, or you have an idea to improve the bot, feel free to talk to me via discord, my nickname is @PabloSz#0327)
 
-The database i'm using is https://gwent.io/.
+The images source i'm using is https://gwent.io/.
 
-A couple servers that started using the bot are:
+Some servers that are officialy using the bot are:
 
 "Gwent Esp", https://discord.gg/8ceWwck.
 
@@ -36,21 +36,12 @@ Official Gwent discord server, https://discord.gg/DTPYChN.
 
 "Gwent Taiwan", https://discord.gg/CRJbjsq.
 
-
-
-### Special thanks to:
-\@nickgaunaetc for helping on spanish version.
-
-\@switchblade420 for helping on nicknames database.
-
-\@阿高 for helping on Chinese version.
-
-And of course \@Zolmeister for your database and all your help.
+"Gwent RU", https://discord.gg/gwentru.
 
 ## Screenshots
-![Screenshot](https://i.imgur.com/PCItFgG.png)
-![Screenshot](https://i.imgur.com/3xpYx89.png)
-
+![Screenshot](https://i.imgur.com/s0wSkaj.png)
+![Screenshot](https://i.imgur.com/B3RUNvv.png)
+![Screenshot](https://i.imgur.com/8bhhZV5.png)
 
 ## How it's made?
 It's using "Node.js" with mainly "Discord.js" library.

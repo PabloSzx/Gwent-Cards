@@ -2,7 +2,13 @@ import axios from 'axios';
 import _ from 'lodash';
 import DiscordJS from 'discord.js';
 import getValues from 'object.values';
-import { translation, nicknames, cards_language, database, emotes } from '../data';
+import {
+  translation,
+  nicknames,
+  cards_language,
+  database,
+  emotes,
+} from '../data';
 import {
   stringToPathKey,
   checkChineseOrJapaneseCharacter,
@@ -115,6 +121,9 @@ export default class GwentDatabase {
         keys = Object.keys(poss[priorityIndex]);
         return [getEquivalent(values[0]), keys[0]];
       }
+      values = getValues(poss[0]);
+      keys = Object.keys(poss[0]);
+      return [getEquivalent(values[0]), keys[0]];
     } else if (checkRussianCharacter(input)) {
       const ruPossibilities = filter(cards_language['ru-RU'], input);
 
@@ -220,8 +229,11 @@ export default class GwentDatabase {
     ]._rarity[rarity]}**`;
 
     if (data.strength > 0) {
-      fields[fields.length] = `*${translation[language]
-        .power}*: **${emotes[data.strength.toString()] ? emotes[data.strength.toString()] : data.strength.toString()}**`;
+      fields[fields.length] = `*${translation[language].power}*: **${emotes[
+        data.strength.toString()
+      ]
+        ? emotes[data.strength.toString()]
+        : data.strength.toString()}**`;
     }
 
     const positions = data.positions;
