@@ -5,7 +5,7 @@ export default class FirebaseDatabase {
   constructor(apiKey, databaseURL) {
     this.database = firebase.initializeApp({
       apiKey,
-      databaseURL
+      databaseURL,
     });
 
     this.channels = {};
@@ -47,24 +47,21 @@ export default class FirebaseDatabase {
         .update({ [id]: languageToAdd })
         .then(() => {
           console.log('--Language Updated--');
-          const msg = `Your server default language has updated to: ${languageToAdd}`;
-          if (message.author.dmChannel) {
-            message.author.dmChannel.send(msg);
-          } else {
-            message.author.createDM(channel => {
-              channel.send(msg);
-            });
-          }
+          const msg = `Your server default language has updated to: ${languageToAdd} \n\n\n\`This message will self-destruct in ten seconds\``;
+          message
+            .reply(msg)
+            .then(m => m.delete(10000))
+            .catch(err => console.error(err));
         })
         .catch(err => {
           console.log(err);
         });
-    } else if (message.author.dmChannel) {
-      message.author.dmChannel.send(`Error, ${language} not recognized`);
     } else {
-      message.author.createDM(channel => {
-        channel.send(`Error, ${language} not recognized`);
-      });
+      message
+        .reply(
+          `Error, ${language} not recognized \n\n\n\`This message will self-destruct in ten seconds\``
+        )
+        .then(m => m.delete(10000).catch(err => console.error(err)));
     }
   }
 

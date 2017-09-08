@@ -310,14 +310,12 @@ export default class GwentDatabase {
           });
       }
     } else {
-      message.author
-        .createDM()
-        .then(channel => {
-          channel.send('Card not recognized');
-        })
-        .catch(err => {
-          console.error(err);
-        });
+      message
+        .reply(
+          "Card not recognized \n If you think it's an error, please, report the bug here: https://github.com/PabloSzx/Gwent-Cards/issues \n\n\n`This message will self-destruct in ten seconds`"
+        )
+        .then(m => m.delete(10000))
+        .catch(err => console.error(err));
     }
   }
 }

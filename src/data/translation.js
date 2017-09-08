@@ -699,71 +699,71 @@ const translation = {
     craft: '合成',
   },
 };
-
+/*
 _.forIn(translation, (value, key) => {
-  _.forIn(value._rarity, (v, k) => {
-    switch (k) {
-      case 'Legendary':
-        _.set(translation, key + '._rarity.' + k, v + emotes.legendary);
-        break;
-      case 'Epic':
-        _.set(translation, key + '._rarity.' + k, v + emotes.epic);
-        break;
-      case 'Rare':
-        _.set(translation, key + '._rarity.' + k, v + emotes.rare);
-        break;
-      case 'Common':
-        _.set(translation, key + '._rarity.' + k, v + emotes.common);
-        break;
-      default:
-      //EMPTY
-    }
-  });
-  _.forIn(value._faction, (v, k) => {
-    switch (k) {
-      case 'Neutral':
-        _.set(translation, key + '._faction.' + k, v + emotes.neutral);
-        break;
-      case 'Monster':
-        _.set(translation, key + '._faction.' + k, v + emotes.monster);
-        break;
-      case 'Scoiatael':
-        _.set(translation, key + '._faction.' + k, v + emotes.scoiatael);
-        break;
-      case 'NorthernKingdom':
-        _.set(translation, key + '._faction.' + k, v + emotes.northern);
-        break;
-      case 'Skellige':
-        _.set(translation, key + '._faction.' + k, v + emotes.skellige);
-        break;
-      case 'Nilfgaard':
-        _.set(translation, key + '._faction.' + k, v + emotes.nilfgaard);
-        break;
-      default:
-      //EMPTY
-    }
-  });
-  _.set(translation, key + '._type.' + '[\'Double Agent\']', 'Double Agent' + emotes.doubleagent);
-  _.set(translation, key + '._loyalty.Disloyal', translation[key]._loyalty.Disloyal + emotes.agent);
-
-  _.forIn(value._lane, (v, k) => {
-    switch (k) {
-      case 'Any':
-        _.set(translation, key + '._lane.' + k, v + emotes.agile);
-        break;
-      case 'Siege':
-        _.set(translation, key + '._lane.' + k, v + emotes.siege);
-        break;
-      case 'Melee':
-        _.set(translation, key + '._lane.' + k, v + emotes.melee);
-        break;
-      case 'Ranged':
-        _.set(translation, key + '._lane.' + k, v + emotes.ranged);
-        break;
-      default:
-      //EMPTY
-    }
-  });
-});
-
+//   _.forIn(value._rarity, (v, k) => {
+//     switch (k) {
+//       case 'Legendary':
+//         _.set(translation, key + '._rarity.' + k, v + emotes.legendary);
+//         break;
+//       case 'Epic':
+//         _.set(translation, key + '._rarity.' + k, v + emotes.epic);
+//         break;
+//       case 'Rare':
+//         _.set(translation, key + '._rarity.' + k, v + emotes.rare);
+//         break;
+//       case 'Common':
+//         _.set(translation, key + '._rarity.' + k, v + emotes.common);
+//         break;
+//       default:
+//       //EMPTY
+//     }
+//   });
+//   _.forIn(value._faction, (v, k) => {
+//     switch (k) {
+//       case 'Neutral':
+//         _.set(translation, key + '._faction.' + k, v + emotes.neutral);
+//         break;
+//       case 'Monster':
+//         _.set(translation, key + '._faction.' + k, v + emotes.monster);
+//         break;
+//       case 'Scoiatael':
+//         _.set(translation, key + '._faction.' + k, v + emotes.scoiatael);
+//         break;
+//       case 'NorthernKingdom':
+//         _.set(translation, key + '._faction.' + k, v + emotes.northern);
+//         break;
+//       case 'Skellige':
+//         _.set(translation, key + '._faction.' + k, v + emotes.skellige);
+//         break;
+//       case 'Nilfgaard':
+//         _.set(translation, key + '._faction.' + k, v + emotes.nilfgaard);
+//         break;
+//       default:
+//       //EMPTY
+//     }
+//   });
+//   _.set(translation, key + '._type.' + '[\'Double Agent\']', 'Double Agent' + emotes.doubleagent);
+//   _.set(translation, key + '._loyalty.Disloyal', translation[key]._loyalty.Disloyal + emotes.agent);
+//
+//   _.forIn(value._lane, (v, k) => {
+//     switch (k) {
+//       case 'Any':
+//         _.set(translation, key + '._lane.' + k, v + emotes.agile);
+//         break;
+//       case 'Siege':
+//         _.set(translation, key + '._lane.' + k, v + emotes.siege);
+//         break;
+//       case 'Melee':
+//         _.set(translation, key + '._lane.' + k, v + emotes.melee);
+//         break;
+//       case 'Ranged':
+//         _.set(translation, key + '._lane.' + k, v + emotes.ranged);
+//         break;
+//       default:
+//       //EMPTY
+//     }
+//   });
+// });
+*/
 export default translation;
