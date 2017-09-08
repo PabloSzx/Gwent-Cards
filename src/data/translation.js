@@ -701,7 +701,7 @@ const translation = {
 };
 
 _.forIn(translation, (value, key) => {
-  _.each(value._rarity, (v, k) => {
+  _.forIn(value._rarity, (v, k) => {
     switch (k) {
       case 'Legendary':
         _.set(translation, key + '._rarity.' + k, v + emotes.legendary);
@@ -738,6 +738,27 @@ _.forIn(translation, (value, key) => {
         break;
       case 'Nilfgaard':
         _.set(translation, key + '._faction.' + k, v + emotes.nilfgaard);
+        break;
+      default:
+      //EMPTY
+    }
+  });
+  _.set(translation, key + '._type.' + '[\'Double Agent\']', 'Double Agent' + emotes.doubleagent);
+  _.set(translation, key + '._loyalty.Disloyal', translation[key]._loyalty.Disloyal + emotes.agent);
+
+  _.forIn(value._lane, (v, k) => {
+    switch (k) {
+      case 'Any':
+        _.set(translation, key + '._lane.' + k, v + emotes.agile);
+        break;
+      case 'Siege':
+        _.set(translation, key + '._lane.' + k, v + emotes.siege);
+        break;
+      case 'Melee':
+        _.set(translation, key + '._lane.' + k, v + emotes.melee);
+        break;
+      case 'Ranged':
+        _.set(translation, key + '._lane.' + k, v + emotes.ranged);
         break;
       default:
       //EMPTY

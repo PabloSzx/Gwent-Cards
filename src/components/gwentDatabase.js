@@ -2,7 +2,7 @@ import axios from 'axios';
 import _ from 'lodash';
 import DiscordJS from 'discord.js';
 import getValues from 'object.values';
-import { translation, nicknames, cards_language, database } from '../data';
+import { translation, nicknames, cards_language, database, emotes } from '../data';
 import {
   stringToPathKey,
   checkChineseOrJapaneseCharacter,
@@ -221,7 +221,7 @@ export default class GwentDatabase {
 
     if (data.strength > 0) {
       fields[fields.length] = `*${translation[language]
-        .power}*: **${data.strength.toString()}**`;
+        .power}*: **${emotes[data.strength.toString()] ? emotes[data.strength.toString()] : data.strength.toString()}**`;
     }
 
     const positions = data.positions;
@@ -237,8 +237,8 @@ export default class GwentDatabase {
     ]._lane[position]}**`;
 
     if (data.loyalties.length > 0) {
-      fields[fields.length] = `*${translation[language]
-        .loyalty}*: **${translation[language]._loyalty[data.loyalties[0]]}**`;
+      fields[fields.length] = `${translation[language]
+        .loyalty}: **${translation[language]._loyalty[data.loyalties[0]]}**`;
     }
 
     const categories = data.categories;

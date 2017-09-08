@@ -4,6 +4,7 @@ import cards_language from './cards_language.json';
 import nicknames from './nicknames.json';
 import equivalents from './equivalents.json';
 import database from './database.json';
+import emotes from './emotes.json';
 
 export {
   restrictedChannels,
@@ -12,4 +13,5 @@ export {
   nicknames,
   equivalents,
   database,
+  emotes,
 };
