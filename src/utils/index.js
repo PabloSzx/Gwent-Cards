@@ -16,10 +16,12 @@ function stringToPathKey(input) {
 function getEquivalent(input) {
   let equivalent;
 
+  const pathKey = stringToPathKey(input);
+
   _.find(equivalents, (value, key) =>
     _.find(value, val => {
       if (val) {
-        if (stringToPathKey(input) === val) {
+        if (pathKey == val) {
           equivalent = key;
           return key;
         }
@@ -96,19 +98,26 @@ function filter(array, input) {
   });
 }
 
-function nicknameCheck(input, object) {
+function nicknameCheck(input, list) {
   let nickname;
-  _.map(object, (value, key) => {
-    _.map(value, (v, k) => {
-      if (k > 0) {
+  let lng = 'en-US';
+  _.find(list, (value, key) => {
+    // value = object / key = aelirenn, etc..
+    return _.find(value, (v, k) => {
+      // v = zap, dbomb, etc... / k = name, nick1, nick2, etc...
+      if (k !== 'name') {
         if (v.toLowerCase() === input.toLowerCase()) {
           nickname = key;
+          if (k === 'nick5' || k === 'nick6') {
+            lng = 'ru-RU';
+          }
+          return key;
         }
       }
     });
   });
 
-  return nickname;
+  return [nickname, lng];
 }
 
 function bestPossibility(array, input) {
@@ -143,6 +152,19 @@ function checkChannelPermission(channel, list) {
   return bool;
 }
 
+function secondsTransition(msg, txt, seconds) {
+  const txt_edit = txt.replace(/(10|8|6|4|2)/, x => x - 2);
+  _.delay(() => {
+    msg
+      .edit('<@' + msg.mentions.users.firstKey() + '>, ' + txt_edit)
+      .then(m => secondsTransition(m, txt_edit, seconds))
+      .catch(err => {
+        const x = err;
+        //recursion end
+      });
+  }, seconds);
+}
+
 export {
   stringToPathKey,
   checkChineseOrJapaneseCharacter,
@@ -155,4 +177,5 @@ export {
   checkChannelPermission,
   bestPossibility,
   getEquivalent,
+  secondsTransition,
 };

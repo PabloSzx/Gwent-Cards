@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import firebase from 'firebase';
+import { secondsTransition } from '../utils';
+import { self_destruct } from '../data';
 
 export default class FirebaseDatabase {
   constructor(apiKey, databaseURL) {
@@ -47,21 +49,38 @@ export default class FirebaseDatabase {
         .update({ [id]: languageToAdd })
         .then(() => {
           console.log('--Language Updated--');
-          const msg = `Your server default language has updated to: ${languageToAdd} \n\n\n\`This message will self-destruct in ten seconds\``;
+          // const msg = ` \n\n\n\`This message will self-destruct in ten seconds\``;
+          // message
+          //   .reply(msg)
+          //   .then(m => m.delete(10000))
+          //   .catch(err => console.error(err));
+          let txt = `Your server default language has updated to: ${languageToAdd} ${self_destruct}`;
           message
-            .reply(msg)
-            .then(m => m.delete(10000))
+            .reply(txt)
+            .then(m => {
+              m.delete(10000);
+              secondsTransition(m, txt, 1800);
+            })
             .catch(err => console.error(err));
         })
         .catch(err => {
           console.log(err);
         });
     } else {
+      let txt = `Error, ${language} not recognized ${self_destruct}`;
       message
-        .reply(
-          `Error, ${language} not recognized \n\n\n\`This message will self-destruct in ten seconds\``
-        )
-        .then(m => m.delete(10000).catch(err => console.error(err)));
+        .reply(txt)
+        .then(m => {
+          m.delete(10000);
+          secondsTransition(m, txt, 1800);
+        })
+        .catch(err => console.error(err));
+
+      // message
+      //   .reply(
+      //      \n\n\n\`This message will self-destruct in ten seconds\``
+      //   )
+      //   .then(m => m.delete(10000).catch(err => console.error(err)));
     }
   }
 

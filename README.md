@@ -11,7 +11,7 @@ or type: {"Name of card"} and the bot will reply you only with the card basic de
 
 The bot is currently working with an algorithm that compares your input with the most similar card and the bot will give you the better option. For example, if you type [adrenaline] you will receive "Adrenaline rush" info, and you can request multiple cards in a single message, for example: [adrenaline] [troll] [geralt] etc...
 
-There are implemented shortcuts that you can use to write less, for example [dbomb] to get "Dimeritium Bomb" info.
+There are implemented shortcuts that you can use to write less, for example [dbomb] to get "Dimeritium Bomb" info (implemented for English and Russian at the moment).
 The list of nicknames is available here https://docs.google.com/spreadsheets/d/1rxDfsX2BoAo6MKZFJewgZwZhxJQ22m9luaC8CqDWzk0/edit?usp=sharing.
 
 The bot is currently supporting 12 simultaneous languages: English, Deutsch (German), Español (Spanish), Español LA (Latin American Spanish), Français (French), Italiano (Italian), 日本語 (Japanese), Polski (Polish), Português (Portuguese), Русский (Russian), 官话 (Chinese), 简体中文 (Chinese Taiwan).

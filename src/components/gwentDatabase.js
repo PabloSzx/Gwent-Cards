@@ -8,6 +8,7 @@ import {
   cards_language,
   database,
   emotes,
+  self_destruct,
 } from '../data';
 import {
   stringToPathKey,
@@ -19,6 +20,8 @@ import {
   bestPossibility,
   getImage,
   getEquivalent,
+  secondsTransition,
+  nicknameTestCheck,
 } from '../utils';
 
 export default class GwentDatabase {
@@ -77,8 +80,8 @@ export default class GwentDatabase {
     let priorityIndex;
     const nickname = nicknameCheck(input, nicknames);
 
-    if (nickname) {
-      return [getEquivalent(nickname), 'en-US'];
+    if (nickname[0]) {
+      return [getEquivalent(nickname[0]), nickname[1]];
     } else if (checkChineseOrJapaneseCharacter(input)) {
       const jpPossibilities = filter(cards_language['ja-JP'], input);
       const cnPossibilities = filter(cards_language['zh-CN'], input);
@@ -310,11 +313,15 @@ export default class GwentDatabase {
           });
       }
     } else {
+      let txt =
+        "Card not recognized \n If you think it's an error, please, report the bug here: https://github.com/PabloSzx/Gwent-Cards/issues" +
+        self_destruct;
       message
-        .reply(
-          "Card not recognized \n If you think it's an error, please, report the bug here: https://github.com/PabloSzx/Gwent-Cards/issues \n\n\n`This message will self-destruct in ten seconds`"
-        )
-        .then(m => m.delete(10000))
+        .reply(txt)
+        .then(m => {
+          m.delete(10000);
+          secondsTransition(m, txt, 1800);
+        })
         .catch(err => console.error(err));
     }
   }
