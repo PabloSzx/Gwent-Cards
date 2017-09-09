@@ -47,7 +47,7 @@ function checkRussianCharacter(input) {
 
 function colorFaction(faction) {
   let fact = 'Neutral';
-  fact = faction.indexOf('Monsters') !== -1 ? 'Monsters' : fact;
+  fact = faction.indexOf('Monster') !== -1 ? 'Monsters' : fact;
   fact = faction.indexOf('Nilfgaard') !== -1 ? 'Nilfgaard' : fact;
   fact = faction.indexOf('Northern') !== -1 ? 'Northern Realms' : fact;
   fact = faction.indexOf('Scoia') !== -1 ? "Scoia'tael" : fact;
@@ -61,7 +61,7 @@ function colorFaction(faction) {
       return 0x720000;
     }
     case 'Nilfgaard': {
-      return 0x000000;
+      return 0x1a1a1a;
     }
     case 'Northern Realms': {
       return 0x3d85c6;
