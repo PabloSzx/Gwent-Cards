@@ -305,7 +305,8 @@ export default class GwentDatabase {
                       `Sent card info to ${msg.channel.recipient
                         .username} direct message channel`
                     );
-                  });
+                  })
+                  .catch(err => console.error(err));
               })
               .catch(err => {
                 console.error(err);

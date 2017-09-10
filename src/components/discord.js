@@ -49,6 +49,16 @@ export default class Discord {
               }
             }
           }
+        } else if (
+          message.author.id === '215658764097945601' &&
+          message.content.trim().slice(0, 4) === '!say'
+        ) {
+          this.sendMessageMainChannel(
+            message.content
+              .trim()
+              .slice(4)
+              .trim()
+          );
         } else {
           this.checkMessage(message, content.replace(/"/g, ''));
         }
@@ -59,10 +69,20 @@ export default class Discord {
   }
 
   checkMessage(message, content) {
-    if (content.trim().slice(0, 6) === '!top10') {
+    if (
+      content
+        .trim()
+        .slice(0, 6)
+        .toLowerCase() === '!top10'
+    ) {
       this.TopTracker.request(message);
       return;
-    } else if (content.trim().slice(0, 7) === '!ladder') {
+    } else if (
+      content
+        .trim()
+        .slice(0, 7)
+        .toLowerCase() === '!ladder'
+    ) {
       this.UserTracker.request(content.slice(7).trim(), message);
       return;
     }
@@ -97,16 +117,38 @@ export default class Discord {
     }
   }
 
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async sendMessageMainChannel(message) {
+    let n = 0;
+    this.client.guilds.every(async value => {
+      if (value.available) {
+        n += 1;
+        await this.sleep(5000 * n);
+        value.defaultChannel
+          .send(
+            '`<NEW ANNOUNCEMENT>`\n\n' +
+              message +
+              ' \n\n <@318804439354048537> Developer, <@215658764097945601>'
+          )
+          .then(msg => console.log(`Sent message in ${value.name} server`))
+          .catch(err => console.error(err));
+      }
+    });
+  }
+
   newServerEvent(guild) {
     this.client
       .fetchUser('215658764097945601')
       .then(user => {
         const msg = `New server added: ${guild.name} with ${guild.memberCount} members, the region of the server is ${guild.region}`;
         if (user.dmChannel) {
-          user.dmChannel.send(msg);
+          user.dmChannel.send(msg).catch(err => console.error(err));
         } else {
           user.createDM(channel => {
-            channel.send(msg);
+            channel.send(msg).catch(err => console.error(err));
           });
         }
       })
