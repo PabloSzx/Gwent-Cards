@@ -1,5 +1,5 @@
 import DiscordJS from 'discord.js';
-import { GwentDatabase, FirebaseDatabase } from './';
+import { GwentDatabase, FirebaseDatabase, TopTracker, UserTracker } from './';
 import { restrictedChannels } from '../data';
 import { checkChannelPermission } from '../utils';
 
@@ -21,13 +21,14 @@ export default class Discord {
       .catch(err => {
         console.error(err);
       });
+    this.fDatabase = new FirebaseDatabase(this.apiKey, this.databaseURL);
+    this.cardsDatabase = new GwentDatabase(this.fDatabase);
+    this.TopTracker = new TopTracker();
+    this.UserTracker = new UserTracker();
 
     this.client.on('message', message => this.messageEvent(message));
 
     this.client.on('guildCreate', guild => this.newServerEvent(guild));
-
-    this.fDatabase = new FirebaseDatabase(this.apiKey, this.databaseURL);
-    this.cardsDatabase = new GwentDatabase(this.fDatabase);
   }
 
   messageEvent(message) {
@@ -48,22 +49,24 @@ export default class Discord {
               }
             }
           }
-        } else if (
-          message.author.id === '215658764097945601' &&
-          message.content.trim() === '!gwent-check-memory'
-        ) {
-          console.log(this.cardsDatabase.getMemory());
         } else {
           this.checkMessage(message, content.replace(/"/g, ''));
         }
-        // }
       } catch (e) {
-        console.log(e);
+        console.error(e);
       }
     }
   }
 
   checkMessage(message, content) {
+    if (content.trim().slice(0, 6) === '!top10') {
+      this.TopTracker.request(message);
+      return;
+    } else if (content.trim().slice(0, 7) === '!ladder') {
+      this.UserTracker.request(content.slice(7).trim(), message);
+      return;
+    }
+
     const firstBracket = content.indexOf('[');
     const secondBracket =
       content.substring(firstBracket).indexOf(']') + firstBracket;
@@ -108,7 +111,7 @@ export default class Discord {
         }
       })
       .catch(() => {
-        console.log('Error 404! PabloSz not found');
+        console.error('Error 404! PabloSz not found');
       });
   }
 }

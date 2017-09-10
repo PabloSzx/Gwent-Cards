@@ -2,6 +2,24 @@ import _ from 'lodash';
 import levenshtein from 'fast-levenshtein';
 import { equivalents } from '../data';
 
+String.prototype.replaceLast = function(what, replacement) {
+  return this.split(' ')
+    .reverse()
+    .join(' ')
+    .replace(new RegExp(what), replacement)
+    .split(' ')
+    .reverse()
+    .join(' ');
+};
+
+String.prototype.paddingLeft = function(paddingValue, length) {
+  return String(paddingValue.repeat(length) + this).slice(-length);
+};
+
+String.prototype.paddingRight = function(paddingValue, length) {
+  return String(this + paddingValue.repeat(length)).slice(0, length);
+};
+
 function stringToPathKey(input) {
   if (input) {
     let str = input;
@@ -124,7 +142,7 @@ function bestPossibility(array, input) {
   let best = array[0];
   let bestDif = levenshtein.get(input, best);
   let dif = 0;
-  _.map(array, value => {
+  _.forIn(array, value => {
     dif = levenshtein.get(input, value);
     if (dif < bestDif) {
       best = value;
@@ -143,9 +161,10 @@ function getImage(data) {
 function checkChannelPermission(channel, list) {
   let bool = true;
 
-  _.map(list, value => {
+  _.forIn(list, value => {
     if (channel === value) {
       bool = false;
+      return false;
     }
   });
 
@@ -153,7 +172,7 @@ function checkChannelPermission(channel, list) {
 }
 
 function secondsTransition(msg, txt, seconds) {
-  const txt_edit = txt.replace(/(10|8|6|4|2)/, x => x - 2);
+  const txt_edit = txt.replaceLast(/(10|8|6|4|2)/, x => x - 2);
   _.delay(() => {
     msg
       .edit('<@' + msg.mentions.users.firstKey() + '>, ' + txt_edit)

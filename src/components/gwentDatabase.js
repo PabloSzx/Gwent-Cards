@@ -259,7 +259,7 @@ export default class GwentDatabase {
     const categories = data.categories;
     let category = '';
     if (categories) {
-      _.map(categories, (value, key) => {
+      _.forIn(categories, (value, key) => {
         if (translation[language]._type[value]) {
           category += translation[language]._type[value];
         } else {

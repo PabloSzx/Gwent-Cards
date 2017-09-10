@@ -12,9 +12,12 @@ export default class FirebaseDatabase {
 
     this.channels = {};
 
-    this.database.database().ref().on('value', snapshot => {
-      this.channels = snapshot.val();
-    });
+    this.database
+      .database()
+      .ref()
+      .on('value', snapshot => {
+        this.channels = snapshot.val();
+      });
   }
 
   addServer(id, language, message) {
@@ -49,11 +52,6 @@ export default class FirebaseDatabase {
         .update({ [id]: languageToAdd })
         .then(() => {
           console.log('--Language Updated--');
-          // const msg = ` \n\n\n\`This message will self-destruct in ten seconds\``;
-          // message
-          //   .reply(msg)
-          //   .then(m => m.delete(10000))
-          //   .catch(err => console.error(err));
           let txt = `Your server default language has updated to: ${languageToAdd} ${self_destruct}`;
           message
             .reply(txt)
@@ -75,12 +73,6 @@ export default class FirebaseDatabase {
           secondsTransition(m, txt, 1800);
         })
         .catch(err => console.error(err));
-
-      // message
-      //   .reply(
-      //      \n\n\n\`This message will self-destruct in ten seconds\``
-      //   )
-      //   .then(m => m.delete(10000).catch(err => console.error(err)));
     }
   }
 
@@ -88,9 +80,10 @@ export default class FirebaseDatabase {
     const defaultServer = 'en-US';
     let server;
 
-    _.map(this.channels, (value, key) => {
+    _.forIn(this.channels, (value, key) => {
       if (key === guildId) {
         server = value;
+        return false;
       }
     });
 
@@ -98,7 +91,7 @@ export default class FirebaseDatabase {
     let priority = -1;
     let defaultPriority = -1;
 
-    _.map(poss, (value, key) => {
+    _.forIn(poss, (value, key) => {
       n = Object.keys(value)[0];
       if (n === server) {
         priority = key;
