@@ -288,10 +288,9 @@ export default class GwentDatabase {
           .reply({ embed: this.embedData(info, card, long) })
           .then(msg =>
             console.log(
-              `Sent card info ${msg.channel.name
-                ? `in ${msg.channel.name} on ${msg.channel.guild.name} server`
-                : `to ${msg.channel.recipient
-                    .username} direct message channel`}`
+              `Card info successfully displayed in ${msg.guild
+                ? `${msg.channel.name} channel from ${msg.guild.name} server`
+                : `${msg.author.username} direct message`}`
             )
           )
           .catch(() => {

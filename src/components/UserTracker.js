@@ -52,9 +52,9 @@ class UserTracker {
             .reply({ embed: this.embedData(_.last(data.ranks)) })
             .then(
               console.log(
-                `User ${user} tracking info succesfully displayed in ${msg.guild
-                  ? `${msg.channel.name}`
-                  : `${msg.author.username} direct message`} channel`
+                `User ${user} tracking info successfully displayed in ${msg.guild
+                  ? `${msg.channel.name} channel from ${msg.guild.name} server`
+                  : `${msg.author.username} direct message`}`
               )
             )
             .catch(err => console.error(err));

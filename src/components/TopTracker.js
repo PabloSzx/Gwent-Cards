@@ -64,9 +64,9 @@ class TopTracker {
             .reply({ embed: this.embedData(data.ranks) })
             .then(
               console.log(
-                `Top 10 info succesfully displayed in ${msg.guild
-                  ? msg.channel.name
-                  : `${msg.author.username} direct message`} channel`
+                `Top 10 info successfully displayed in ${msg.guild
+                  ? `${msg.channel.name} channel from ${msg.guild.name} server`
+                  : `${msg.author.username} direct message`}`
               )
             )
             .catch(err => console.error(err));

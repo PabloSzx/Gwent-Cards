@@ -125,16 +125,24 @@ export default class Discord {
     let n = 0;
     this.client.guilds.every(async value => {
       if (value.available) {
-        n += 1;
-        await this.sleep(5000 * n);
-        value.defaultChannel
-          .send(
-            '`<NEW ANNOUNCEMENT>`\n\n' +
-              message +
-              ' \n\n <@318804439354048537> Developer, <@215658764097945601>'
-          )
-          .then(msg => console.log(`Sent message in ${value.name} server`))
-          .catch(err => console.error(err));
+        if (value.defaultChannel) {
+          if (
+            value.defaultChannel
+              .permissionsFor(this.client.user)
+              .has('SEND_MESSAGES')
+          ) {
+            n += 1;
+            await this.sleep(5000 * n);
+            value.defaultChannel
+              .send(
+                '`<NEW ANNOUNCEMENT>`\n\n' +
+                  message +
+                  ' \n\n <@318804439354048537> Developer, <@215658764097945601>'
+              )
+              .then(msg => console.log(`Sent message in ${value.name} server`))
+              .catch(err => console.error(err));
+          }
+        }
       }
     });
   }
