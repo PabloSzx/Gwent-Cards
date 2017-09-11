@@ -65,8 +65,9 @@ class TopTracker {
             .then(
               console.log(
                 `Top 10 info successfully displayed in ${msg.guild
-                  ? `${msg.channel.name} channel from ${msg.guild.name} server`
-                  : `${msg.author.username} direct message`}`
+                  ? `<${msg.channel.name}> channel from <${msg.guild
+                      .name}> server`
+                  : `<${msg.author.username}> direct message channel`}`
               )
             )
             .catch(err => console.error(err));

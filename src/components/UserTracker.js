@@ -53,8 +53,9 @@ class UserTracker {
             .then(
               console.log(
                 `User ${user} tracking info successfully displayed in ${msg.guild
-                  ? `${msg.channel.name} channel from ${msg.guild.name} server`
-                  : `${msg.author.username} direct message`}`
+                  ? `<${msg.channel.name}> channel from <${msg.guild
+                      .name}> server`
+                  : `<${msg.author.username}> direct message channel`}`
               )
             )
             .catch(err => console.error(err));

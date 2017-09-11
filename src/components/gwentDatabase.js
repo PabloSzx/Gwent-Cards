@@ -284,13 +284,15 @@ export default class GwentDatabase {
     if (card) {
       const info = database[card[0]];
       if (info) {
+        console.log(message.author.username);
         message
           .reply({ embed: this.embedData(info, card, long) })
           .then(msg =>
             console.log(
               `Card info successfully displayed in ${msg.guild
-                ? `${msg.channel.name} channel from ${msg.guild.name} server`
-                : `${msg.author.username} direct message`}`
+                ? `<${msg.channel.name}> channel from <${msg.guild
+                    .name}> server`
+                : `<${message.author.username}> direct message channel`}`
             )
           )
           .catch(() => {
@@ -301,8 +303,8 @@ export default class GwentDatabase {
                   .send({ embed: this.embedData(info, card, long) })
                   .then(msg => {
                     console.log(
-                      `Sent card info to ${msg.channel.recipient
-                        .username} direct message channel`
+                      `Sent card info to <${message.author
+                        .username}> direct message channel`
                     );
                   })
                   .catch(err => console.error(err));
