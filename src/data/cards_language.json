@@ -377,7 +377,8 @@
         "Jadefigur",
         "Harpyien-Küken",
         "Krabbspinnen-Junges",
-        "Tschort"
+        "Tschort",
+        "Draugir"
     ],
     "en-US": [
         "Ciri",
@@ -757,7 +758,8 @@
         "Jade Figurine",
         "Harpy Hatchling",
         "Arachas Hatchling",
-        "Chort"
+        "Chort",
+        "Draugir"
     ],
     "es-ES": [
         "Ciri",
@@ -1137,7 +1139,8 @@
         "Estatuilla de jade",
         "Cría de arpía",
         "Cría de arachas",
-        "Chort"
+        "Chort",
+        "Draugir"
     ],
     "es-MX": [
         "Ciri",
@@ -1517,7 +1520,8 @@
         "Estatuilla de jade",
         "Cría de Arpía",
         "Cría de Arachas",
-        "Chort"
+        "Chort",
+        "Draugir"
     ],
     "fr-FR": [
         "Ciri",
@@ -1552,7 +1556,7 @@
         "Chironex",
         "Feld-maréchal Duda : compagnon",
         "Feld-maréchal Duda : agitateur",
-        "Tschart",
+        "Fiellon",
         "Ragh nar Roog",
         "Le dernier vœu",
         "Leurre",
@@ -1897,7 +1901,8 @@
         "Figurine de jade",
         "Jeune harpie",
         "Jeune arachas",
-        "Tschart"
+        "Tschart",
+        "Draugir"
     ],
     "it-IT": [
         "Ciri",
@@ -2277,7 +2282,8 @@
         "Statuetta di giada",
         "Arpia giovane",
         "Arachas giovane",
-        "Chort"
+        "Chort",
+        "Draugir"
     ],
     "ja-JP": [
         "シリ",
@@ -2657,7 +2663,8 @@
         "翡翠の小像",
         "ハーピーの幼生",
         "アラキスの幼生",
-        "チョルト"
+        "チョルト",
+        "ドラウガー"
     ],
     "pl-PL": [
         "Ciri",
@@ -2984,7 +2991,7 @@
         "Archespor",
         "Strażnik Dol Blathanna",
         "Rębacze klanu an Craite",
-        "Krasnolud trapper",
+        "Krasnolud traper",
         "Dywizja Magne",
         "Weteran klanu Tuirseach",
         "Wykładowca z Ban Ard",
@@ -3037,7 +3044,8 @@
         "Jadeitowa figurka",
         "Młode harpii",
         "Młode krabopająka",
-        "Czart"
+        "Czart",
+        "Draugir"
     ],
     "pt-BR": [
         "Ciri",
@@ -3417,7 +3425,8 @@
         "Estatueta de Jade",
         "Filhote de Harpia",
         "Filhote de Aracna",
-        "Chorabash"
+        "Chorabash",
+        "Draugir"
     ],
     "ru-RU": [
         "Цири",
@@ -3797,7 +3806,8 @@
         "Нефритовая статуэтка",
         "Молодая гарпия",
         "Молодой главоглаз",
-        "Черт"
+        "Черт",
+        "Драугир"
     ],
     "zh-CN": [
         "希里",
@@ -4085,7 +4095,7 @@
         "冒牌希里",
         "契拉克",
         "戴尔兰尼旅步兵",
-        "投尸机",
+        "投石机",
         "侦察员",
         "维可瓦罗医师",
         "黑步兵强弩手",
@@ -4177,7 +4187,8 @@
         "翡翠人偶",
         "鹰身女妖幼崽",
         "蟹蜘蛛幼虫",
-        "羊角魔"
+        "羊角魔",
+        "战鬼"
     ],
     "zh-TW": [
         "希里",
@@ -4557,6 +4568,7 @@
         "翡翠小雕像",
         "人面妖鳥雛鳥",
         "蟹蜘蛛幼蟲",
-        "讎特怪"
+        "讎特怪",
+        "戰鬼"
     ]
 }
