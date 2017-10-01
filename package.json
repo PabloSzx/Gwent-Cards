@@ -1,6 +1,6 @@
 {
   "name": "gwent-cards",
-  "version": "2.1.1",
+  "version": "2.3.0",
   "description": "Discord Bot designed for Gwent cards display",
   "main": "bot.js",
   "scripts": {
@@ -11,14 +11,7 @@
     "type": "git",
     "url": "https://github.com/PabloSzx/Gwent-Cards.git"
   },
-  "keywords": [
-    "discord.js",
-    "discord",
-    "node",
-    "heroku",
-    "gwent",
-    "gwent.io"
-  ],
+  "keywords": ["discord.js", "discord", "node", "heroku", "gwent", "gwent.io"],
   "author": "PabloSzx",
   "license": "ISC",
   "bugs": {
@@ -48,5 +41,9 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "prettier": "^1.5.3"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5"
   }
 }

@@ -284,7 +284,6 @@ export default class GwentDatabase {
     if (card) {
       const info = database[card[0]];
       if (info) {
-        console.log(message.author.username);
         message
           .reply({ embed: this.embedData(info, card, long) })
           .then(msg =>
