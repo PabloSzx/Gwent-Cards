@@ -10,7 +10,7 @@ class UserTracker {
   embedData(info) {
     const embed = new DiscordJS.RichEmbed({
       title: info.username,
-      url: `https://gwent.io/user/${info.username}`,
+      url: `https://gwent.io/user/${info.username.replace(/ /g, "%20")}`,
       footer: {
         text: 'Gwent.io',
         icon_url: 'https://gwent.io/images/gwent_io_icon_256.png',
