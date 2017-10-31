@@ -158,7 +158,6 @@ export default {
   },
   'Celaeno Harpy': {
     name: 'Celaeno Harpy',
-    nick2: 'harpy',
   },
   Cerys: {
     name: 'Cerys',
