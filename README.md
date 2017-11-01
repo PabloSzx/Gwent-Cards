@@ -24,7 +24,7 @@ If the admin wants to change the default bot language on his server, has to ment
 
 For example, in any channel of your server , write: "\@Gwent-Cards es-es" to set the Spanish on your default language (just the discord server owner can execute this command).
 
-You can use "!top10" to get the top 10 in standard ladder and "!ladder nickname" to get the ladder information of a specific player.
+You can use "!top10" to get the top 10 in standard ladder, "!protop10" to get the top 10 in pro ladder and "!ladder nickname" to get the ladder information of a specific player.
 
 (If you want to report a bug, or you have an idea to improve the bot, feel free to talk to me via discord, my nickname is @PabloSz#0327)
 
@@ -48,6 +48,7 @@ Official Gwent discord server, https://discord.gg/DTPYChN.
 ![Screenshot](https://i.imgur.com/8bhhZV5.png)
 ![Screenshot](https://i.imgur.com/5NGRqI1.png)
 ![Screenshot](https://i.imgur.com/WYYqmKV.png)
+![Screenshot](https://i.imgur.com/zX7e8J0.png)
 ## How it's made?
 It's using "Node.js" with mainly "Discord.js" library.
 https://github.com/hydrabolt/discord.js/
