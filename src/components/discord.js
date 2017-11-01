@@ -1,5 +1,11 @@
 import DiscordJS from 'discord.js';
-import { GwentDatabase, FirebaseDatabase, TopTracker, UserTracker } from './';
+import {
+  GwentDatabase,
+  FirebaseDatabase,
+  TopTracker,
+  TopProTracker,
+  UserTracker,
+} from './';
 import { restrictedChannels } from '../data';
 import { checkChannelPermission } from '../utils';
 
@@ -24,6 +30,7 @@ export default class Discord {
     this.fDatabase = new FirebaseDatabase(this.apiKey, this.databaseURL);
     this.cardsDatabase = new GwentDatabase(this.fDatabase);
     this.TopTracker = new TopTracker();
+    this.TopProTracker = new TopProTracker();
     this.UserTracker = new UserTracker();
 
     this.client.on('message', message => this.messageEvent(message));
@@ -85,7 +92,14 @@ export default class Discord {
     ) {
       this.UserTracker.request(content.slice(7).trim(), message);
       return;
+    } else if (content
+        .trim()
+        .slice(0, 9)
+        .toLowerCase() === '!protop10') {
+      this.TopProTracker.request(message);
+      return;
     }
+
 
     const firstBracket = content.indexOf('[');
     const secondBracket =
