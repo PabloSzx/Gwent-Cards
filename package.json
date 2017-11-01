@@ -24,6 +24,9 @@
   "bugs": {
     "url": "https://github.com/PabloSzx/Gwent-Cards/issues"
   },
+  "engines": {
+    "node": "8.6.0"
+  },
   "homepage": "https://pabloszx.github.io/Gwent-Cards/",
   "dependencies": {
     "axios": "^0.16.2",
