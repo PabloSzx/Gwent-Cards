@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import levenshtein from 'fast-levenshtein';
-import { equivalents } from '../data';
+import { equivalents, self_destruct } from '../data';
 
 String.prototype.replaceLast = function(what, replacement) {
   return this.split(' ')
@@ -171,17 +171,38 @@ function checkChannelPermission(channel, list) {
   return bool;
 }
 
+async function errorReply(msg, user) {
+  let txt = `User not available\n If you want ***${
+    user
+  }*** to be tracked, please register him on https://gwent.io/ ${
+    self_destruct
+  }`;
+  msg
+    .reply(txt)
+    .then(m => {
+      m.delete(10000);
+      secondsTransition(m, txt, 1800);
+    })
+    .catch(err => console.error(err));
+}
+
 function secondsTransition(msg, txt, seconds) {
-  const txt_edit = txt.replaceLast(/(10|8|6|4|2)/, x => x - 2);
-  _.delay(() => {
-    msg
-      .edit('<@' + msg.mentions.users.firstKey() + '>, ' + txt_edit)
-      .then(m => secondsTransition(m, txt_edit, seconds))
-      .catch(err => {
-        const x = err;
-        //recursion end
-      });
-  }, seconds);
+  let message = '';
+  if (msg) {
+    const txt_edit = txt.replaceLast(/(10|8|6|4|2)/, x => x - 2);
+    _.delay(() => {
+      if (msg.mentions.users.firstKey()) {
+        message = '<@' + msg.mentions.users.firstKey() + '>, ';
+      }
+      msg
+        .edit(message + txt_edit)
+        .then(m => secondsTransition(m, txt_edit, seconds))
+        .catch(err => {
+          const x = err;
+          //recursion end
+        });
+    }, seconds);
+  }
 }
 
 export {
@@ -197,4 +218,5 @@ export {
   bestPossibility,
   getEquivalent,
   secondsTransition,
+  errorReply,
 };

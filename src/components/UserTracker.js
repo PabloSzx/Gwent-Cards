@@ -1,7 +1,7 @@
 import axios from 'axios';
 import _ from 'lodash';
 import DiscordJS from 'discord.js';
-import { secondsTransition } from '../utils';
+import { errorReply } from '../utils';
 import { self_destruct } from '../data';
 
 class UserTracker {
@@ -10,7 +10,7 @@ class UserTracker {
   embedData(info) {
     const embed = new DiscordJS.RichEmbed({
       title: info.username,
-      url: `https://gwent.io/user/${info.username.replace(/ /g, "%20")}`,
+      url: `https://gwent.io/user/${info.username.replace(/ /g, '%20')}`,
       footer: {
         text: 'Gwent.io',
         icon_url: 'https://gwent.io/images/gwent_io_icon_256.png',
@@ -47,27 +47,23 @@ class UserTracker {
       })
       .then(response => {
         const data = response.data.results[0];
-        if (data) {
+        if (data && _.last(data.ranks)) {
           msg
             .reply({ embed: this.embedData(_.last(data.ranks)) })
             .then(
               console.log(
-                `User ${user} tracking info successfully displayed in ${msg.guild
-                  ? `<${msg.channel.name}> channel from <${msg.guild
-                      .name}> server`
-                  : `<${msg.author.username}> direct message channel`}`
+                `User ${user} tracking info successfully displayed in ${
+                  msg.guild
+                    ? `<${msg.channel.name}> channel from <${
+                        msg.guild.name
+                      }> server`
+                    : `<${msg.author.username}> direct message channel`
+                }`
               )
             )
             .catch(err => console.error(err));
         } else {
-          let txt = `User not available\n If you want ***${user}*** to be tracked, please register him on https://gwent.io/ ${self_destruct}`;
-          msg
-            .reply(txt)
-            .then(m => {
-              m.delete(10000);
-              secondsTransition(m, txt, 1800);
-            })
-            .catch(err => console.error(err));
+          errorReply(msg, user);
         }
       })
       .catch(err => {

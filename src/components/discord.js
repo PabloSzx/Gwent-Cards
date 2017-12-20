@@ -70,7 +70,8 @@ export default class Discord {
           this.checkMessage(message, content.replace(/"/g, ''));
         }
       } catch (e) {
-        console.error(e);
+        const err = e;
+        //console.error(e);
       }
     }
   }
@@ -92,14 +93,15 @@ export default class Discord {
     ) {
       this.UserTracker.request(content.slice(7).trim(), message);
       return;
-    } else if (content
+    } else if (
+      content
         .trim()
         .slice(0, 9)
-        .toLowerCase() === '!protop10') {
+        .toLowerCase() === '!protop10'
+    ) {
       this.TopProTracker.request(message);
       return;
     }
-
 
     const firstBracket = content.indexOf('[');
     const secondBracket =
@@ -165,7 +167,9 @@ export default class Discord {
     this.client
       .fetchUser('215658764097945601')
       .then(user => {
-        const msg = `New server added: ${guild.name} with ${guild.memberCount} members, the region of the server is ${guild.region}`;
+        const msg = `New server added: ${guild.name} with ${
+          guild.memberCount
+        } members, the region of the server is ${guild.region}`;
         if (user.dmChannel) {
           user.dmChannel.send(msg).catch(err => console.error(err));
         } else {
