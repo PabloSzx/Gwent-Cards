@@ -64,26 +64,51 @@ class TopTracker {
             .reply({ embed: this.embedData(data.ranks) })
             .then(
               console.log(
-                `Top 10 info successfully displayed in ${msg.guild
-                  ? `<${msg.channel.name}> channel from <${msg.guild
-                      .name}> server`
-                  : `<${msg.author.username}> direct message channel`}`
+                `Top 10 info successfully displayed in ${
+                  msg.guild
+                    ? `<${msg.channel.name}> channel from <${
+                        msg.guild.name
+                      }> server`
+                    : `<${msg.author.username}> direct message channel`
+                }`
               )
             )
-            .catch(err => console.error(err));
+            .catch(
+              err =>
+                err.message
+                  ? console.error(
+                      `Error!, ${err.message} called in TopTracker.js, line 80`
+                    )
+                  : console.error('Error in TopTracker line 80')
+            );
         } else {
-          let txt = `User not tracked \n If you want ***${user}*** to be tracked, please sign up on https://gwent.io/ ${self_destruct}`;
+          let txt = `User not tracked \n If you want ***${
+            user
+          }*** to be tracked, please sign up on https://gwent.io/ ${
+            self_destruct
+          }`;
           msg
             .reply(txt)
             .then(m => {
               m.delete(10000);
               secondsTransition(m, txt, 1800);
             })
-            .catch(err => console.error(err));
+            .catch(
+              err =>
+                err.message
+                  ? console.error(
+                      `Error!, ${err.message} called in TopTracker.js, line 100`
+                    )
+                  : console.error('Error in TopTracker line 100')
+            );
         }
       })
       .catch(err => {
-        console.error(err);
+        err.message
+          ? console.error(
+              `Error!, ${err.message} called in TopTracker.js, line 109`
+            )
+          : console.error('Error in TopTracker line 109');
       });
   }
 }

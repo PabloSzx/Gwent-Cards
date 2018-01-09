@@ -52,14 +52,25 @@ export default class FirebaseDatabase {
         .update({ [id]: languageToAdd })
         .then(() => {
           console.log('--Language Updated--');
-          let txt = `Your server default language has updated to: ${languageToAdd} ${self_destruct}`;
+          let txt = `Your server default language has updated to: ${
+            languageToAdd
+          } ${self_destruct}`;
           message
             .reply(txt)
             .then(m => {
               m.delete(10000);
               secondsTransition(m, txt, 1800);
             })
-            .catch(err => console.error(err));
+            .catch(
+              err =>
+                err.message
+                  ? console.error(
+                      `Error!, ${
+                        err.message
+                      } called in firebaseDatabase.js, line 68`
+                    )
+                  : console.error('Error in firebaseDatabase line 68')
+            );
         })
         .catch(err => {
           console.log(err);
@@ -72,7 +83,14 @@ export default class FirebaseDatabase {
           m.delete(10000);
           secondsTransition(m, txt, 1800);
         })
-        .catch(err => console.error(err));
+        .catch(
+          err =>
+            err.message
+              ? console.error(
+                  `Error!, ${err.message} called in firebaseDatabase, line 90`
+                )
+              : console.error('Error in firebaseDatabase line 90')
+        );
     }
   }
 

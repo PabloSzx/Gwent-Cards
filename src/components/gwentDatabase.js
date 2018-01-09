@@ -214,29 +214,30 @@ export default class GwentDatabase {
   static categories(data, language) {
     const fields = [];
 
-    fields[fields.length] = `*${translation[language].group}*: **${translation[
-      language
-    ]._group[data.type]}**`;
+    fields[fields.length] = `*${translation[language].group}*: **${
+      translation[language]._group[data.type]
+    }**`;
 
     let faction = data.faction;
     if (data.faction === 'Northern Realms') {
       faction = 'NorthernKingdom';
     }
 
-    fields[fields.length] = `*${translation[language]
-      .faction}*: **${translation[language]._faction[faction]}**`;
+    fields[fields.length] = `*${translation[language].faction}*: **${
+      translation[language]._faction[faction]
+    }**`;
 
     const rarity = data.rarity;
-    fields[fields.length] = `*${translation[language].rarity}*: **${translation[
-      language
-    ]._rarity[rarity]}**`;
+    fields[fields.length] = `*${translation[language].rarity}*: **${
+      translation[language]._rarity[rarity]
+    }**`;
 
     if (data.strength > 0) {
-      fields[fields.length] = `*${translation[language].power}*: **${emotes[
-        data.strength.toString()
-      ]
-        ? emotes[data.strength.toString()]
-        : data.strength.toString()}**`;
+      fields[fields.length] = `*${translation[language].power}*: **${
+        emotes[data.strength.toString()]
+          ? emotes[data.strength.toString()]
+          : data.strength.toString()
+      }**`;
     }
 
     const positions = data.positions;
@@ -247,13 +248,14 @@ export default class GwentDatabase {
       position = 'Any';
     }
 
-    fields[fields.length] = `*${translation[language].lane}*: **${translation[
-      language
-    ]._lane[position]}**`;
+    fields[fields.length] = `*${translation[language].lane}*: **${
+      translation[language]._lane[position]
+    }**`;
 
     if (data.loyalties.length > 0) {
-      fields[fields.length] = `${translation[language]
-        .loyalty}: **${translation[language]._loyalty[data.loyalties[0]]}**`;
+      fields[fields.length] = `${translation[language].loyalty}: **${
+        translation[language]._loyalty[data.loyalties[0]]
+      }**`;
     }
 
     const categories = data.categories;
@@ -271,8 +273,9 @@ export default class GwentDatabase {
       });
 
       if (data.categories.length > 0) {
-        fields[fields.length] = `*${translation[language]
-          .type}*: **${category}**`;
+        fields[fields.length] = `*${translation[language].type}*: **${
+          category
+        }**`;
       }
     }
     return fields;
@@ -288,10 +291,13 @@ export default class GwentDatabase {
           .reply({ embed: this.embedData(info, card, long) })
           .then(msg =>
             console.log(
-              `Card info successfully displayed in ${msg.guild
-                ? `<${msg.channel.name}> channel from <${msg.guild
-                    .name}> server`
-                : `<${message.author.username}> direct message channel`}`
+              `Card info successfully displayed in ${
+                msg.guild
+                  ? `<${msg.channel.name}> channel from <${
+                      msg.guild.name
+                    }> server`
+                  : `<${message.author.username}> direct message channel`
+              }`
             )
           )
           .catch(() => {
@@ -302,14 +308,30 @@ export default class GwentDatabase {
                   .send({ embed: this.embedData(info, card, long) })
                   .then(msg => {
                     console.log(
-                      `Sent card info to <${message.author
-                        .username}> direct message channel`
+                      `Sent card info to <${
+                        message.author.username
+                      }> direct message channel`
                     );
                   })
-                  .catch(err => console.error(err));
+                  .catch(
+                    err =>
+                      err.message
+                        ? console.error(
+                            `Error!, ${
+                              err.message
+                            } called in gwentDatabase.js, line 322`
+                          )
+                        : console.error('Error in gwentDatabase line 322')
+                  );
               })
               .catch(err => {
-                console.error(err);
+                err.message
+                  ? console.error(
+                      `Error!, ${
+                        err.message
+                      } called in gwentDatabase.js, line 330`
+                    )
+                  : console.error('Error in gwentDatabase line 330');
               });
           });
       }
@@ -323,7 +345,14 @@ export default class GwentDatabase {
           m.delete(10000);
           secondsTransition(m, txt, 1800);
         })
-        .catch(err => console.error(err));
+        .catch(
+          err =>
+            err.message
+              ? console.error(
+                  `Error!, ${err.message} called in gwentDatabase.js, line 352`
+                )
+              : console.error('Error in gwentDatabase line 352')
+        );
     }
   }
 }

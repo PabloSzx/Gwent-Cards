@@ -25,7 +25,11 @@ export default class Discord {
         this.client.guilds.map((value, key) => console.log(`${value}  ${key}`));
       })
       .catch(err => {
-        console.error(err);
+        err.message
+          ? console.error(
+              `Error!, ${err.message} called in discord.js, line 28`
+            )
+          : console.error('Error in discord.js line 28');
       });
     this.fDatabase = new FirebaseDatabase(this.apiKey, this.databaseURL);
     this.cardsDatabase = new GwentDatabase(this.fDatabase);
@@ -72,6 +76,11 @@ export default class Discord {
       } catch (e) {
         const err = e;
         //console.error(e);
+        err.message
+          ? console.error(
+              `Error!, ${err.message} called in discord.js, line 81`
+            )
+          : console.error('Error in discord.js line 81');
       }
     }
   }
@@ -156,7 +165,14 @@ export default class Discord {
                   ' \n\n <@318804439354048537> Developer, <@215658764097945601>'
               )
               .then(msg => console.log(`Sent message in ${value.name} server`))
-              .catch(err => console.error(err));
+              .catch(
+                err =>
+                  err.message
+                    ? console.error(
+                        `Error!, ${err.message} called in discord.js, line 172`
+                      )
+                    : console.error('Error in line discord.js 172')
+              );
           }
         }
       }
@@ -171,10 +187,28 @@ export default class Discord {
           guild.memberCount
         } members, the region of the server is ${guild.region}`;
         if (user.dmChannel) {
-          user.dmChannel.send(msg).catch(err => console.error(err));
+          user.dmChannel
+            .send(msg)
+            .catch(
+              err =>
+                err.message
+                  ? console.error(
+                      `Error!, ${err.message} called in discord.js, line 190`
+                    )
+                  : console.error('Error in discord.js line 190')
+            );
         } else {
           user.createDM(channel => {
-            channel.send(msg).catch(err => console.error(err));
+            channel
+              .send(msg)
+              .catch(
+                err =>
+                  err.message
+                    ? console.error(
+                        `Error!, ${err.message} called in discord.js, line 205`
+                      )
+                    : console.error('Error in discord.js line 205')
+              );
           });
         }
       })

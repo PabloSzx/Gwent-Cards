@@ -21,14 +21,14 @@ class TopProTracker {
       if (key < 10) {
         txt = '';
         txt = txt.concat(value.mmr.toString().paddingRight(' ', 5) + ' | ');
-        txt = txt.concat(value.country.iso
-            .toUpperCase()
-            .paddingLeft(' ', 6) + '    '
-            + ' | ');
         txt = txt.concat(
-          value.total_matches.toString() + ' | '
+          value.country.iso.toUpperCase().paddingLeft(' ', 6) + '    ' + ' | '
         );
-        embed.addField((parseInt(key) + 1).toString() + '.- ' + value.player, txt);
+        txt = txt.concat(value.total_matches.toString() + ' | ');
+        embed.addField(
+          (parseInt(key) + 1).toString() + '.- ' + value.player,
+          txt
+        );
       } else {
         return false;
       }
@@ -46,8 +46,25 @@ class TopProTracker {
       .then(ladder => {
         msg
           .reply({ embed: this.embedData(ladder) })
-          .then(console.log(`Pro Ladder Top 10 info successfully displayed in ${msg.guild ? `<${msg.channel.name}> channel from <${msg.guild.name}> server` : `<${msg.author.username}> direct message channel`}`))
-          .catch(err => console.error(err));
+          .then(
+            console.log(
+              `Pro Ladder Top 10 info successfully displayed in ${
+                msg.guild
+                  ? `<${msg.channel.name}> channel from <${
+                      msg.guild.name
+                    }> server`
+                  : `<${msg.author.username}> direct message channel`
+              }`
+            )
+          )
+          .catch(
+            err =>
+              err.message
+                ? console.error(
+                    `Error!, ${err.message} called in TopProTracker.js, line 64`
+                  )
+                : console.error('Error in TopProTracker line 64')
+          );
       })
       .catch(error => {
         console.log(error);

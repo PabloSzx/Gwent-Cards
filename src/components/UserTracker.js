@@ -61,13 +61,24 @@ class UserTracker {
                 }`
               )
             )
-            .catch(err => console.error(err));
+            .catch(
+              err =>
+                err.message
+                  ? console.error(
+                      `Error!, ${err.message} called in UserTracker.js, line 68`
+                    )
+                  : console.error('Error in UserTracker line 68')
+            );
         } else {
           errorReply(msg, user);
         }
       })
       .catch(err => {
-        console.error(err);
+        err.message
+          ? console.error(
+              `Error!, ${err.message} called in UserTracker.js, line 79`
+            )
+          : console.error('Error in UserTracker line 79');
       });
   }
 }
