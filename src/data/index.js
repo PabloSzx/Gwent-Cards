@@ -7,13 +7,4 @@ import database from './database.json';
 import emotes from './emotes.json';
 import { self_destruct } from './constants.js';
 
-export {
-  restrictedChannels,
-  translation,
-  cards_language,
-  nicknames,
-  equivalents,
-  database,
-  emotes,
-  self_destruct,
-};
+export { restrictedChannels, translation, cards_language, nicknames, equivalents, database, emotes, self_destruct };
