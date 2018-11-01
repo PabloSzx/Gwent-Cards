@@ -216,15 +216,9 @@ export default class GwentDatabase {
 				: data.strength.toString()}**`;
 		}
 
-		const positions = data.positions;
-		let position;
-		if (positions.length === 1) {
-			position = positions[0];
-		} else if (positions.length === 3) {
-			position = 'Any';
-		}
+		const provision = data.provision;
 
-		fields[fields.length] = `*${translation[language].lane}*: **${translation[language]._lane[position]}**`;
+		fields[fields.length] = `*Provision*: **${provision}**`;
 
 		if (data.loyalties.length > 0) {
 			fields[fields.length] = `${translation[language].loyalty}: **${translation[language]._loyalty[
