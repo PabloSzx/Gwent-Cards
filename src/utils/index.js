@@ -155,7 +155,7 @@ function bestPossibility(array, input) {
 
 function getImage(data) {
   const variation = Object.keys(data.variations)[0];
-  return `https://cdn.zolmeister.com/gwent/images/cards/${variation}_low.png`;
+  return `https://img.seven7y.com/g/cardbot/low/${variation}.png`;
 }
 
 function checkChannelPermission(channel, list) {

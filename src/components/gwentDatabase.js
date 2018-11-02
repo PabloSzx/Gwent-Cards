@@ -32,10 +32,10 @@ export default class GwentDatabase {
 				title: database[card[0]].name[card[1]],
 				type: 'rich',
 				description: `${text}\n\n${cats.join(' - ')}`,
-				url: `https://gwent.io/card/${card[0]}`,
+				url: `https://gwent.seven7y.com/hc-card.php?card=${Object.keys(data.variations)[0]}`,
 				footer: {
-					text: 'Gwent.io',
-					icon_url: 'https://gwent.io/images/gwent_io_icon_256.png'
+					text: 'The Voice of Gwent',
+					icon_url: 'https://i.imgur.com/IAAXOFD.png'
 				}
 			});
 			if (long) {
