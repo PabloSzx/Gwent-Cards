@@ -155,7 +155,7 @@ function bestPossibility(array, input) {
 
 function getImage(data) {
   const variation = Object.keys(data.variations)[0];
-  return `https://img.seven7y.com/g/cardbot/low/${variation}.png`;
+  return `https://img.seven7y.com/g/cardbot/low/${variation.slice(0, -2)}.png`;
 }
 
 function checkChannelPermission(channel, list) {
