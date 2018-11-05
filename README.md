@@ -28,11 +28,11 @@ You can use "!top10" to get the top 10 in standard ladder, "!protop10" to get th
 
 (If you want to report a bug, or you have an idea to improve the bot, feel free to talk to me via discord, my nickname is @PabloSz#0327)
 
-The images source i'm using is https://gwent.io/.
+The images source i'm using is https://gwent.seven7y.com.
 
 And the raw database where i get the information from is https://github.com/GwentCommunityDevelopers or https://github.com/GwentCommunityDevelopers/gwent-data-release
 
-Some servers that are officialy using the bot are:
+Some servers that are officially using the bot are:
 
 "Gwent Esp", https://discord.gg/8ceWwck.
 
@@ -43,9 +43,9 @@ Official Gwent discord server, https://discord.gg/DTPYChN.
 "Gwent RU", https://discord.gg/gwentru.
 
 ## Screenshots
-![Screenshot](https://i.imgur.com/s0wSkaj.png)
-![Screenshot](https://i.imgur.com/B3RUNvv.png)
-![Screenshot](https://i.imgur.com/8bhhZV5.png)
+![Screenshot](https://i.imgur.com/PobiHkg.png)
+![Screenshot](https://i.imgur.com/VdrtS9O.png)
+![Screenshot](https://i.imgur.com/9df3Vhi.png)
 ![Screenshot](https://i.imgur.com/5NGRqI1.png)
 ![Screenshot](https://i.imgur.com/WYYqmKV.png)
 ![Screenshot](https://i.imgur.com/zX7e8J0.png)
