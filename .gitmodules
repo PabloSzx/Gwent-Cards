@@ -1,0 +1,3 @@
+[submodule "Gwent-Cards-Data"]
+	path = Gwent-Cards-Data
+	url = https://github.com/PabloSzx/Gwent-Cards-Data

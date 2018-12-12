@@ -4,6 +4,7 @@
 	"description": "Discord Bot designed for Gwent cards display",
 	"main": "bot.js",
 	"scripts": {
+		"build": "git submodule init && git submodule update && cd Gwent-Cards-Data && yarn && yarn start",
 		"start": "babel-node bot.js",
 		"test": "nodemon bot.js --exec babel-node"
 	},
