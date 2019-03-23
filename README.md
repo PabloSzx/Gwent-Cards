@@ -40,8 +40,6 @@ Some servers that are officially using the bot are:
 
 Official GWENT: The Witcher Card Game Discord server, https://discord.gg/playgwent
 
-"Gwent Esp", https://discord.gg/8ceWwck
-
 Gwent discord community server, https://discord.gg/DTPYChN
 
 "Gwent Taiwan", https://discord.gg/CRJbjsq
