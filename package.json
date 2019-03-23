@@ -4,6 +4,7 @@
   "description": "Discord Bot designed for Gwent cards display",
   "main": "bot.js",
   "scripts": {
+    "heroku-postbuild": "echo Build Done!",
     "build":
       "git submodule update --init --recursive && git submodule foreach git pull origin master && yarn --cwd Gwent-Cards-Data && yarn --cwd Gwent-Cards-Data start",
     "start": "babel-node bot.js",

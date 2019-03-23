@@ -1,8 +1,15 @@
-import FirebaseDatabase from './firebaseDatabase';
-import GwentDatabase from './gwentDatabase';
-import Discord from './discord';
-import UserTracker from './UserTracker';
-import TopTracker from './TopTracker';
-import TopProTracker from './TopProTracker';
+import Discord from "./discord";
+import FirebaseDatabase from "./firebaseDatabase";
+import GwentDatabase from "./gwentDatabase";
+import MyEsportsTracker from "./MyEsportsTracker";
+import TopProTracker from "./TopProTracker";
+import TopTracker from "./TopTracker";
 
-export { FirebaseDatabase, GwentDatabase, Discord, UserTracker, TopTracker, TopProTracker };
+export {
+  FirebaseDatabase,
+  GwentDatabase,
+  Discord,
+  TopTracker,
+  TopProTracker,
+  MyEsportsTracker,
+};
