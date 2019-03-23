@@ -47,8 +47,11 @@ class MyEsportsTracker {
       value.description = value.description.replace(/<br\/>/gi, " ");
       embed.addField(
         value.nameEN,
+
         `*Faction*: **${value.factionEN}** | *Leader*: **${value.leaderEN}** | ${value.description
-          ? "*Description*: **" + value.description + "**"
+          ? "*Description*: **" +
+            _.truncate(value.description, { length: 200 }) +
+            "**"
           : ""} *Scrap*: **${value.scrap}** | *Votes*: **${value.votes}** | *Link*: **${value.link}**`
       );
     });
@@ -110,7 +113,7 @@ class MyEsportsTracker {
               : console.error("Error in gwentDatabase line 168")
         );
     } catch (err) {
-      console.error("Error in MySportsTracker.requestEvents", e);
+      console.error("Error in MySportsTracker.requestEvents", err);
     }
   }
 
@@ -124,7 +127,7 @@ class MyEsportsTracker {
       if (_.isEmpty(data)) {
         _.delay(() => {
           let txt =
-            'Write "!gwent-decks username" to use, for example "!gwent-decks pawloex" \n Decks information provided by https://myesports.net, register there to see your decks. Only decks from current Gwent Update are shown' +
+            'Write "!gwent-decks username" to use, for example "!gwent-decks pawloex" \n Decks information provided by https://myesports.net, register there to see your decks. Only decks from current Gwent Update are shown.' +
             self_destruct_30;
           message
             .reply(txt)
@@ -171,7 +174,7 @@ class MyEsportsTracker {
               : console.error("Error in gwentDatabase line 155")
         );
     } catch (err) {
-      console.error("Error in MySportsTracker.requestDecks", e);
+      console.error("Error in MySportsTracker.requestDecks", err);
     }
   }
 
@@ -201,7 +204,7 @@ class MyEsportsTracker {
               : console.error("Error in gwentDatabase line 168")
         );
     } catch (err) {
-      console.error("Error in MySportsTracker.requestNews", e);
+      console.error("Error in MySportsTracker.requestNews", err);
     }
   }
 }

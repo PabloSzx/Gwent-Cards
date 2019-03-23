@@ -200,7 +200,6 @@ function secondsTransition(msg, txt, seconds) {
         .edit(message + txt_edit)
         .then(m => secondsTransition(m, txt_edit, seconds))
         .catch(err => {
-          console.error(err);
           const x = err;
           //recursion end
         });
