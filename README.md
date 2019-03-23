@@ -24,31 +24,38 @@ If the admin wants to change the default bot language on his server, has to ment
 
 For example, in any channel of your server , write: "\@Gwent-Cards es-es" to set the Spanish on your default language (just the discord server owner can execute this command).
 
-You can use "!top10" to get the top 10 in standard ladder, "!protop10" to get the top 10 in pro ladder and "!ladder nickname" to get the ladder information of a specific player.
+Additionally you can write:
+ - "!protop10" to get the top 10 in pro ladder in https://masters.playgwent.com/en/rankings/pro-ladder/
+ - "!gwent-events" to get the last 5 Gwents events of https://www.myesports.net/
+ - "!gwent-news" to get the last 5 Gwent news of https://www.myesports.net/
+ - "!gwent-decks user" to get the up to 5 best decks of the specifed user of https://www.myesports.net/ 
 
 (If you want to report a bug, or you have an idea to improve the bot, feel free to talk to me via discord, my nickname is @PabloSz#0327)
 
-The images source i'm using is https://gwent.seven7y.com.
+The images source i'm using is https://www.myesports.net/
 
 And the raw database where i get the information from is https://github.com/GwentCommunityDevelopers or https://github.com/GwentCommunityDevelopers/gwent-data-release
 
 Some servers that are officially using the bot are:
 
-"Gwent Esp", https://discord.gg/8ceWwck.
+Official GWENT: The Witcher Card Game Discord server, https://discord.gg/playgwent
 
-Official Gwent discord server, https://discord.gg/DTPYChN.
+"Gwent Esp", https://discord.gg/8ceWwck
 
-"Gwent Taiwan", https://discord.gg/CRJbjsq.
+Gwent discord community server, https://discord.gg/DTPYChN
 
-"Gwent RU", https://discord.gg/gwentru.
+"Gwent Taiwan", https://discord.gg/CRJbjsq
+
+"Gwent RU", https://discord.gg/gwentru
 
 ## Screenshots
-![Screenshot](https://i.imgur.com/PobiHkg.png)
-![Screenshot](https://i.imgur.com/VdrtS9O.png)
-![Screenshot](https://i.imgur.com/9df3Vhi.png)
-![Screenshot](https://i.imgur.com/5NGRqI1.png)
-![Screenshot](https://i.imgur.com/WYYqmKV.png)
-![Screenshot](https://i.imgur.com/zX7e8J0.png)
+![Screenshot](https://i.imgur.com/zVI6ncR.png)
+![Screenshot](https://i.imgur.com/QFcrUMG.png)
+![Screenshot](https://i.imgur.com/6gOONIo.png)
+![Screenshot](https://i.imgur.com/VfEHWwc.png)
+![Screenshot](https://i.imgur.com/x9Sml7J.png)
+![Screenshot](https://i.imgur.com/pEODzxq.png)
+![Screenshot](https://i.imgur.com/der5QIC.png)
 ## How it's made?
 It's using "Node.js" with mainly "Discord.js" library.
 https://github.com/hydrabolt/discord.js/

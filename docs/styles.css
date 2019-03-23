@@ -13,8 +13,14 @@ p {
   padding-left: 18em;
   padding-right: 18em;
 
-  font-size: 0.2em;
+  font-size: 1em;
 }
+
+.buttons {
+  text-align: center;
+}
+
+
 
 .black-background {
   background-color: #f2f2f2;
@@ -36,6 +42,7 @@ p {
   z-index: 1;
   padding-top: 0.2em;
   width: 10em;
+
 }
 
 .card {
