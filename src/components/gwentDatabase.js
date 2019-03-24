@@ -1,7 +1,6 @@
 import _ from "lodash";
 import {
   translation,
-  nicknames,
   cards_language,
   database,
   emotes,
@@ -12,7 +11,6 @@ import {
   checkRussianCharacter,
   colorFaction,
   filter,
-  nicknameCheck,
   bestPossibility,
   getImage,
   getEquivalent,
@@ -79,11 +77,8 @@ export default class GwentDatabase {
     let values;
     let keys;
     let priorityIndex;
-    const nickname = nicknameCheck(input, nicknames);
 
-    if (nickname[0]) {
-      return [getEquivalent(nickname[0]), nickname[1]];
-    } else if (checkChineseOrJapaneseCharacter(input)) {
+    if (checkChineseOrJapaneseCharacter(input)) {
       const jpPossibilities = filter(cards_language["ja-JP"], input);
       const cnPossibilities = filter(cards_language["zh-CN"], input);
       const twPossibilities = filter(cards_language["zh-TW"], input);
