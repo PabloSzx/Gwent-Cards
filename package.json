@@ -5,7 +5,7 @@
   "main": "bot.js",
   "scripts": {
     "heroku-postbuild": "echo Build Done!",
-    "fetch": "git submodule update --init --recursive && git submodule foreach git pull origin master",
+    "fetch": "git submodule update --init --recursive && git submodule foreach \"git fetch --all && git reset --hard origin/master\"",
     "build": "yarn --cwd Gwent-Cards-Data && yarn --cwd Gwent-Cards-Data start",
     "start": "babel-node bot.js",
     "dev": "nodemon bot.js --exec babel-node"
@@ -29,19 +29,23 @@
   },
   "homepage": "https://pabloszx.github.io/Gwent-Cards/",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.19.2",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "discord.js": "^11.1.0",
     "fast-levenshtein": "^2.0.6",
-    "firebase": "^6.3.3",
+    "firebase": "^7.13.2",
     "gwent-pro-ladder-lib": "^1.0.3",
     "lodash": "^4.17.15",
-    "object.values": "^1.1.0"
+    "object.values": "^1.1.1"
   },
   "devDependencies": {
-    "prettier": "^1.18.2",
-    "nodemon": "^1.19.1"
+    "@types/fast-levenshtein": "^0.0.1",
+    "@types/lodash": "^4.14.149",
+    "@types/nodemon": "^1.19.0",
+    "@types/prettier": "^2.0.0",
+    "nodemon": "^2.0.2",
+    "prettier": "^2.0.2"
   },
   "prettier": {
     "singleQuote": true,
