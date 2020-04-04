@@ -5,7 +5,7 @@
   "main": "bot.js",
   "scripts": {
     "heroku-postbuild": "echo Build Done!",
-    "fetch": "git submodule update --init --recursive && git submodule foreach \"git fetch --all && git reset --hard origin/master\"",
+    "fetch": "git submodule update --init --recursive && git submodule foreach --recursive \"git fetch --all && git reset --hard origin/master\"",
     "build": "yarn --cwd Gwent-Cards-Data && yarn --cwd Gwent-Cards-Data start",
     "start": "babel-node bot.js",
     "dev": "nodemon bot.js --exec babel-node"
