@@ -36,7 +36,7 @@
     "fast-levenshtein": "^2.0.6",
     "firebase": "^7.13.2",
     "gwent-pro-ladder-lib": "^1.0.3",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "object.values": "^1.1.1"
   },
   "devDependencies": {
